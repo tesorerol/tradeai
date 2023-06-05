@@ -1,0 +1,101 @@
+[
+    {
+        "address":"0x45a4378F1F69897Dc00306488F304b1bDef1d2d4",
+        "namePool": "APES TOGETHER STRONG",
+        "strategy":"Trading and arbitrage",
+        "risk": "Low",
+        "token": "USDT",
+        "parent":"claim",
+        "type":"Weekly",
+        "visible":"true",
+        "claim":true
+    },{
+        "address":"0x4C4121CBBFf68C46D49E203c164479B48423064d",
+        "namePool": "PUBLIC",
+        "strategy":"Trading and arbitrage",
+        "risk": "Low",
+        "token": "USDT",
+        "parent":"claim",
+        "type":"Weekly",
+        "AbiType":"public",
+        "visible":"true",
+        "claim":true
+    },{
+        "address":"0x5dCC863b125efC49956F19BFA81C9cD3A5d49d30",
+        "namePool": "NETH",
+        "strategy":"Trading and arbitrage",
+        "risk": "Low",
+        "token": "USDT",
+        "parent":"vispx",
+        "type":"Weekly",
+        "visible":"true",
+        "claim":true
+    },
+    {
+        "address":"0xc7d3A1B0DC96254784f0d5fC6EB6e6C276bb8Db3",
+        "namePool": "Alpha",
+        "strategy":"Trading and arbitrage",
+        "risk": "Low",
+        "token": "USDT",
+        "parent":"vispx",
+        "type":"Weekly",
+        "visible":"true",
+        "claim":true
+    },
+    {
+        "address":"0xFC80AD886e93A3b0749FB9acB711621533951aA8",
+        "namePool": "CM PRIVATE",
+        "strategy":"Trading and arbitrage",
+        "risk": "Low",
+        "token": "USDT",
+        "parent":"private",
+        "type":"Weekly",
+        "visible":"true",
+        "claim":true
+    },
+    {
+        "address":"0x2DCcf3dF30b4814B9660A2eDC9aa30735567d7a8",
+        "namePool": "ASTRID",
+        "strategy":"Trading and arbitrage",
+        "risk": "Low",
+        "token": "USDT",
+        "parent":"private",
+        "type":"Weekly"
+    },
+    {
+        "address":"0xcCc743cd299269373971bF17043cCc173c603e98",
+        "namePool": "5K POOL",
+        "strategy":"Trading and arbitrage",
+        "risk": "Low",
+        "token": "USDT",
+        "parent":"private",
+        "type":"Weekly",
+        "visible":"true",
+        "claim":true,
+        "desposit":true
+    },
+    {
+        "address":"0x389D0Da22cfb4a6C5553dea206F4D23E06310994",
+        "namePool": "TEAM ALEX",
+        "strategy":"Trading and arbitrage",
+        "risk": "Low",
+        "token": "USDT",
+        "parent":"claim",
+        "type":"Weekly",
+        "visible":"true",
+        "claim":true,
+        "desposit":false
+    },
+    {
+        "address":"0x3617aDBd5Fa162dfb44F15C5e28599DaE0CFde3d",
+        "namePool": "SCM",
+        "strategy":"Trading and arbitrage",
+        "risk": "Low",
+        "token": "USDT",
+        "parent":"claim",
+        "type":"Weekly",
+        "visible":"true",
+        "claim":true,
+        "desposit":false
+    }
+]
