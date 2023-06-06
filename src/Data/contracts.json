@@ -26,7 +26,7 @@
             "desposit":true
         },
         {
-            "address":"0x92D2BFDAB3587E667B9F46842914a4DE8aA581D8",
+            "address":"0x95E257Ba297E705B968c605BbDb5937a0CF95334",
             "namePool": "Anarkey",
             "strategy":"Trading and arbitrage",
             "risk": "Low",
