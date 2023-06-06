@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
-import logoMin from "../assets/logo/logo-min.png"
 import { FaMoneyBillWaveAlt } from 'react-icons/fa';
+import {GiTwoCoins} from "react-icons/gi"
 import { HiHome } from 'react-icons/hi';
 import { MdHowToVote, MdCollections } from 'react-icons/md';
 import {AiOutlineArrowDown} from "react-icons/ai";
@@ -71,9 +71,10 @@ const MenuNav2 = ({removeAct, addAct, refActive}) => {
 
   return (
     <div className='menu-nav'>
-            <NavLink onClick={removeAct} className='menu-nav-options' to="/" data-aos="fade-right" data-aos-duration="1000" data-aos-delay="100"><HiHome size={"20px"} color="#9ed0ed"/> Home</NavLink>
-            <NavLink onClick={removeAct} className='menu-nav-options' to="/vote" data-aos="fade-right" data-aos-duration="1000" data-aos-delay="200"><MdHowToVote size={"20px"} color="#9ed0ed"/> Vote</NavLink>
-            <div>
+            <NavLink className='menu-nav-options' to="/earn-strategies/0x4E8d2157cE9A79319AF4bcAF336F5ab4A8C51912" onClick={removeAct}><GiTwoCoins className='me-1' size={"20px"} color="#9ed0ed"/> Earn TradeAi Pass</NavLink>
+            <NavLink className='menu-nav-options' to="/earn-strategies/0x92D2BFDAB3587E667B9F46842914a4DE8aA581D8" onClick={removeAct}><GiTwoCoins className='me-1' size={"20px"} color="#9ed0ed"/> Anarkey</NavLink>
+            <NavLink className='menu-nav-options' to="/earn-strategies/0x818F3eE1E66773165f1B4e1b815c57a275E6e807" onClick={removeAct}><GiTwoCoins className='me-1' size={"20px"} color="#9ed0ed"/> Public</NavLink>
+            {/* <div>
                 <p ref={refActive} onClick={()=>toggleEarn("earn")} data-aos="fade-right" data-aos-delay="300" className='earn-p menu-nav-options'>
                     <span className="ms-1 d-sm-inline"><FaMoneyBillWaveAlt className='me-1' size={"20px"} color="#9ed0ed"/> Earn Strategies <IoIosArrowDown className={`${!isOpen.earn ? "arrow-close" : "arrow-open"}`}/></span>
                 </p>
@@ -139,29 +140,6 @@ const MenuNav2 = ({removeAct, addAct, refActive}) => {
                                 </ul>
                             }
                         </li>
-{/*                        <li className='menu-list-2-item'>
-                            <div className='menu-list-2-nav' onClick={()=>toggleEarn("monthly")}>
-                                <p>Monthly </p>
-                                <IoIosArrowDown className={`icon-arrow-down ${!isOpen.monthly ? "arrow-close" : "arrow-open"}`}/>
-                            </div>
-                            {
-                                isOpen.monthly &&
-                                <ul className="menu-list-options" id="">
-                                            {data.map((contract,i)=>(
-                                                contract.parent == "montly" && contract.visible == "true" && 
-                                                
-                                                <div key={i} className='list-options'>
-                                                    <NavLink onClick={addAct} to={`/earn-strategies/${contract.address}`} className={"w-100 d-flex gap-2"}>
-                                                        <BsArrowRightShort size={"18px"}/>
-                                                        <li className='w-100 menu-list-2-nav-option'>
-                                                            {contract.namePool}
-                                                        </li>
-                                                    </NavLink>
-                                                </div>
-                                            ))}
-                                </ul>
-                            }
-                        </li>*/}
                         <li className='menu-list-2-item'>
                             <div className='menu-list-2-nav' onClick={()=>toggleEarn("private")}>
                                 <p>Partners </p>
@@ -187,10 +165,10 @@ const MenuNav2 = ({removeAct, addAct, refActive}) => {
                     </ul>
                 }
 
-            </div>
+            </div> */}
            
             
-            <NavLink onClick={removeAct} className='menu-nav-options' to="/collection" data-aos="fade-right" data-aos-duration="1000" data-aos-delay="400"><MdCollections size={"20px"} color="#9ed0ed"/> Collection</NavLink>
+            {/* <NavLink onClick={removeAct} className='menu-nav-options' to="/collection" data-aos="fade-right" data-aos-duration="1000" data-aos-delay="400"><MdCollections size={"20px"} color="#9ed0ed"/> Collection</NavLink> */}
         </div>
   )
 }

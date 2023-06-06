@@ -2,7 +2,6 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import { FaUserAlt } from 'react-icons/fa'
 import Button2 from '../../Components/Button2'
-import Table from '../../Components/Table'
 import usdt from '../../assets/icons/usdt.png'
 import { BsQuestionSquare } from 'react-icons/bs'
 import { ethers } from 'ethers'

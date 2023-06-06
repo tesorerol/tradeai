@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import { FaUserAlt } from 'react-icons/fa'
 import Button2 from '../../Components/Button2'
-import Table from '../../Components/Table'
 import usdt from '../../assets/icons/usdt.png'
 import { BsQuestionSquare } from 'react-icons/bs'
 import { ethers } from 'ethers'
@@ -320,38 +319,38 @@ const EarnTemplate = (props) => {
               </div>
               <div className="approve">
                 {Aprove ? (
-                  <Button2
-                    fnct={() => {
-                      setLoading(true)
-                      Approve(Provider, EarnContract, USDT)
-                        .then((r) => {
-                          Allowance(Provider, address, EarnContract, USDT).then(
-                            (r) => {
-                              if (
-                                parseInt(ethers.utils.formatEther(r)) >= 1000000
-                              ) {
-                                setAprove(false)
-                                Swal.fire({
-                                  icon: 'success',
-                                  title: 'Tokens Approve',
-                                  showConfirmButton: true,
-                                })
-                              } else {
-                                setAprove(true)
-                                Swal.fire({
-                                  icon: 'error',
-                                  title: 'you need approve more than 0 or use max default',
-                                  showConfirmButton: true,
-                                })
-                              }
-                              setLoading(false)
-                            },
-                          )
-                        })
-                        .catch((r) => setLoading(false))
-                    }}
-                    txt="Approve"
-                  />
+                  <button className='button2' onClick={() => {
+                    setLoading(true)
+                    Approve(Provider, EarnContract, USDT)
+                      .then((r) => {
+                        Allowance(Provider, address, EarnContract, USDT).then(
+                          (r) => {
+                            if (
+                              parseInt(ethers.utils.formatEther(r)) >= 1000000
+                            ) {
+                              setAprove(false)
+                              Swal.fire({
+                                icon: 'success',
+                                title: 'Tokens Approve',
+                                showConfirmButton: true,
+                              })
+                            } else {
+                              setAprove(true)
+                              Swal.fire({
+                                icon: 'error',
+                                title: 'you need approve more than 0 or use max default',
+                                showConfirmButton: true,
+                              })
+                            }
+                            setLoading(false)
+                          },
+                        )
+                      })
+                      .catch((r) => setLoading(false))
+                  }}>
+                    <span className='button-content'>Approve</span>
+                  </button>
+                  
                 ) : (
                   <p className="amount-approved">
                     Amount approved for use:{' '}
@@ -402,8 +401,8 @@ const EarnTemplate = (props) => {
                         </button>
                       </div>
                     </div>
-                    <button disabled={!desposit?true:false} className="btn2" onClick={() => desposit?Deposit():console.log()}>
-                      {desposit?"Deposit":"Deposit disabled"}
+                    <button disabled={!desposit?true:false} className="button2" onClick={() => desposit?Deposit():console.log()}>
+                      {desposit? <span className='button-content'>Deposit</span> : <span className='button-content'>Deposit</span>}
                     </button>
                   </div>
                 </div>
@@ -446,16 +445,16 @@ const EarnTemplate = (props) => {
                 </div>
 
                 <button
-                  className="btn2 btn-claim"
+                  className="button2 btn-claim"
                   onClick={() => (FinishTime ? console.log() : Witdraw())}
                 >
                   {FinishTime ? (
-                    FinishTime
+                    <span className='button-content'>{FinishTime}</span>
                   ) : (
-                    <>
+                    <span className='button-content'>
                       <i className="fa-solid fa-lock mr-1"></i>
                       {'Claim'}
-                    </>
+                    </span>
                   )}
                 </button>
               </div>

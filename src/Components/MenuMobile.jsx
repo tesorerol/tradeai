@@ -1,7 +1,6 @@
 import React, { useRef } from 'react'
-import logo from "../assets/logo/logo-benft.png"
+import logo from "../assets/logo/logo-w-b.png"
 import {AiOutlineClose} from "react-icons/ai";
-import MenuNav from './MenuNav';
 import Comunity from './Comunity';
 import MenuNav2 from './MenuNav2';
 
@@ -19,12 +18,11 @@ const MenuMobile = ({closeMenu}) => {
     <div className='menu-mobile'>
         <div className='logo'>
             <img className='logo-menu' src={logo} alt="logo-benft" />
-            <AiOutlineClose onClick={closeMenu} color='#2c98d4' size={"30px"}/>
+            <AiOutlineClose onClick={closeMenu} color='#256fe2' size={"30px"}/>
         </div>
-        {/* <MenuNav removeAct={closeMenu} addAct={closeMenu} refActive={refActive}/> */}
         <MenuNav2 removeAct={closeMenu} addAct={closeMenu} refActive={refActive}/>
 
-        <Comunity />
+        {/* <Comunity /> */}
 
     </div>
   )

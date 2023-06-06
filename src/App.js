@@ -1,11 +1,8 @@
 import './assets/App.scss';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import { Route,Routes } from 'react-router-dom';
+import { Route,Routes, Navigate } from 'react-router-dom';
 import { useContext, useEffect, useState } from 'react';
-import Home from './pages/Home/Home';
-import Vote from './pages/Vote/Vote';
-import Collection from './pages/Collections/Collection';
 import EarnDinamic from './pages/Earns/EarnDinamic';
 import Menu from './Components/Menu';
 import Header from './Components/Header';
@@ -14,8 +11,8 @@ import RecentTransactions from './Components/RecentTransactions';
 import { WalletContext } from './Providers/WallectConnect';
 import NotFound from './Components/NotFound';
 import NewEarn from './pages/NewEarn/NewEarn';
-import PopUp from './Components/PopUp';
 import Genv2 from './pages/NewEarn/gen2v2';
+import Home from './pages/Home/Home';
 
 
 function App() {
@@ -57,7 +54,7 @@ document.addEventListener("keydown", function(e) {
     }
     }
 
-    const [popUp,setPopUp] = useState(true)
+    const [popUp,setPopUp] = useState(false)
 
     const togglePopup = ()=>{
       setPopUp(!popUp)
@@ -75,18 +72,14 @@ document.addEventListener("keydown", function(e) {
               <Header toggleModal={toggleModal} />
               <div className='container-routes'>
                 <Routes>
-                  <Route path="/" element={<Home/>} />
-                  <Route path="/vote" element={<Vote />} />
-                  <Route path="/collection" element={<Collection />} />
-                  <Route path="/Gen2-presale" element={<NewEarn />} />
-                  <Route path="/Gen2-private" element={<Genv2 />} />
+                  <Route path="/" element={<Navigate to="/earn-strategies/0x4E8d2157cE9A79319AF4bcAF336F5ab4A8C51912"/>} />
                   <Route path="/earn-strategies/:address" element={<EarnDinamic />} />
                   <Route path="*" element={<NotFound/>} />
                 </Routes>
               </div>
             </div>
             {modal && <RecentTransactions toggleModal={toggleModal}/> } 
-            {popUp && <PopUp togglePopup={togglePopup} />}
+                      
             </>
           }
         </div>      

@@ -1,7 +1,8 @@
 import React, { useRef } from 'react'
-import logo from "../assets/logo/logo-benft.png"
-import MenuNav from './MenuNav';
-import Comunity from './Comunity';
+import logo from "../assets/logo/trade-ai-w-h.png"
+import logo2 from "../assets/logo/trade-ai-black-h.png"
+import logo3 from "../assets/logo/trade-ai-color.png"
+import logo4 from "../assets/logo/logo-w-b.png"
 import MenuNav2 from './MenuNav2';
 
 const Menu = () => {
@@ -17,11 +18,10 @@ const Menu = () => {
   return (
     <div className='menu'>
         <div className='logo'>
-            <img className='logo-menu' src={logo} alt="logo-benft" />
+            <img className='logo-menu' src={logo4} alt="logo-benft" />
         </div>
-        {/* <MenuNav removeAct={removeActive} addAct={addActive} refActive={refActive}/> */}
-        <MenuNav2 removeAct={removeActive} addAct={addActive} refActive={refActive}/>
-        <Comunity />
+        <MenuNav2 addAct={addActive} refActive={refActive}/>
+        {/* <Comunity /> */}
         
     </div>
   )

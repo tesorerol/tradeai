@@ -1,6 +1,5 @@
 import React, { useContext, useRef, useState } from 'react'
 import Button from './Button'
-import logoMin from "../assets/logo/logo-min.png"
 import MenuMobile from './MenuMobile'
 import {IoIosArrowDown} from "react-icons/io";
 import {FiLogOut} from "react-icons/fi"
@@ -56,7 +55,7 @@ const Header = ({toggleModal}) => {
           <div className={`wallet-connected-data ${walletModal ? "visible" : "hidden"}`}>
             <p>BNB: <span className='span-balance'>{balance}</span></p>
             
-            <p onClick={()=>disconnectWallet()} >Disconnect <span><FiLogOut/></span></p>
+            <p onClick={()=>disconnectWallet()} >Disconnect <span><FiLogOut color='#256fe2'/></span></p>
           </div>
         </div>}
         

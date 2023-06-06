@@ -1,12 +1,16 @@
 import React, { useContext, useEffect } from 'react'
-import logo from '../../assets/logo/logo-benft.png'
+import logo from '../../assets/logo/logo-w-b.png'
 import metamaskLogo from '../../assets/icons/metamask.png.png'
 import walletConnect from '../../assets/icons/wallet-connect.png'
-import trustWallet from '../../assets/icons/trust-wallet.png'
+import trustWallet from '../../assets/icons/trust-w.png'
+import marcoContent from "../../assets/login/marco-card.png"
+import marcoButton from "../../assets/login/marco-boton.png"
+import marcoMobile from "../../assets/login/marco-mobile.png"
 import { WalletContext } from '../../Providers/WallectConnect'
 import WL from '../../Data/wl.json'
 import Swal from 'sweetalert2'
 import Button from '../../Components/Button'
+
 const Login = ({ isAllowed, setIsAllowed }) => {
   const { connectToWallet, WallectConnect, address, disconnectWallet } = useContext(WalletContext)
 
@@ -36,10 +40,13 @@ const Login = ({ isAllowed, setIsAllowed }) => {
 
   return (
     <div className="page-login">
-      <div className="page-login-logo">
-        <img src={logo} alt="Logo BeNFT" />
+      <div className='container-page-login'>
+      <div className="page-login-logo aparecer2">
+        <img className='page-login-logo-img' src={logo} alt="Logo BeNFT" />
       </div>
-      <div className="page-login-content">
+      <div className="page-login-content aparecer2">
+        <img className='page-login-content-bg' src={marcoContent} alt="" />
+        <img className='page-login-content-bg-mobile'src={marcoMobile} alt="" />
         <div className="modal-wallets">
           <ul>
             <li>
@@ -75,8 +82,10 @@ const Login = ({ isAllowed, setIsAllowed }) => {
           </ul>
         </div>
       </div>
-      <div className='request-whitelist'>
-        <a className='btn2 request-whitelist' href="https://forms.gle/2pyyBZdhycXtHTrW6" target='_blank'>Request to add to Whitelist</a>
+      <div className='request-whitelist aparecer2'>
+        <img className='request-whitelist-bg' src={marcoButton} alt="TradeAI" />
+        <a className='request-whitelist-button' href="https://forms.gle/2pyyBZdhycXtHTrW6" target='_blank'>Request to add to Whitelist</a>
+      </div>
       </div>
     </div>
   )
