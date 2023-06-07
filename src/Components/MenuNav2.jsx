@@ -71,9 +71,10 @@ const MenuNav2 = ({removeAct, addAct, refActive}) => {
 
   return (
     <div className='menu-nav'>
-            {/*<NavLink className='menu-nav-options' to="/earn-strategies/0x4E8d2157cE9A79319AF4bcAF336F5ab4A8C51912" onClick={removeAct}><GiTwoCoins className='me-1' size={"20px"} color="#9ed0ed"/> Earn TradeAi Pass</NavLink>*/}
-            <NavLink className='menu-nav-options' to="/earn-strategies/0x95E257Ba297E705B968c605BbDb5937a0CF95334" onClick={removeAct}><GiTwoCoins className='me-1' size={"20px"} color="#9ed0ed"/> Anarkey</NavLink>
-            {/* <NavLink className='menu-nav-options' to="/earn-strategies/0x818F3eE1E66773165f1B4e1b815c57a275E6e807" onClick={removeAct}><GiTwoCoins className='me-1' size={"20px"} color="#9ed0ed"/> Public</NavLink>*/}
+            
+            {/* <NavLink className='button-nav' to="/earn-strategies/0x4E8d2157cE9A79319AF4bcAF336F5ab4A8C51912" onClick={removeAct}> Earn TradeAi Pass</NavLink> */}
+            <NavLink className='button-nav' to="/earn-strategies/0x95E257Ba297E705B968c605BbDb5937a0CF95334" onClick={removeAct}> Anarkey</NavLink>
+            {/* <NavLink className='button-nav' to="/earn-strategies/0x818F3eE1E66773165f1B4e1b815c57a275E6e807" onClick={removeAct}> Public</NavLink> */}
             {/* <div>
                 <p ref={refActive} onClick={()=>toggleEarn("earn")} data-aos="fade-right" data-aos-delay="300" className='earn-p menu-nav-options'>
                     <span className="ms-1 d-sm-inline"><FaMoneyBillWaveAlt className='me-1' size={"20px"} color="#9ed0ed"/> Earn Strategies <IoIosArrowDown className={`${!isOpen.earn ? "arrow-close" : "arrow-open"}`}/></span>

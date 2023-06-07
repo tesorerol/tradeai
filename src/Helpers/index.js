@@ -91,4 +91,43 @@ const formatMoney = (
   }
 }
 
-export { GetBalance, Allowance, Approve, MModeTimer, formatMoney }
+const formatMoney2 = (
+  amount,
+  moneda = '',
+  decimalCount = 2,
+  decimal = '.',
+  thousands = ',',
+) => {
+  try {
+    if (typeof amount === 'string') {
+      amount = parseFloat(amount)
+    }
+    decimalCount = Math.abs(decimalCount)
+    decimalCount = isNaN(decimalCount) ? 0 : decimalCount
+
+    const negativeSign = amount < 0 ? '-' : ''
+
+    let i = parseInt(
+      (amount = Math.trunc(Math.abs(Number(amount) || 0) * Math.pow(10, decimalCount)) / Math.pow(10, decimalCount))
+    ).toString()
+    let j = i.length > 3 ? i.length % 3 : 0
+
+    return (
+      negativeSign +
+      (j ? i.substr(0, j) + thousands : '') +
+      i.substr(j).replace(/(\d{3})(?=\d)/g, '$1' + thousands) +
+      (decimalCount
+        ? decimal +
+          Math.abs(amount - i)
+            .toFixed(decimalCount)
+            .slice(2)
+        : '') +
+      ' ' +
+      moneda
+    )
+  } catch (e) {
+    console.log(e)
+  }
+}
+
+export { GetBalance, Allowance, Approve, MModeTimer, formatMoney, formatMoney2 }

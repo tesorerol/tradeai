@@ -4,6 +4,7 @@ import MenuMobile from './MenuMobile'
 import {IoIosArrowDown} from "react-icons/io";
 import {FiLogOut} from "react-icons/fi"
 import { WalletContext } from '../Providers/WallectConnect';
+import Navbar from './Navbar';
 
 
 const Header = ({toggleModal}) => {
@@ -46,6 +47,8 @@ const Header = ({toggleModal}) => {
                     <div className="hambur-3 menu-hambur"></div>
             </div>
         </div>
+        
+        <Navbar />
 
        {address && <div className='wallet-connected'>
           <div onClick={()=>setWalletModal(!walletModal)} className='wallet'>

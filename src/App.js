@@ -66,7 +66,7 @@ document.addEventListener("keydown", function(e) {
           {
             !isAllowed ? <Login isAllowed={isAllowed} setIsAllowed={setIsAllowed}/> : 
             <>
-            <Menu />
+            {/* <Menu /> */}
             
             <div className='container-right'>
               <Header toggleModal={toggleModal} />

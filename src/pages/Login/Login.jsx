@@ -9,7 +9,7 @@ import marcoMobile from "../../assets/login/marco-mobile.png"
 import { WalletContext } from '../../Providers/WallectConnect'
 import WL from '../../Data/wl.json'
 import Swal from 'sweetalert2'
-import Button from '../../Components/Button'
+
 
 const Login = ({ isAllowed, setIsAllowed }) => {
   const { connectToWallet, WallectConnect, address, disconnectWallet } = useContext(WalletContext)
@@ -84,7 +84,7 @@ const Login = ({ isAllowed, setIsAllowed }) => {
       </div>
       <div className='request-whitelist aparecer2'>
         <img className='request-whitelist-bg' src={marcoButton} alt="TradeAI" />
-        <a className='request-whitelist-button' href="https://forms.gle/2pyyBZdhycXtHTrW6" target='_blank'>Request to add to Whitelist</a>
+        <a className='request-whitelist-button' href="https://forms.gle/2pyyBZdhycXtHTrW6" target='_blank' rel="noreferrer">Request to add to Whitelist</a>
       </div>
       </div>
     </div>
