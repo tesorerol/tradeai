@@ -1,12 +1,12 @@
 import { LoadingOutlined } from "@ant-design/icons";
 import { Col, Progress, Row } from "antd";
 import BigNumber from "bignumber.js";
-import { useWeb3ReactLocal } from "hooks/useWeb3ReactLocal";
+// import { useWeb3ReactLocal } from "hooks/useWeb3ReactLocal";
 import { isEmpty } from "lodash";
 import { useEffect, useMemo, useState } from "react";
-import { getStakedInfo } from "request/pool";
-import { getContract } from "utils/contract";
-import { formatRoundFloorInteger } from "utils/formatNumber";
+// import { getStakedInfo } from "request/pool";
+// import { getContract } from "utils/contract";
+// import { formatRoundFloorInteger } from "utils/formatNumber";
 import Erc721ABI from "../../../abi/nft/erc721.json";
 import "./index.scss";
 import ListNft from "./ListNft";
@@ -33,8 +33,7 @@ export const STATUS = {
   FAIL: "FAIL",
 };
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const textDefault = "###";
+// const textDefault = "###";
 
 export const MESSAGE_CANNOT_STAKE_OR_UNSTAKE =
   "Please you switch correct networks is ETH";
@@ -47,53 +46,53 @@ const Summary = (props) => {
     stakedTotal: "0",
     null: "0",
   });
-  const [status, setStatus] = useState < string > "";
+  const [status, setStatus] = useState("");
   const [myNftsNotyetStake, setMyNftsNotyetStake] = useState([]);
   const [myStakedNfts, setMyStakedNfts] = useState([]);
   const [isApprovedNft, setIsApproveNft] = useState(false);
   const [poolDetail, setPoolDetail] = useState();
 
-  const { account, library } = useWeb3ReactLocal();
-  const stakeContractAddress = process.env.REACT_APP_CONTRACT_STAKING;
+  // const { account, library } = useWeb3ReactLocal();
+  // const stakeContractAddress = process.env.REACT_APP_CONTRACT_STAKING;
 
-  const collectionAddress = useMemo(() => {
-    if (myNftsNotyetStake.length > 0 || myStakedNfts.length > 0) {
-      return myNftsNotyetStake[0]?.address || myStakedNfts[0]?.address;
-    }
-    return "";
-  }, [myNftsNotyetStake, myStakedNfts]);
+  // const collectionAddress = useMemo(() => {
+  //   if (myNftsNotyetStake.length > 0 || myStakedNfts.length > 0) {
+  //     return myNftsNotyetStake[0]?.address || myStakedNfts[0]?.address;
+  //   }
+  //   return "";
+  // }, [myNftsNotyetStake, myStakedNfts]);
 
-  const contractErc721 = useMemo(() => {
-    if (collectionAddress && library) {
-      return getContract(collectionAddress, Erc721ABI, library, account);
-    }
-  }, [collectionAddress, account, library]);
+  // const contractErc721 = useMemo(() => {
+  //   if (collectionAddress && library) {
+  //     return getContract(collectionAddress, Erc721ABI, library, account);
+  //   }
+  // }, [collectionAddress, account, library]);
 
-  useEffect(() => {
-    if (contractErc721) {
-      checkUserIsApproved();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [contractErc721]);
+  // useEffect(() => {
+  //   if (contractErc721) {
+  //     checkUserIsApproved();
+  //   }
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [contractErc721]);
 
-  useEffect(() => {
-    if (status === STATUS.SUCCESS) {
-      console.log("RECALL DATA STAKED");
-      fetchStaked();
-    }
-  }, [status]);
+  // useEffect(() => {
+  //   if (status === STATUS.SUCCESS) {
+  //     console.log("RECALL DATA STAKED");
+  //     fetchStaked();
+  //   }
+  // }, [status]);
 
-  useEffect(() => {
-    fetchStaked();
-  }, []);
+  // useEffect(() => {
+  //   fetchStaked();
+  // }, []);
 
-  const checkUserIsApproved = async () => {
-    const transaction = await contractErc721?.isApprovedForAll(
-      account,
-      stakeContractAddress
-    );
-    setIsApproveNft(transaction);
-  };
+  // const checkUserIsApproved = async () => {
+  //   const transaction = await contractErc721?.isApprovedForAll(
+  //     account,
+  //     stakeContractAddress
+  //   );
+  //   setIsApproveNft(transaction);
+  // };
 
   const getStatusActionCallSC = (status) => {
     setStatus(status);
@@ -111,44 +110,48 @@ const Summary = (props) => {
     setIsApproveNft(approved);
   };
 
-  const fetchStaked = async () => {
-    try {
-      const res = await getStakedInfo();
-      if (res?.status === 200) {
-        const { data } = res;
-        if (!isEmpty(data)) {
-          setStakedInfo(data);
-        }
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  // const fetchStaked = async () => {
+  //   try {
+  //     const res = await getStakedInfo();
+  //     if (res?.status === 200) {
+  //       const { data } = res;
+  //       if (!isEmpty(data)) {
+  //         setStakedInfo(data);
+  //       }
+  //     }
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
 
-  const percent = useMemo(() => {
-    if (Number(poolDetail?.is_display_nft_stake) > 0) {
-      return new BigNumber(poolDetail?.total_nft_stake || 0)
-        .div(stakedInfo.totalNft)
-        .multipliedBy(100)
-        .toFixed(2);
-    } else {
-      if (stakedInfo.totalNft === 0) {
-        return 0;
-      }
-      return new BigNumber(stakedInfo.stakedTotal)
-        .div(stakedInfo.totalNft)
-        .multipliedBy(100)
-        .toFixed(2);
-    }
-  }, [
-    stakedInfo,
-    poolDetail?.is_display_nft_stake,
-    poolDetail?.total_nft_stake,
-  ]);
+  const percent = 0;
+
+  // const percent = useMemo(() => {
+  //   if (Number(poolDetail?.is_display_nft_stake) > 0) {
+  //     return new BigNumber(poolDetail?.total_nft_stake || 0)
+  //       .div(stakedInfo.totalNft)
+  //       .multipliedBy(100)
+  //       .toFixed(2);
+  //   } else {
+  //     if (stakedInfo.totalNft === 0) {
+  //       return 0;
+  //     }
+  //     return new BigNumber(stakedInfo.stakedTotal)
+  //       .div(stakedInfo.totalNft)
+  //       .multipliedBy(100)
+  //       .toFixed(2);
+  //   }
+  // }, [
+  //   stakedInfo,
+  //   poolDetail?.is_display_nft_stake,
+  //   poolDetail?.total_nft_stake,
+  // ]);
 
   const handlePoolDetail = (data) => {
     setPoolDetail(data);
   };
+
+  const formatRoundFloorInteger = (value) => value
 
   return (
     <Row gutter={[16, 16]}>

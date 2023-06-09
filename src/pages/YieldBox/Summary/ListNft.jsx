@@ -1,21 +1,16 @@
 import { Button as ButtonMui } from '@material-ui/core';
 import { Col, Row, Spin, Tooltip } from 'antd';
-import { Button } from 'components/Base/Form/Button';
-import Empty from 'components/Empty/EmptySecondary';
-import { ETHER_SCAN_URL } from 'constants/network';
-import { useTypedSelector } from 'hooks/useTypedSelector';
-import { useWeb3ReactLocal } from 'hooks/useWeb3ReactLocal';
+// import { ETHER_SCAN_URL } from 'constants/network';
+// import { useTypedSelector } from 'hooks/useTypedSelector';
+// import { useWeb3ReactLocal } from 'hooks/useWeb3ReactLocal';
 import { useEffect, useMemo, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { getListNftOfUserNotyetStake, getListStake, getPoolStakeDetail } from 'request/pool';
-import { alertFailure } from 'store/actions/alert';
-import { isEqual2Strings } from 'utils/campaign';
-import { getContract } from 'utils/contract';
+// import { getListNftOfUserNotyetStake, getListStake, getPoolStakeDetail } from 'request/pool';
+// import { alertFailure } from 'store/actions/alert';
+// import { isEqual2Strings } from 'utils/campaign';
+// import { getContract } from 'utils/contract';
 import { antIcon, STATUS } from '.';
-import Erc721ABI from '../../../abi/nft/erc721.json';
-import StakingABI from '../../../abi/Staking.json';
 import SectionCarousel from '../Carousel';
-import { NftDetail } from '../interface';
 import ModalListNft from '../modals/ModalListNft';
 import ModalStakeNft from '../modals/ModalStakeNft';
 import ModalSuccess from '../modals/ModalSuccess';
@@ -26,7 +21,7 @@ import NftCard from './NftCard';
 
 const ListNft = (props) => {
   const { onStatus, status, onMyNftsNotyetStake, isApprovedNft, onApproved, onPoolDetail } = props;
-  const { account, library } = useWeb3ReactLocal();
+  // const { account, library } = useWeb3ReactLocal();
   const dispatch = useDispatch();
 
   const [myNftsNotyetStake, setMyNftsNotyetStake] = useState([]);
@@ -40,126 +35,128 @@ const ListNft = (props) => {
   const [idPoolStake, setIdPoolStake] = useState();
   const [poolDetail, setPoolDetail] = useState();
 
-  const { appChainID } = useTypedSelector((state) => state.appNetwork).data;
+  // const { appChainID } = useTypedSelector((state) => state.appNetwork).data;
 
-  const stakeContractAddress = process.env.REACT_APP_CONTRACT_STAKING ;
+  // const stakeContractAddress = process.env.REACT_APP_CONTRACT_STAKING ;
 
-  const contractStake = getContract(stakeContractAddress, StakingABI, library, account);
+  // const contractStake = getContract(stakeContractAddress, StakingABI, library, account);
 
-  const wrongNetwork = !isEqual2Strings(appChainID, process.env.REACT_APP_ETH_CHAIN_ID || '');
+  // const wrongNetwork = !isEqual2Strings(appChainID, process.env.REACT_APP_ETH_CHAIN_ID || '');
 
-  const disabledButton = useMemo(() => {
-    if (poolDetail && Number(poolDetail?.is_display) === 0) {
-      return true;
-    }
-    const noItemChoose = myNftsNotyetStake.filter((item) => item.isChecked).length < 1;
-    return wrongNetwork || noItemChoose;
-  }, [myNftsNotyetStake, wrongNetwork, poolDetail]);
+  // const disabledButton = useMemo(() => {
+  //   if (poolDetail && Number(poolDetail?.is_display) === 0) {
+  //     return true;
+  //   }
+  //   const noItemChoose = myNftsNotyetStake.filter((item) => item.isChecked).length < 1;
+  //   return wrongNetwork || noItemChoose;
+  // }, [myNftsNotyetStake, wrongNetwork, poolDetail]);
 
-  const collectionAddress = useMemo(() => {
-    if (myNftsNotyetStake.length > 0) {
-      return myNftsNotyetStake[0].address;
-    }
-    return '';
-  }, [myNftsNotyetStake]);
+  // const collectionAddress = useMemo(() => {
+  //   if (myNftsNotyetStake.length > 0) {
+  //     return myNftsNotyetStake[0].address;
+  //   }
+  //   return '';
+  // }, [myNftsNotyetStake]);
 
-  const contractErc721 = useMemo(() => {
-    if (collectionAddress && library) {
-      return getContract(collectionAddress, Erc721ABI, library, account);
-    }
-  }, [collectionAddress, account, library]);
+  // const contractErc721 = useMemo(() => {
+  //   if (collectionAddress && library) {
+  //     return getContract(collectionAddress, Erc721ABI, library, account);
+  //   }
+  // }, [collectionAddress, account, library]);
 
-  const dataSelected = useMemo(() => {
-    return myNftsNotyetStake.filter((item) => item.isChecked);
-  }, [myNftsNotyetStake]);
+  // const dataSelected = useMemo(() => {
+  //   return myNftsNotyetStake.filter((item) => item.isChecked);
+  // }, [myNftsNotyetStake]);
 
-  useEffect(() => {
-    fetchMyNftsNotyetStake();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [account]);
+  // useEffect(() => {
+  //   fetchMyNftsNotyetStake();
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [account]);
 
-  useEffect(() => {
-    if (status === STATUS.SUCCESS) {
-      fetchMyNftsNotyetStake();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [status]);
+  // useEffect(() => {
+  //   if (status === STATUS.SUCCESS) {
+  //     fetchMyNftsNotyetStake();
+  //   }
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [status]);
 
-  useEffect(() => {
-    fetchListStake();
-  }, []);
+  // useEffect(() => {
+  //   fetchListStake();
+  // }, []);
 
-  useEffect(() => {
-    if (Number(idPoolStake) > 0) {
-      fetchDetailPool();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [idPoolStake]);
+  // useEffect(() => {
+  //   if (Number(idPoolStake) > 0) {
+  //     fetchDetailPool();
+  //   }
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [idPoolStake]);
 
-  const fetchListStake = async () => {
-    try {
-      const res = await getListStake();
-      if (res?.status === 200 && res?.data?.data) {
-        const data = res?.data?.data;
-        if (data?.length > 0) {
-          const id = data[0]?.id;
-          setIdPoolStake(id);
-        }
-      }
-    } catch (error) {
-      console.error({ error });
-    }
-  };
+  // const fetchListStake = async () => {
+  //   try {
+  //     const res = await getListStake();
+  //     if (res?.status === 200 && res?.data?.data) {
+  //       const data = res?.data?.data;
+  //       if (data?.length > 0) {
+  //         const id = data[0]?.id;
+  //         setIdPoolStake(id);
+  //       }
+  //     }
+  //   } catch (error) {
+  //     console.error({ error });
+  //   }
+  // };
 
-  const fetchDetailPool = async () => {
-    try {
-      const res = await getPoolStakeDetail(idPoolStake);
-      if (res?.status === 200 && res?.data) {
-        const poolDetail = res?.data?.pool_detail;
-        onPoolDetail(poolDetail);
-        setPoolDetail(poolDetail);
-      }
-    } catch (error) {
-      console.error({ error });
-    }
-  };
+  // const fetchDetailPool = async () => {
+  //   try {
+  //     const res = await getPoolStakeDetail(idPoolStake);
+  //     if (res?.status === 200 && res?.data) {
+  //       const poolDetail = res?.data?.pool_detail;
+  //       onPoolDetail(poolDetail);
+  //       setPoolDetail(poolDetail);
+  //     }
+  //   } catch (error) {
+  //     console.error({ error });
+  //   }
+  // };
 
-  const handleApprove = async () => {
-    if (contractErc721) {
-      onStatus(STATUS.LOADING);
-      try {
-        const transaction = await contractErc721?.setApprovalForAll(stakeContractAddress, true);
-        await transaction.wait(1);
-        setLoading(false);
-        onStatus(STATUS.SUCCESS);
-        onApproved(true);
-      } catch (error) {
-        onStatus(STATUS.FAIL);
-        onApproved(false);
-        if (error?.code === 4001) {
-          dispatch(alertFailure('User Reject'));
-        }
-      }
-    }
-  };
+  // const handleApprove = async () => {
+  //   if (contractErc721) {
+  //     onStatus(STATUS.LOADING);
+  //     try {
+  //       const transaction = await contractErc721?.setApprovalForAll(stakeContractAddress, true);
+  //       await transaction.wait(1);
+  //       setLoading(false);
+  //       onStatus(STATUS.SUCCESS);
+  //       onApproved(true);
+  //     } catch (error) {
+  //       onStatus(STATUS.FAIL);
+  //       onApproved(false);
+  //       if (error?.code === 4001) {
+  //         dispatch(alertFailure('User Reject'));
+  //       }
+  //     }
+  //   }
+  // };
 
-  const fetchMyNftsNotyetStake = async () => {
-    try {
-      setLoading(true);
-      const res = await getListNftOfUserNotyetStake();
-      if (res?.status === 200) {
-        const { data } = res;
-        if (data && data.length >= 0) {
-          setMyNftsNotyetStake(data);
-          onMyNftsNotyetStake(data);
-        }
-      }
-      setLoading(false);
-    } catch (error) {
-      console.error(error);
-      setLoading(false);
-    }
-  };
+  // const fetchMyNftsNotyetStake = async () => {
+  //   try {
+  //     setLoading(true);
+  //     const res = await getListNftOfUserNotyetStake();
+  //     if (res?.status === 200) {
+  //       const { data } = res;
+  //       if (data && data.length >= 0) {
+  //         setMyNftsNotyetStake(data);
+  //         onMyNftsNotyetStake(data);
+  //       }
+  //     }
+  //     setLoading(false);
+  //   } catch (error) {
+  //     console.error(error);
+  //     setLoading(false);
+  //   }
+  // };
+
+  const isEqual2Strings = (a ,b) => a === b; 
 
   const onSelectNft = (token_id, checked) => {
     const newData = myNftsNotyetStake.map((item) => {
@@ -186,30 +183,30 @@ const ListNft = (props) => {
     setMyNftsNotyetStake(getListNftByChecked(false));
   };
 
-  const handleStake = async () => {
-    onStatus(STATUS.LOADING);
-    setLoadingConfirm(true);
-    const ids = dataSelected.map((item) => item.token_id);
-    const key = process.env.REACT_APP_KEY_STAKING || '2022';
-    try {
-      const transaction = await contractStake.stakeNFT(ids, key);
-      setTxHash(transaction?.hash);
-      await transaction.wait(1);
-      setTimeout(async () => {
-        // wait crawl data
-        setOpenModalSuccess(true);
-        setLoading(false);
-        onStatus(STATUS.SUCCESS);
-      }, 20000);
-    } catch (error) {
-      console.error(error);
-      setLoadingConfirm(false);
-      onStatus(STATUS.FAIL);
-      if (error?.code === 4001) {
-        dispatch(alertFailure('User Reject'));
-      }
-    }
-  };
+  // const handleStake = async () => {
+  //   onStatus(STATUS.LOADING);
+  //   setLoadingConfirm(true);
+  //   const ids = dataSelected.map((item) => item.token_id);
+  //   const key = process.env.REACT_APP_KEY_STAKING || '2022';
+  //   try {
+  //     const transaction = await contractStake.stakeNFT(ids, key);
+  //     setTxHash(transaction?.hash);
+  //     await transaction.wait(1);
+  //     setTimeout(async () => {
+  //       // wait crawl data
+  //       setOpenModalSuccess(true);
+  //       setLoading(false);
+  //       onStatus(STATUS.SUCCESS);
+  //     }, 20000);
+  //   } catch (error) {
+  //     console.error(error);
+  //     setLoadingConfirm(false);
+  //     onStatus(STATUS.FAIL);
+  //     if (error?.code === 4001) {
+  //       dispatch(alertFailure('User Reject'));
+  //     }
+  //   }
+  // };
 
   const renderData = () => {
     return (
@@ -237,16 +234,19 @@ const ListNft = (props) => {
             })}
           </Row>
         ) : (
-          <Empty text="Wallet Empty!" />
+          // <Empty text="Wallet Empty!" />
+          <div>Wallet Empty!</div>
         )}
       </>
     );
   };
 
-  const showTextStake =
-    myNftsNotyetStake.length === 0 ||
-    (myNftsNotyetStake.length > 0 && isApprovedNft) ||
-    !isEqual2Strings(appChainID, process.env.REACT_APP_ETH_CHAIN_ID || '');
+  const showTextStake = true;
+
+  // const showTextStake =
+  //   myNftsNotyetStake.length === 0 ||
+  //   (myNftsNotyetStake.length > 0 && isApprovedNft) ||
+  //   !isEqual2Strings(appChainID, process.env.REACT_APP_ETH_CHAIN_ID || '');
 
   return (
     <>

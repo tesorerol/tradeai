@@ -1,32 +1,34 @@
-import { Button as ButtonMui } from '@material-ui/core';
-import { Col, Row, Spin, Tooltip } from 'antd';
-import { Button } from 'components/Base/Form/Button';
-import Empty from 'components/Empty/EmptySecondary';
-import { ETHER_SCAN_URL } from 'constants/network';
-import { useTypedSelector } from 'hooks/useTypedSelector';
-import { useWeb3ReactLocal } from 'hooks/useWeb3ReactLocal';
-import moment from 'moment';
-import { useEffect, useMemo, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { getListNftOfUserStaked } from 'request/pool';
-import { alertFailure } from 'store/actions/alert';
-import { isEqual2Strings } from 'utils/campaign';
-import { getContract } from 'utils/contract';
-import { antIcon, STATUS } from '.';
-import Erc721ABI from '../../../abi/nft/erc721.json';
-import StakingABI from '../../../abi/Staking.json';
-import SectionCarousel from '../Carousel';
-import { NftDetail } from '../interface';
-import ModalListNft from '../modals/ModalListNft';
-import ModalStakeNft from '../modals/ModalStakeNft';
-import ModalSuccess from '../modals/ModalSuccess';
-import '../styles/index.scss';
-import './index.scss';
-import NftCard from './NftCard';
+import { Button as ButtonMui } from "@material-ui/core";
+import { Col, Row, Spin, Tooltip } from "antd";
+// import { ETHER_SCAN_URL } from "constants/network";
+// import { useTypedSelector } from "hooks/useTypedSelector";
+// import { useWeb3ReactLocal } from "hooks/useWeb3ReactLocal";
+import moment from "moment";
+import { useEffect, useMemo, useState } from "react";
+import { useDispatch } from "react-redux";
+// import { getListNftOfUserStaked } from "request/pool";
+// import { alertFailure } from "store/actions/alert";
+// import { isEqual2Strings } from "utils/campaign";
+// import { getContract } from "utils/contract";
+import { antIcon, STATUS } from ".";
+import SectionCarousel from "../Carousel";
+import ModalListNft from "../modals/ModalListNft";
+import ModalStakeNft from "../modals/ModalStakeNft";
+import ModalSuccess from "../modals/ModalSuccess";
+import "../styles/index.scss";
+import "./index.scss";
+import NftCard from "./NftCard";
 
 
 const ListNftStaked = (props) => {
-  const { onStatus, status, onMyStakedNfts, isApprovedNft, onApproved, poolDetail } = props;
+  const {
+    onStatus,
+    status,
+    onMyStakedNfts,
+    isApprovedNft,
+    onApproved,
+    poolDetail,
+  } = props;
   const { account, library } = useWeb3ReactLocal();
   const dispatch = useDispatch();
 
@@ -36,17 +38,26 @@ const ListNftStaked = (props) => {
   const [loadingConfirm, setLoadingConfirm] = useState(false);
   const [openModalListNFT, setModalListNFT] = useState(false);
   const [openModalSuccess, setOpenModalSuccess] = useState(false);
-  const [txHash, setTxHash] = useState<string>('');
+  const [txHash, setTxHash] = useState < string > "";
   const { appChainID } = useTypedSelector((state) => state.appNetwork).data;
 
   const stakeContractAddress = process.env.REACT_APP_CONTRACT_STAKING;
 
-  const contractStake = getContract(stakeContractAddress, StakingABI, library, account);
+  const contractStake = getContract(
+    stakeContractAddress,
+    StakingABI,
+    library,
+    account
+  );
 
-  const wrongNetwork = !isEqual2Strings(appChainID, process.env.REACT_APP_ETH_CHAIN_ID || '');
+  const wrongNetwork = !isEqual2Strings(
+    appChainID,
+    process.env.REACT_APP_ETH_CHAIN_ID || ""
+  );
 
   const disabledButton = useMemo(() => {
-    const noItemChoose = myStakedNfts.filter((item) => item.isChecked).length < 1;
+    const noItemChoose =
+      myStakedNfts.filter((item) => item.isChecked).length < 1;
     return wrongNetwork || noItemChoose;
   }, [myStakedNfts, wrongNetwork]);
 
@@ -54,7 +65,7 @@ const ListNftStaked = (props) => {
     if (myStakedNfts.length > 0) {
       return myStakedNfts[0].address;
     }
-    return '';
+    return "";
   }, [myStakedNfts]);
 
   const contractErc721 = useMemo(() => {
@@ -71,7 +82,10 @@ const ListNftStaked = (props) => {
     if (contractErc721) {
       onStatus(STATUS.LOADING);
       try {
-        const transaction = await contractErc721?.setApprovalForAll(stakeContractAddress, true);
+        const transaction = await contractErc721?.setApprovalForAll(
+          stakeContractAddress,
+          true
+        );
         await transaction.wait(1);
         setLoading(false);
         onStatus(STATUS.SUCCESS);
@@ -80,7 +94,7 @@ const ListNftStaked = (props) => {
         onStatus(STATUS.FAIL);
         onApproved(false);
         if (error?.code === 4001) {
-          dispatch(alertFailure('User Reject'));
+          dispatch(alertFailure("User Reject"));
         }
       }
     }
@@ -89,8 +103,8 @@ const ListNftStaked = (props) => {
   useEffect(() => {
     if (poolDetail) {
       fetchMyNftsNotyetStake();
-    }else {
-      setLoading(false)
+    } else {
+      setLoading(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [account, poolDetail?.lock_period]);
@@ -112,7 +126,10 @@ const ListNftStaked = (props) => {
           const newData = data?.map((item) => {
             const staked_at = item?.staked_at;
             const lock = poolDetail?.lock_period || 0;
-            const dateCanUnstake = moment(Number(staked_at) * 1000).add(Number(lock), 'hours');
+            const dateCanUnstake = moment(Number(staked_at) * 1000).add(
+              Number(lock),
+              "hours"
+            );
             const canUnStake = moment().isAfter(dateCanUnstake);
             return {
               ...item,
@@ -133,7 +150,8 @@ const ListNftStaked = (props) => {
 
   const onSelectNft = (token_id, checked) => {
     const newData = myStakedNfts.map((item) => {
-      if (isEqual2Strings(token_id, item.token_id)) return { ...item, isChecked: checked };
+      if (isEqual2Strings(token_id, item.token_id))
+        return { ...item, isChecked: checked };
       return item;
     });
     setMyStakedNfts(newData);
@@ -173,7 +191,7 @@ const ListNftStaked = (props) => {
     onStatus(STATUS.LOADING);
     setLoadingConfirm(true);
     const ids = dataSelected.map((item) => item.token_id);
-    const key = process.env.REACT_APP_KEY_STAKING || '2022';
+    const key = process.env.REACT_APP_KEY_STAKING || "2022";
     try {
       const transaction = await contractStake.unstakeNFT(ids, key);
       setTxHash(transaction?.hash);
@@ -189,7 +207,7 @@ const ListNftStaked = (props) => {
       setLoadingConfirm(false);
       onStatus(STATUS.FAIL);
       if (error?.code === 4001) {
-        dispatch(alertFailure('User Reject'));
+        dispatch(alertFailure("User Reject"));
       }
     }
   };
@@ -211,13 +229,18 @@ const ListNftStaked = (props) => {
                   xl={{ span: 8 }}
                   xxl={{ span: 8 }}
                 >
-                  <NftCard item={item} showCheckbox={isApprovedNft && canUnStake} onSelect={onSelectNft} />
+                  <NftCard
+                    item={item}
+                    showCheckbox={isApprovedNft && canUnStake}
+                    onSelect={onSelectNft}
+                  />
                 </Col>
               );
             })}
           </Row>
         ) : (
-          <Empty text="Stake your XBorg NFT to get rewards!" />
+          // <Empty text="Stake your XBorg NFT to get rewards!" />
+          <div>Stake your XBorg NFT to get rewards!</div>
         )}
       </>
     );
@@ -226,19 +249,19 @@ const ListNftStaked = (props) => {
   const showTextUnstake =
     myStakedNfts.length === 0 ||
     (myStakedNfts.length > 0 && isApprovedNft) ||
-    !isEqual2Strings(appChainID, process.env.REACT_APP_ETH_CHAIN_ID || '');
+    !isEqual2Strings(appChainID, process.env.REACT_APP_ETH_CHAIN_ID || "");
 
   return (
     <>
       <div className="background-gradient">
         <div className="list-nft">
           <div className="flex title mt-0">
-            <div className="text1">{'ACTIVE'}</div>
+            <div className="text1">{"ACTIVE"}</div>
 
             <div className="text2">
               <span
                 className="text-select"
-                style={{ cursor: isApprovedNft ? 'pointer' : 'no-drop' }}
+                style={{ cursor: isApprovedNft ? "pointer" : "no-drop" }}
                 onClick={() => {
                   if (isApprovedNft) {
                     handleSelectAll();
@@ -250,7 +273,7 @@ const ListNftStaked = (props) => {
               &nbsp;|&nbsp;
               <div
                 className="text-select"
-                style={{ cursor: isApprovedNft ? 'pointer' : 'no-drop' }}
+                style={{ cursor: isApprovedNft ? "pointer" : "no-drop" }}
                 onClick={handleSelectNone}
               >
                 Select None
@@ -267,14 +290,22 @@ const ListNftStaked = (props) => {
                   overlayClassName="custom-tooltip-stake-wrong-network"
                 >
                   <div>
-                    <Button disabled={true} className="button-stake" shape="square">
+                    <Button
+                      disabled={true}
+                      className="button-stake"
+                      shape="square"
+                    >
                       Unstake
                     </Button>
                   </div>
                 </Tooltip>
               ) : (
                 <Button
-                  style={disabledButton ? { cursor: 'no-drop' } : { cursor: 'pointer' }}
+                  style={
+                    disabledButton
+                      ? { cursor: "no-drop" }
+                      : { cursor: "pointer" }
+                  }
                   disabled={disabledButton}
                   className="button-stake"
                   shape="square"
@@ -284,9 +315,14 @@ const ListNftStaked = (props) => {
                 </Button>
               )
             ) : (
-              <Button className="button-stake" shape="square" onClick={handleApprove} disabled={wrongNetwork}>
+              <Button
+                className="button-stake"
+                shape="square"
+                onClick={handleApprove}
+                disabled={wrongNetwork}
+              >
                 {status === STATUS.LOADING && antIcon(24)}
-                {status !== STATUS.LOADING && 'Approve'}
+                {status !== STATUS.LOADING && "Approve"}
               </Button>
             )}
           </div>
@@ -301,8 +337,11 @@ const ListNftStaked = (props) => {
         title="Unstake Your NFT"
         className="unstake"
         footer={[
-          <div className="footer" style={{ borderTop: 'none' }}>
-            <ButtonMui className="button-cancel-stake-nft" onClick={() => setOpenModal(false)}>
+          <div className="footer" style={{ borderTop: "none" }}>
+            <ButtonMui
+              className="button-cancel-stake-nft"
+              onClick={() => setOpenModal(false)}
+            >
               Cancel
             </ButtonMui>
             <Button
@@ -320,7 +359,9 @@ const ListNftStaked = (props) => {
         wrapClassName="modal-stake-nft"
       >
         <div className="section-carousel-wrapper">
-          <div className="section-carousel-title">Total: {dataSelected.length} NFTs</div>
+          <div className="section-carousel-title">
+            Total: {dataSelected.length} NFTs
+          </div>
           <SectionCarousel>
             {dataSelected.map((item, index) => {
               return <NftCard item={item} key={index} showCheckbox={false} />;
@@ -345,9 +386,14 @@ const ListNftStaked = (props) => {
           </div>
           <div className="line-horizontal"></div>
           <div className="section-button">
-            <Button disabled={loadingConfirm} className="button-stake-modal" shape="square" onClick={handleUnStake}>
+            <Button
+              disabled={loadingConfirm}
+              className="button-stake-modal"
+              shape="square"
+              onClick={handleUnStake}
+            >
               {loadingConfirm && antIcon(24)}
-              {!loadingConfirm && 'Confirm'}
+              {!loadingConfirm && "Confirm"}
             </Button>
           </div>
         </div>
@@ -368,7 +414,7 @@ const ListNftStaked = (props) => {
           <div
             className="transaction-hash"
             onClick={() => {
-              window.open(`${ETHER_SCAN_URL}/tx/${txHash}`, '_blank');
+              window.open(`${ETHER_SCAN_URL}/tx/${txHash}`, "_blank");
             }}
           >
             <span>View transaction details</span>&nbsp;

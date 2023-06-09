@@ -5,7 +5,6 @@ import Tabs from "@material-ui/core/Tabs";
 import { Select, Tooltip } from "antd";
 import React from "react";
 import useWindowSize from "../../hooks/useWindowSize";
-import Reward from "./Reward";
 import { useStyles, useTabPanelStyles } from "./styles";
 import "./styles/index.scss";
 import Summary from "./Summary";
@@ -160,7 +159,7 @@ const YieldBox = () => {
         </AppBar>
         <TabPanel key={value} value={value} index={value}>
           {value === 0 && <Summary />}
-          {value === 1 && <Reward />}
+          {/* {value === 1 && <Reward />} */}
         </TabPanel>
       </div>
     );
