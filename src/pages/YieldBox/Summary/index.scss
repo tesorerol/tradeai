@@ -1,0 +1,364 @@
+// $header-img: image-url('images/nfts/bg-staked.png', false, false);
+
+.background-gradient {
+  width: 100%;
+  background-image: linear-gradient(180deg, #b347ff, #454cf9, #02acd3);
+  padding: 2.2px;
+  border-radius: 10px;
+}
+
+.list-nft {
+  width: 100%;
+  //   height: 523px;
+  background: #372d46;
+  border-radius: 9px;
+  padding-top: 25px;
+  // border: 1.2px solid #ca80ff;
+  // border: 1.2px solid linear-gradient(180deg, #b347ff 100%, #454cf9 100%, #02acd3 100%);
+
+  .title {
+    justify-content: space-between;
+    margin: 0 23px;
+    margin-top: 25px;
+
+    .text1 {
+      font-family: 'Montserrat-SemiBold';
+      font-size: 24px;
+      color: #ffffff;
+    }
+
+    .text2 {
+      font-family: 'Montserrat-Regular';
+      font-size: 14px;
+      color: #ffffff;
+      line-height: 40px;
+    }
+
+    .text-select {
+      display: inline;
+      cursor: pointer;
+    }
+  }
+
+  .button-stake {
+    font-family: 'Montserrat-Medium';
+    font-size: 13px;
+    line-height: 24px;
+    color: #ffffff;
+    margin: 0 8px;
+    padding: '12px 12px';
+
+    &:disabled {
+      opacity: 0.6;
+    }
+  }
+
+  .list {
+    margin-top: 15px;
+    padding: 0 22px 22px;
+    overflow-x: auto;
+    height: 520px;
+
+    &::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+      margin-bottom: 5px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: #ffffff;
+    }
+  }
+
+  .text-info {
+  }
+}
+
+.nft-card {
+  background: #262628;
+  border-radius: 5px;
+  // padding: 8px;
+  margin: 5px;
+  flex-direction: column;
+  position: relative;
+
+  .wrapper {
+    padding: 10px;
+  }
+
+  .collection-name {
+    font-size: 12px;
+    font-family: 'Montserrat-Regular';
+  }
+
+  .name {
+    font-size: 12px;
+    font-family: 'Montserrat-Medium';
+  }
+
+  .date {
+    font-family: 'Montserrat-Regular';
+    font-size: 10px;
+    margin-top: 3px;
+  }
+
+  .image {
+    border-radius: 5px;
+    margin-bottom: 5px;
+
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+
+    // @media (max-width: 750px) {
+    //   width: 110px;
+    //   height: 110px;
+    // }
+    // max-width: 120px;
+  }
+
+  .checkbox {
+    position: absolute;
+    top: 10px;
+    left: 20px;
+  }
+}
+
+.xborg {
+  .background-image {
+    background-image: url('../../../asset/images/bg-staked-ver-2.png');
+    background-repeat: no-repeat;
+    // background-position: top center;
+    // object-fit: contain;
+    // background-size: cover;
+    max-width: 100%;
+    height: 270px;
+  }
+
+  .title {
+    font-size: 14px;
+    color: #ffffff;
+    font-family: 'Montserrat-Medium';
+    padding: 6px 0 0 26px;
+  }
+
+  .progress-section {
+    margin-top: 18px;
+    margin-bottom: 24px;
+    padding-left: 12px;
+
+    .progress {
+      .ant-progress-text {
+        color: #ffffff;
+      }
+
+      .staked {
+        font-size: 14px;
+        font-family: 'Montserrat-Regular';
+        margin-top: 5px;
+      }
+    }
+  }
+
+  .total {
+    font-family: 'Montserrat-Medium';
+    width: 164px;
+    text-align: center;
+  }
+
+  .des {
+    width: 164px;
+    margin-top: 16px;
+    font-size: 14px;
+    font-family: 'Montserrat-Regular';
+    text-align: left;
+
+    .weight-500 {
+      font-weight: 500;
+    }
+
+    .weight-600 {
+      font-weight: 600;
+    }
+
+    .weight-700 {
+      font-weight: 700;
+    }
+
+    .font-size-14 {
+      font-size: 14px;
+    }
+
+    .font-size-18 {
+      font-size: 18px;
+    }
+
+    .icon-section {
+      display: flex;
+      justify-content: center;
+      margin-top: 26px;
+
+      img {
+        margin-right: 12px;
+
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+  }
+}
+
+.flex {
+  display: flex;
+}
+
+.center {
+  justify-content: center;
+}
+
+.ant-checkbox-wrapper:hover .ant-checkbox-inner,
+.ant-checkbox:hover .ant-checkbox-inner,
+.ant-checkbox-input:focus + .ant-checkbox-inner {
+  border-color: #262628;
+}
+
+.ant-checkbox-checked .ant-checkbox-inner {
+  background-color: #262628;
+}
+
+.ant-checkbox-checked::after {
+  border: 1px solid #262628;
+}
+
+.ant-checkbox-wrapper {
+  .ant-checkbox {
+    .ant-checkbox-inner {
+      background: transparent;
+      border: 1px solid #262628;
+    }
+  }
+
+  .ant-checkbox.ant-checkbox-checked {
+    .ant-checkbox-inner {
+      border-color: transparent;
+      background-color: #262628;
+    }
+  }
+}
+
+.react-multiple-carousel__arrow--right {
+  background: linear-gradient(102.92deg, #b347ff 6.55%, #454cf9 47.11%, #0961fe 71.51%, #02acd3 98.22%) !important;
+  width: 28px;
+  height: 28px;
+  right: 1px;
+  z-index: 1;
+
+  @media screen and (max-width: 844px) {
+    min-width: 28px;
+    width: 28px;
+    height: 28px;
+    min-height: 28px;
+    z-index: 3 !important;
+  }
+
+  &::before {
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 900;
+  }
+
+  &:hover {
+    background: linear-gradient(102.92deg, #b347ff 6.55%, #454cf9 47.11%, #0961fe 71.51%, #02acd3 98.22%) !important;
+  }
+}
+
+.react-multiple-carousel__arrow--left {
+  background: linear-gradient(102.92deg, #b347ff 6.55%, #454cf9 47.11%, #0961fe 71.51%, #02acd3 98.22%) !important;
+  width: 28px;
+  height: 28px;
+  z-index: 1;
+
+  @media screen and (max-width: 844px) {
+    min-width: 28px;
+    width: 28px;
+    height: 28px;
+    min-height: 28px;
+    z-index: 3 !important;
+  }
+
+  left: 1px;
+
+  &::before {
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 900;
+  }
+
+  &:hover {
+    background: linear-gradient(102.92deg, #b347ff 6.55%, #454cf9 47.11%, #0961fe 71.51%, #02acd3 98.22%) !important;
+  }
+}
+
+.button-cancel {
+  color: black;
+  background: white;
+  min-width: 150;
+  font-size: 14px;
+  font-family: 'Montserrat-Regular';
+  padding: '9px 23px';
+
+  &:hover {
+    color: black;
+    background: white;
+  }
+  text-transform: none;
+}
+
+.button-cancel-stake-nft {
+  color: black;
+  background: white;
+  min-width: 150;
+  font-size: 14px;
+  font-family: 'Montserrat-Semibold';
+  padding: 9px 23px;
+  border-radius: 8px;
+
+  &:hover {
+    color: black;
+    background: white;
+  }
+  text-transform: none;
+}
+
+.ant-spin-spinning {
+  width: 100%;
+}
+.ant-spin {
+  color: #b347ff;
+}
+
+.unstake {
+  .ant-modal-footer {
+    border-top: none;
+  }
+}
+
+.mt-0 {
+  margin-top: 0 !important;
+}
+
+.custom-tooltip-stake-wrong-network {
+  .ant-tooltip-arrow {
+    display: none;
+  }
+
+  .ant-tooltip-inner {
+    background: #44454b;
+    text-align: center;
+    width: 246px;
+  }
+}

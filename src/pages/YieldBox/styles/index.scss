@@ -1,0 +1,302 @@
+$bg-black: #06071c;
+$color-grey-5: #d1d1d1;
+$text-color-white: #fff;
+$color-pure-black: #000000;
+$bg-grey: #353a41;
+
+.ant-modal-content {
+  background: $bg-black;
+  //   border: 1px solid $color-grey-5;
+  border-radius: 8px;
+  color: $text-color-white;
+  padding: 20px 30px;
+
+  .ant-modal-header {
+    padding: 0;
+    border: none;
+    background: $bg-black;
+    color: $text-color-white;
+
+    .ant-modal-title {
+      font-family: 'Montserrat-SemiBold';
+      color: $text-color-white;
+      font-size: 24px;
+      line-height: 24px;
+    }
+  }
+
+  .ant-modal-body {
+    padding: 0;
+    margin-top: 20px;
+  }
+
+  .ant-modal-footer {
+    margin-top: 20px;
+    width: 97%;
+    margin-left: 8px;
+  }
+}
+
+.close-modal-icon {
+  color: $color-pure-black;
+}
+
+.close-modal-icon.Dark {
+  color: $text-color-white;
+}
+
+.text-explain {
+  font-size: 12;
+  font-family: 'Montserrat-Regular';
+  margin-left: -16px;
+  text-align: left;
+}
+
+.footer {
+  margin-top: 10px;
+  button {
+    margin-top: 20px;
+  }
+}
+
+.button-stake-modal {
+  margin-right: -16px;
+  margin-left: 20px;
+}
+
+.modal-stake-nft {
+  .ant-modal-content {
+    width: 550px;
+  }
+}
+
+.section-carousel-wrapper {
+  background: $bg-grey;
+  padding: 14px 21px;
+  border-radius: 10px;
+  // width: 500px;
+
+  .section-carousel-title {
+    font-family: 'Montserrat-SemiBold';
+    font-size: 16px;
+    color: #ffffff;
+    margin-bottom: 12px;
+    line-height: 24px;
+  }
+}
+
+.section-list-nft-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .section-list-nft {
+    background: $bg-grey;
+    border-radius: 10px;
+    padding: 20px 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-height: 370px;
+    overflow-x: auto;
+    width: 100%;
+
+    &::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: #5d6167;
+    }
+
+    .text-item {
+      margin-bottom: 10px;
+      font-family: 'Montserrat-Regular';
+    }
+  }
+}
+
+.modal-list-nft {
+  .ant-modal {
+    width: 320px !important;
+  }
+  .ant-modal-close-x {
+    color: white;
+  }
+}
+
+.line-horizontal {
+  height: 1px;
+  width: 100%;
+  opacity: 0.1;
+  background: 1px solid #ffffff;
+  margin: 25px 0;
+  margin-top: 0;
+}
+
+.section-button {
+  > .button-stake-modal {
+    margin-left: 0;
+  }
+}
+
+.modal-success {
+  .ant-modal {
+    width: 360px !important;
+  }
+
+  .ant-modal .ant-modal-content {
+    .ant-modal-close {
+      .ant-modal-close-x .anticon {
+        color: #ffffff;
+      }
+    }
+  }
+
+  .modal-success-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 50px 0;
+
+    .title {
+      font-size: 'Montserrat-SemiBold';
+      font-size: 22px;
+      line-height: 32px;
+      margin-top: 18px;
+      margin-bottom: 10px;
+    }
+
+    .transaction-hash {
+      cursor: pointer;
+
+      span {
+        font-size: 'Montserrat-Medium';
+        color: #0961fe;
+        font-size: 12px;
+        line-height: 16px;
+      }
+    }
+  }
+}
+
+.select-section-mobile {
+  margin-bottom: 20px;
+
+  // .select-yield-box-mobile.ant-select-focused {
+  //   box-shadow: none !important;
+  //   outline: none !important;
+
+  //   .ant-select-selector {
+  //     box-shadow: none !important;
+  //     outline: none !important;
+
+  //     &:focus,
+  //     &:active {
+  //       box-shadow: none !important;
+  //       outline: none !important;
+  //     }
+
+  //     &::after {
+  //       box-shadow: none !important;
+  //       outline: none !important;
+  //     }
+  //   }
+  // }
+
+  .ant-select.select-yield-box-mobile {
+    width: 100% !important;
+
+    .ant-select-selector {
+      background: transparent;
+      height: 40px;
+      border: 1px solid #83838e;
+      border-radius: 5px;
+
+      &:hover {
+        border-color: #83838e;
+        box-shadow: none;
+        outline: none;
+      }
+
+      &:focus,
+      &:active {
+        border-color: #83838e;
+        box-shadow: none;
+        outline: none;
+      }
+
+      .ant-select-selection-item {
+        font-size: 'Montserrat-Regular';
+        color: #ffffff;
+        font-size: 16px;
+        line-height: 26px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+      }
+    }
+
+    .ant-select-arrow {
+      .anticon-down {
+        color: #ffffff;
+      }
+    }
+  }
+}
+
+.select-yield-box-mobile-popup {
+  background: #000000;
+  border: 1px solid #83838e;
+  border-radius: 5px;
+
+  .ant-select-item {
+    font-size: 'Montserrat-Regular';
+    color: #ffffff;
+    font-size: 16px;
+    line-height: 26px;
+  }
+
+  .ant-select-item-option-active {
+    background: #353a41;
+  }
+}
+
+.video-bg-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+#video-bg-yield-box::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  // background: linear-gradient(180deg, rgba(6, 7, 28, 0) 0%, #06071d 100%);
+}
+
+.custom-tooltip {
+  .ant-tooltip-inner {
+    background: #44454b;
+    text-align: center;
+    width: 378px;
+    @media screen and (max-width: 450px) {
+      width: 300px;
+    }
+    .t-text1 {
+      font-size: 14px;
+      font-family: 'Montserrat-Bold';
+    }
+    .t-text2 {
+      font-size: 13px;
+      @media screen and (max-width: 450px) {
+        font-size: 11px;
+      }
+      font-family: 'Montserrat-Regular';
+    }
+  }
+}
