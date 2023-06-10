@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 import Web3Modal from "web3modal";
 import { apiService } from "../apis";
 import ENV from "../utils/env";
+import { convertToHex } from "../Helpers";
 const web3modalStorageKey = "WEB3_CONNECT_CACHED_PROVIDER";
 
 export const WalletContext = createContext({});
@@ -41,7 +42,7 @@ const WallectConnect = ({ children }) => {
         if (window && window.ethereum) {
           // Check if web3modal wallet connection is available on storage
           if (localStorage.getItem(web3modalStorageKey)) {
-            await connectToWallet();
+            await connectToWallet("reload");
           }
         } else {
           console.log("window or window.ethereum is not available");
@@ -106,14 +107,20 @@ const WallectConnect = ({ children }) => {
     }
   };
 
-  const connectToWallet = async () => {
+  const connectToWallet = async (type) => {
     try {
       setLoading(true);
       checkIfExtensionIsAvailable();
       const connection = web3Modal && (await web3Modal.connect());
       const provider = new ethers.providers.Web3Provider(connection);
       //chainId
-      if (connection.networkVersion !== ENV.chainId) {
+      let connectChainId = ENV.chainId;
+
+      if (type === "reload") {
+        connectChainId = connection.networkVersion;
+      }
+
+      if (connection.networkVersion !== connectChainId) {
         Swal.fire({
           title: "error",
           icon: "error",
@@ -138,7 +145,7 @@ const WallectConnect = ({ children }) => {
           // ],
           params: [
             {
-              ...ENV.networkInfos["0x5"],
+              ...ENV.networkInfos[convertToHex(Number(ENV.chainId))],
             },
           ],
         };
@@ -146,6 +153,7 @@ const WallectConnect = ({ children }) => {
         return;
       }
       await subscribeProvider(connection);
+      setCurrentChainId(Number(connection.networkVersion));
       setProvider(provider);
       setWalletAddress(provider);
       setLoading(false);
@@ -234,6 +242,7 @@ const WallectConnect = ({ children }) => {
             params: [{ chainId: chainId }],
           })
           .then((data) => {
+            window.location.reload();
             resolve(data);
           })
           .catch((error) => {
