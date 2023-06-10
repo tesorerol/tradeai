@@ -2,12 +2,12 @@ import { createStyles, withStyles } from "@material-ui/core";
 import AppBar from "@material-ui/core/AppBar";
 import Tab from "@material-ui/core/Tab";
 import Tabs from "@material-ui/core/Tabs";
-import { Select, Tooltip } from "antd";
+import { Select } from "antd";
 import React from "react";
+import useWindowSize from '../../hooks/useWindowSize';
+import Summary from "./Summary";
 import { useStyles, useTabPanelStyles } from "./styles";
 import "./styles/index.scss";
-import Summary from "./Summary";
-import useWindowSize from '../../hooks/useWindowSize'
 
 const StyledTabs = withStyles({
   indicator: {
@@ -60,7 +60,6 @@ const a11yProps = (index) => {
 
 const TAB_NAMES = ["Summary", "Reward"];
 
-
 const YieldBox = () => {
   const classes = useStyles();
   const { width } = useWindowSize();
@@ -74,7 +73,7 @@ const YieldBox = () => {
   const userStaked = () => {
     return (
       <div className={classes.root}>
-        <h1 className={classes.pageTitle}>
+        {/* <h1 className={classes.pageTitle}>
           Yield Box
           <Tooltip
             placement="bottom"
@@ -118,7 +117,7 @@ const YieldBox = () => {
               style={{ marginLeft: 11 }}
             />
           </Tooltip>
-        </h1>
+        </h1> */}
         {width < 600 && (
           <div className="select-section-mobile">
             <Select

@@ -1,13 +1,12 @@
-import { ethers } from "ethers";
-import React, { useEffect, useState, createContext, useCallback } from "react";
-import Swal from "sweetalert2";
-import Web3Modal from "web3modal";
-import WalletConnect from "@walletconnect/client";
 import QRCodeModal from "@walletconnect/qrcode-modal";
 import WalletConnectProvider from "@walletconnect/web3-provider";
-import ENV from "../utils/env";
+import { ethers } from "ethers";
+import mobile from "is-mobile";
+import React, { createContext, useCallback, useEffect, useState } from "react";
+import Swal from "sweetalert2";
+import Web3Modal from "web3modal";
 import { apiService } from "../apis";
-import mobile from 'is-mobile';
+import ENV from "../utils/env";
 const web3modalStorageKey = "WEB3_CONNECT_CACHED_PROVIDER";
 
 export const WalletContext = createContext({});
@@ -116,10 +115,10 @@ const WallectConnect = ({ children }) => {
       //chainId
       if (connection.networkVersion !== ENV.chainId) {
         Swal.fire({
-          title: 'error',
-          icon: 'error',
-          text: 'wrong network, please switch to ETH',
-        })
+          title: "error",
+          icon: "error",
+          text: "wrong network, please switch to ETH",
+        });
         let RequestSend = {
           id: 1337,
           jsonrpc: "2.0",
@@ -180,7 +179,7 @@ const WallectConnect = ({ children }) => {
         disconnectWallet();
       }
     });
-    connection.on('networkChanged', async (chainID) => {
+    connection.on("networkChanged", async (chainID) => {
       setCurrentChainId(Number(chainID));
     });
   };
@@ -198,6 +197,7 @@ const WallectConnect = ({ children }) => {
 
     // Subscribe to chainId change
     WallectConnectProvider.on("chainChanged", (chainId) => {
+      setCurrentChainId(Number(chainId));
       console.log(chainId);
     });
 
@@ -212,7 +212,6 @@ const WallectConnect = ({ children }) => {
     });
   }
 
-  
   const addConnection = useCallback(async (provider, networkInfo) => {
     return provider.request({
       method: "wallet_addEthereumChain",
@@ -232,7 +231,7 @@ const WallectConnect = ({ children }) => {
         throw new Error("Invalid provider");
       }
 
-      if(!provider.isMetaMask) {
+      if (!provider.isMetaMask) {
         return;
       }
 
@@ -261,7 +260,6 @@ const WallectConnect = ({ children }) => {
     [Provider.provider, addConnection]
   );
 
-
   return (
     <WalletContext.Provider
       value={{
@@ -278,7 +276,7 @@ const WallectConnect = ({ children }) => {
         setIsAllowed,
         iswhiteList,
         checkWhiteList,
-        switchNetwork
+        switchNetwork,
       }}
     >
       {children}

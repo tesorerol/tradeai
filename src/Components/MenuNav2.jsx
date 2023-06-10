@@ -16,9 +16,9 @@ const MenuNav2 = ({ removeAct, addAct, refActive }) => {
   const canDisplaySwitchButton =
     (Provider.provider &&
       Provider.provider.isMetamask &&
-      currentChainId !== ENV.depositChainId &&
+      Number(currentChainId) !== Number(ENV.depositChainId) &&
       isEarnPage) ||
-    (isStakePage && currentChainId !== ENV.chainId);
+    (isStakePage && Number(currentChainId) !== Number(ENV.chainId));
 
   const [isOpen, setIsOpen] = useState({
     earn: false,

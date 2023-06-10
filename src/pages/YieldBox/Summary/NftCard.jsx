@@ -1,7 +1,7 @@
-import { Checkbox } from 'antd';
-import moment from 'moment';
-import './index.scss';
-import clockIcon from '../../../assets/icons/clock.svg'
+import { Checkbox } from "antd";
+import moment from "moment";
+import "./index.scss";
+import clockIcon from "../../../assets/icons/clock.svg";
 
 const NftCard = (props) => {
   const { item, showCheckbox = false, onSelect } = props;
@@ -13,19 +13,40 @@ const NftCard = (props) => {
   return (
     <div
       className="nft-card"
-      style={{ cursor: onSelect && showCheckbox ? 'pointer' : 'no-drop' }}
-      onClick={() => onSelect && showCheckbox && onSelect(item.token_id, !item.isChecked)}
+      style={{ cursor: onSelect && showCheckbox ? "pointer" : "no-drop" }}
+      onClick={() =>
+        onSelect && showCheckbox && onSelect(item.token_id, !item.isChecked)
+      }
     >
       <div className="wrapper">
-        <img src={item.image_url || `https://xborg.vispx.io/xborg/images/${item?.token_id}.PNG`} alt="nft" className="image" />
-        {showCheckbox && <Checkbox checked={!!item.isChecked} className="checkbox" />}
-        <div className="collection-name">XBorg NFT</div>
-        <div className="name">{item?.name}</div>
-        {item?.staked_at && (
-          <div className="date">
-            <img src={clockIcon} alt="icon-date" /> {formatDateUnix(Number(item.staked_at))}
-          </div>
+        <img
+          src={
+            item.image_url ||
+            `https://xborg.vispx.io/xborg/images/${item?.token_id}.PNG`
+          }
+          alt="nft"
+          className="image"
+        />
+        {showCheckbox && (
+          <Checkbox checked={!!item.isChecked} className="checkbox" />
         )}
+        <div title={"AnarKey"} className="collection-name">
+          AnarKey
+        </div>
+        <div title={item?.name} className="name">
+          {item?.name}
+        </div>
+        <div
+          title={item?.staked_at ? formatDateUnix(Number(item.staked_at)) : ""}
+          className="date"
+        >
+          {item?.staked_at && (
+            <>
+              <img src={clockIcon} alt="icon-date" />{" "}
+              {formatDateUnix(Number(item.staked_at))}
+            </>
+          )}
+        </div>
       </div>
     </div>
   );

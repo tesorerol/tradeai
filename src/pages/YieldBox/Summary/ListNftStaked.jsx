@@ -1,20 +1,21 @@
 import { ButtonBase, Button as ButtonMui } from "@material-ui/core";
 import { Col, Row, Spin } from "antd";
 
-import { useContext, useEffect, useMemo, useState } from "react";
+import { useCallback, useContext, useEffect, useMemo, useState } from "react";
 
+import Swal from "sweetalert2";
 import { antIcon } from ".";
-import SectionCarousel from "../Carousel";
-import ModalListNft from "../modals/ModalListNft";
-import ModalStakeNft from "../modals/ModalStakeNft";
-import "../styles/index.scss";
-import "./index.scss";
-import NftCard from "./NftCard";
 import { WalletContext } from "../../../Providers/WallectConnect";
 import { apiService } from "../../../apis";
 import { useApproveNftAll, useContract } from "../../../hooks/useContracts";
 import ENV from "../../../utils/env";
-import Swal from "sweetalert2";
+import SectionCarousel from "../Carousel";
+import ModalListNft from "../modals/ModalListNft";
+import ModalStakeNft from "../modals/ModalStakeNft";
+import "../styles/index.scss";
+import NftCard from "./NftCard";
+import "./index.scss";
+import backButton from "../../../assets/icons/back-button.svg";
 
 const ListNftStaked = (props) => {
   const { forceRefresh, setForceRefresh } = props;
@@ -68,13 +69,7 @@ const ListNftStaked = (props) => {
     }
   };
 
-  useEffect(() => {
-    if (account) {
-      fetchNftsActive();
-    }
-  }, [account, forceRefresh]);
-
-  const fetchNftsActive = async () => {
+  const fetchNftsActive = useCallback(async () => {
     try {
       setLoading(true);
       const res = await apiService.listActive(account);
@@ -87,7 +82,13 @@ const ListNftStaked = (props) => {
       console.error(error);
       setLoading(false);
     }
-  };
+  }, [account]);
+
+  useEffect(() => {
+    if (account) {
+      fetchNftsActive();
+    }
+  }, [account, fetchNftsActive, forceRefresh]);
 
   const dataSelected = useMemo(() => {
     return myStakedNfts.filter((item) => item.isChecked);
@@ -139,7 +140,7 @@ const ListNftStaked = (props) => {
             })}
           </Row>
         ) : (
-          <div>No Staked AnarKey!</div>
+          <p className="empty-collection">No Staked AnarKey!</p>
         )}
       </>
     );
@@ -150,12 +151,12 @@ const ListNftStaked = (props) => {
       <div className="background-gradient">
         <div className="list-nft">
           <div className="flex title mt-0">
-            <div className="text1">{"ACTIVE"}</div>
+            <div className="text1">ACTIVE</div>
             <div className="text2">
               <span className="text-select" onClick={handleSelectAll}>
                 Select All
               </span>
-              &nbsp;|&nbsp;
+              <span className="divide">|</span>
               <div className="text-select" onClick={handleSelectNone}>
                 Select None
               </div>
@@ -184,22 +185,24 @@ const ListNftStaked = (props) => {
         className="unstake"
         footer={[
           <div className="footer" style={{ borderTop: "none" }}>
-            <ButtonBase
-              className="button-cancel-stake-nft"
-              onClick={() => setOpenModal(false)}
-            >
-              Cancel
-            </ButtonBase>
-            <ButtonBase
-              className="button-stake-modal"
-              shape="square"
-              onClick={() => {
-                setOpenModal(false);
-                setModalListNFT(true);
-              }}
-            >
-              Unstake Now
-            </ButtonBase>
+            <div className="action">
+              <ButtonBase
+                className="button-cancel-stake-nft"
+                onClick={() => setOpenModal(false)}
+              >
+                Cancel
+              </ButtonBase>
+              <ButtonBase
+                className="button-stake-modal"
+                shape="square"
+                onClick={() => {
+                  setOpenModal(false);
+                  setModalListNFT(true);
+                }}
+              >
+                Unstake Now
+              </ButtonBase>
+            </div>
           </div>,
         ]}
         wrapClassName="modal-stake-nft"
@@ -217,10 +220,13 @@ const ListNftStaked = (props) => {
       </ModalStakeNft>
       <ModalListNft
         visible={openModalListNFT}
-        onCancel={() => setModalListNFT(false)}
+        // onCancel={() => setModalListNFT(false)}
         title="Unstake Your NFT"
         wrapClassName="modal-list-nft"
       >
+        <div className="back-button" onClick={() => setModalListNFT(false)}>
+          <img src={backButton} alt="back-button" />
+        </div>
         <div className="section-list-nft-wrapper">
           <div className="section-list-nft">
             <div className="text-item">UnStaked NFT(s):</div>
@@ -232,14 +238,14 @@ const ListNftStaked = (props) => {
           </div>
           <div className="line-horizontal"></div>
           <div className="section-button">
-            <ButtonBase
+            <ButtonMui
               disabled={loadingConfirm}
               className="button-stake-modal"
               shape="square"
               onClick={handleUntake}
             >
               {loadingConfirm ? antIcon(24) : "Confirm"}
-            </ButtonBase>
+            </ButtonMui>
           </div>
         </div>
       </ModalListNft>

@@ -1,18 +1,19 @@
 // $header-img: image-url('images/nfts/bg-staked.png', false, false);
 
-.background-gradient {
-  width: 100%;
-  background-image: linear-gradient(180deg, #b347ff, #454cf9, #02acd3);
-  padding: 2.2px;
-  border-radius: 10px;
-}
+// .background-gradient {
+//   width: 100%;
+//   background-image: linear-gradient(180deg, #b347ff, #454cf9, #02acd3);
+//   padding: 2.2px;
+//   border-radius: 10px;
+// }
 
 .list-nft {
   width: 100%;
   //   height: 523px;
-  background: #372d46;
+  background: #172d3b;
   border-radius: 9px;
   padding-top: 25px;
+  border: 1.5px solid #4b4b4b;
   // border: 1.2px solid #ca80ff;
   // border: 1.2px solid linear-gradient(180deg, #b347ff 100%, #454cf9 100%, #02acd3 100%);
 
@@ -22,16 +23,20 @@
     margin-top: 25px;
 
     .text1 {
-      font-family: 'Montserrat-SemiBold';
       font-size: 24px;
       color: #ffffff;
+      font-weight: 600;
     }
 
     .text2 {
-      font-family: 'Montserrat-Regular';
+      font-weight: 400;
       font-size: 14px;
       color: #ffffff;
       line-height: 40px;
+
+      .divide {
+        margin: 0 12px;
+      }
     }
 
     .text-select {
@@ -40,13 +45,29 @@
     }
   }
 
+  .empty-collection {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 24px;
+    text-align: center;
+    margin-top: 157px;
+  }
+
   .button-stake {
-    font-family: 'Montserrat-Medium';
     font-size: 13px;
     line-height: 24px;
     color: #ffffff;
     margin: 0 8px;
-    padding: '12px 12px';
+    padding: "12px 12px";
+    background: linear-gradient(
+      102.92deg,
+      #282062 6.55%,
+      #27366b 47.11%,
+      #264674 71.51%,
+      #235c80 98.22%
+    );
+    text-transform: initial;
+    width: 80px;
 
     &:disabled {
       opacity: 0.6;
@@ -72,39 +93,63 @@
       background: #ffffff;
     }
   }
-
-  .text-info {
-  }
 }
 
 .nft-card {
-  width: 136px;
-  height: 191px;
+  width: 150px;
   box-sizing: border-box;
   background: #262628;
   border-radius: 5px;
   // padding: 8px;
   flex-direction: column;
   position: relative;
+  font-family: "Chakra Petch", sans-serif;
+
+  @media (max-width: 1400px) {
+    width: 120px;
+  }
+
+  @media (max-width: 450px) {
+    width: 120px;
+  }
+
+  .ant-checkbox {
+    border: 2px solid #ffffff;
+    border-radius: 2px;
+  }
 
   .wrapper {
     padding: 10px;
   }
 
   .collection-name {
+    white-space: nowrap;
+    overflow: hidden;
+    font-weight: 400;
     font-size: 12px;
-    font-family: 'Montserrat-Regular';
+    text-overflow: ellipsis;
+    line-height: 19px;
+    margin-top: 5px;
   }
 
   .name {
+    white-space: nowrap;
+    overflow: hidden;
+    font-weight: 400;
     font-size: 12px;
-    font-family: 'Montserrat-Medium';
+    text-overflow: ellipsis;
+    line-height: 19px;
   }
 
   .date {
-    font-family: 'Montserrat-Regular';
+    white-space: nowrap;
+    overflow: hidden;
+    font-weight: 400;
     font-size: 10px;
     margin-top: 3px;
+    min-height: 15px;
+    text-overflow: ellipsis;
+    line-height: 19px;
   }
 
   .image {
@@ -124,13 +169,14 @@
 
   .checkbox {
     position: absolute;
-    top: 10px;
-    left: 20px;
+    top: 14px;
+    left: 14px;
   }
 }
 
-.xborg {
+.anarkey {
   .background-image {
+    background-image: url("../../../assets/images/progress-bg.png");
     // background-image: url('../../../asset/images/bg-staked-ver-2.png');
     background-repeat: no-repeat;
     // background-position: top center;
@@ -141,42 +187,59 @@
   }
 
   .title {
-    font-size: 14px;
     color: #ffffff;
-    font-family: 'Montserrat-Medium';
     padding: 6px 0 0 26px;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 21px;
   }
 
   .progress-section {
     margin-top: 18px;
     margin-bottom: 24px;
     padding-left: 12px;
+    height: 140px;
+
+    .ant-progress {
+      height: 100%;
+    }
 
     .progress {
+      background: #172d3b;
+
       .ant-progress-text {
         color: #ffffff;
+        font-weight: 600;
+        font-size: 24px;
+        line-height: 22px;
       }
 
       .staked {
         font-size: 14px;
-        font-family: 'Montserrat-Regular';
         margin-top: 5px;
       }
     }
   }
 
   .total {
-    font-family: 'Montserrat-Medium';
     width: 164px;
     text-align: center;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
   }
 
   .des {
     width: 164px;
-    margin-top: 16px;
+    margin-top: 40px;
     font-size: 14px;
-    font-family: 'Montserrat-Regular';
+
     text-align: left;
+
+    .user-staked {
+      margin-bottom: 44px;
+      display: block;
+    }
 
     .weight-500 {
       font-weight: 500;
@@ -253,7 +316,7 @@
 }
 
 .react-multiple-carousel__arrow--right {
-  background: linear-gradient(102.92deg, #b347ff 6.55%, #454cf9 47.11%, #0961fe 71.51%, #02acd3 98.22%) !important;
+  background: #fff !important;
   width: 28px;
   height: 28px;
   right: 1px;
@@ -268,18 +331,18 @@
   }
 
   &::before {
-    color: #ffffff;
+    color: #000000 !important;
     font-size: 16px;
     font-weight: 900;
   }
 
   &:hover {
-    background: linear-gradient(102.92deg, #b347ff 6.55%, #454cf9 47.11%, #0961fe 71.51%, #02acd3 98.22%) !important;
+    background: #fff !important;
   }
 }
 
 .react-multiple-carousel__arrow--left {
-  background: linear-gradient(102.92deg, #b347ff 6.55%, #454cf9 47.11%, #0961fe 71.51%, #02acd3 98.22%) !important;
+  background: #fff !important;
   width: 28px;
   height: 28px;
   z-index: 1;
@@ -295,13 +358,13 @@
   left: 1px;
 
   &::before {
-    color: #ffffff;
+    color: #000000 !important;
     font-size: 16px;
     font-weight: 900;
   }
 
   &:hover {
-    background: linear-gradient(102.92deg, #b347ff 6.55%, #454cf9 47.11%, #0961fe 71.51%, #02acd3 98.22%) !important;
+    background: #fff !important;
   }
 }
 
@@ -310,24 +373,8 @@
   background: white;
   min-width: 150;
   font-size: 14px;
-  font-family: 'Montserrat-Regular';
-  padding: '9px 23px';
 
-  &:hover {
-    color: black;
-    background: white;
-  }
-  text-transform: none;
-}
-
-.button-cancel-stake-nft {
-  color: black;
-  background: white;
-  min-width: 150;
-  font-size: 14px;
-  font-family: 'Montserrat-Semibold';
-  padding: 9px 23px;
-  border-radius: 8px;
+  padding: "9px 23px";
 
   &:hover {
     color: black;

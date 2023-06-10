@@ -1,16 +1,17 @@
 import { LoadingOutlined } from "@ant-design/icons";
 import { Col, Progress, Row } from "antd";
-import { useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 
 import "./index.scss";
 import ListNft from "./ListNft";
 import ListNftStaked from "./ListNftStaked";
 import { apiService } from "../../../apis";
 import { WalletContext } from "../../../Providers/WallectConnect";
-
-const iconWhite = "/images/icons/summary-logo-white.svg";
-const iconDiamond = "/images/icons/summary-logo-diamond.svg";
-const iconBlur = "/images/icons/summary-logo-blur.svg";
+import iconWhite from "../../../assets/icons/summary-logo-white.svg";
+import iconDiamond from "../../../assets/icons/summary-logo-diamond.svg";
+import iconBlur from "../../../assets/icons/summary-logo-blur.svg";
+import Swal from "sweetalert2";
+import ENV from "../../../utils/env";
 
 export const antIcon = (size = 50) => {
   return (
@@ -42,9 +43,19 @@ const Summary = (props) => {
     maxAllocation: 0,
   });
 
-  const { address: account } = useContext(WalletContext);
+  const { address: account, currentChainId } = useContext(WalletContext);
 
-  const getUserStakeInfo = async () => {
+  useEffect(() => {
+    if (Number(currentChainId) !== Number(ENV.chainId)) {
+      Swal.fire({
+        title: "error",
+        icon: "error",
+        text: "Wrong network, please switch to ETH",
+      });
+    }
+  }, [currentChainId]);
+
+  const getUserStakeInfo = useCallback(async () => {
     try {
       if (!account) return;
       const res = await apiService.stakeInfo(account);
@@ -53,11 +64,11 @@ const Summary = (props) => {
     } catch (err) {
       console.error(err);
     }
-  };
+  }, [account]);
 
   useEffect(() => {
     getUserStakeInfo();
-  }, [account, forceRefresh]);
+  }, [getUserStakeInfo, forceRefresh]);
 
   return (
     <Row gutter={[16, 16]}>
@@ -88,7 +99,7 @@ const Summary = (props) => {
         />
       </Col>
       <Col
-        className="xborg"
+        className="anarkey"
         xs={{ span: 16 }}
         sm={{ span: 10 }}
         md={{ span: 6 }}
@@ -98,7 +109,7 @@ const Summary = (props) => {
       >
         <div className="background-image">
           <div className="title">
-            <span>XBorg</span>
+            <span>ANARKEY</span>
           </div>
           <div className="progress-section">
             <Progress
@@ -108,7 +119,10 @@ const Summary = (props) => {
                 "48.44%": "#454CF9",
                 "100%": "#02ACD3",
               }}
-              percent={Number(10)}
+              percent={
+                Number(stakedInfo.stakedTotal / (stakedInfo.totalNft || 1)) *
+                100
+              }
               strokeWidth={8}
               width={140}
               trailColor="#06071C"
@@ -127,14 +141,14 @@ const Summary = (props) => {
         </div>
 
         <div className="des">
-          <span className="weight-500 font-size-18">
+          <span className="weight-500 font-size-18 user-staked">
             Staked:{" "}
             <span className="weight-700 font-size-18">
               {stakedInfo?.staked || 0}
             </span>
           </span>
           <br />
-          <span className="weight-500 font-size-18">
+          <span className="weight-500 font-size-18 user-staked">
             Max Allocation:{" "}
             <span className="weight-700 font-size-18">
               {stakedInfo?.maxAllocation || 0}
