@@ -33,7 +33,7 @@ const WallectConnect = ({ children }) => {
   const web3Modal =
     typeof window !== "undefined" && new Web3Modal({ cacheProvider: true });
   // const chainID = 97;
-  const chainID = ENV.stakeChainID;
+  // const chainID = ENV.stakeChainID;
   /* This effect will fetch wallet address if user has already connected his/her wallet */
   useEffect(() => {
     async function checkConnection() {
@@ -138,15 +138,7 @@ const WallectConnect = ({ children }) => {
           // ],
           params: [
             {
-              chainId: "0x38",
-              chainName: "Binance Smart Chain Mainnet",
-              nativeCurrency: {
-                name: "Binance Coin",
-                symbol: "bnb", // 2-6 characters long
-                decimals: 18,
-              },
-              rpcUrls: ["https://bsc-dataseed1.binance.org/"],
-              blockExplorerUrls: ["https://bscscan.com/"],
+              ...ENV.networkInfos["0x5"],
             },
           ],
         };
@@ -246,11 +238,12 @@ const WallectConnect = ({ children }) => {
           })
           .catch((error) => {
             if (error.code === 4902 || (mobile() && error.code === -32603)) {
-              return addConnection(provider, ENV.BSC_INFO).catch(
-                (addConnectError) => {
-                  reject(addConnectError);
-                }
-              );
+              return addConnection(
+                provider,
+                ENV.networkInfos[chainId] || ENV.networkInfos?.["0x5"]
+              ).catch((addConnectError) => {
+                reject(addConnectError);
+              });
             }
 
             reject(error);

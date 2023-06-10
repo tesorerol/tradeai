@@ -104,7 +104,7 @@ const MenuNav2 = ({ removeAct, addAct, refActive }) => {
           onClick={() =>
             switchNetwork(
               convertToHex(isStakePage ? ENV.chainId : ENV.depositChainId)
-            )
+            ).catch((e) => console.error(e))
           }
         >
           Switch Network
