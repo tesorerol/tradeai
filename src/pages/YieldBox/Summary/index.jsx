@@ -115,9 +115,9 @@ const Summary = (props) => {
             <Progress
               type="circle"
               strokeColor={{
-                " 0%": "#B347FF",
-                "48.44%": "#454CF9",
-                "100%": "#02ACD3",
+                " 0%": "#246FE5",
+                "48.44%": "#246FE5",
+                "100%": "#246FE5",
               }}
               percent={
                 Number(stakedInfo.stakedTotal / (stakedInfo.totalNft || 1)) *
