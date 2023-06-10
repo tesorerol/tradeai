@@ -54,20 +54,17 @@ const WallectConnect = ({ children }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  useEffect(() => {
-    const checkWhiteList = async (address) => {
-      try {
-        const res = await apiService.checkWhiteList(address);
-        console.log('res', res)
-        setWhiteList(res?.data?.isWL);
-      } catch (err) {
-        console.error(err);
-      }
-    };
-
-    if (address) {
-      checkWhiteList();
+  const checkWhiteList = async (address) => {
+    try {
+      if (!address) throw Error("No address");
+      const res = await apiService.checkWhiteList(address);
+      setWhiteList(res?.data?.isWL);
+    } catch (err) {
+      console.error("checkWhiteList", err);
     }
+  };
+  useEffect(() => {
+    checkWhiteList();
   }, [address]);
 
   const setWalletAddress = async (provider) => {
@@ -223,6 +220,7 @@ const WallectConnect = ({ children }) => {
         WallectConnect,
         setIsAllowed,
         iswhiteList,
+        checkWhiteList,
       }}
     >
       {children}

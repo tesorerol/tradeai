@@ -69,7 +69,10 @@ const Summary = (props) => {
         xl={{ span: 10 }}
         xxl={{ span: 10 }}
       >
-        <ListNft forceRefresh={forceRefresh} setForceRefresh={setForceRefresh}/>
+        <ListNft
+          forceRefresh={forceRefresh}
+          setForceRefresh={setForceRefresh}
+        />
       </Col>
       <Col
         xs={{ span: 24 }}
@@ -79,7 +82,10 @@ const Summary = (props) => {
         xl={{ span: 10 }}
         xxl={{ span: 10 }}
       >
-        <ListNftStaked forceRefresh={forceRefresh} setForceRefresh={setForceRefresh}/>
+        <ListNftStaked
+          forceRefresh={forceRefresh}
+          setForceRefresh={setForceRefresh}
+        />
       </Col>
       <Col
         className="xborg"

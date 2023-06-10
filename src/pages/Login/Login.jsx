@@ -7,27 +7,16 @@ import marcoContent from "../../assets/login/marco-card.png";
 import marcoButton from "../../assets/login/marco-boton.png";
 import marcoMobile from "../../assets/login/marco-mobile.png";
 import { WalletContext } from "../../Providers/WallectConnect";
-import WL from "../../Data/wl.json";
-import Swal from "sweetalert2";
 
 const Login = ({ isAllowed, setIsAllowed }) => {
-  const { connectToWallet, WallectConnect, address, disconnectWallet } =
+  const { connectToWallet, WallectConnect, address } =
     useContext(WalletContext);
 
   useEffect(() => {
     if (address) {
-      let wl = WL.filter((wl) => wl.wallet.toLowerCase() === address.toLowerCase())
-      if(wl.length>0){
-        setIsAllowed(!isAllowed)
-      }else{
-        Swal.fire({
-            title:"Sorry you are not in whitelist",
-            icon:"error"
-        })
-        disconnectWallet();
-      }
+      setIsAllowed(!isAllowed);
     }
-  }, [address])
+  }, [address]);
 
   function WhiteListWallet(type) {
     if (type === "connect") {
