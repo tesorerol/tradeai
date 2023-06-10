@@ -8,7 +8,7 @@ const ENV = {
 
   // backend
   baseURL: "http://34.202.74.117:3333/api",
-  waitingCrawlTime: 5000,
+  waitingCrawlTime: 20000,
 
   //staking
   keyStaking: 2022,
