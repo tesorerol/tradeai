@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import { FaMoneyBillWaveAlt } from 'react-icons/fa';
 import {GiTwoCoins} from "react-icons/gi"
@@ -10,7 +10,6 @@ import {BsArrowBarRight, BsArrowRightShort,BsArrowRight} from "react-icons/bs"
 import data from "../Data/contracts.json"
 
 const MenuNav2 = ({removeAct, addAct, refActive}) => {
-
     const [isOpen,setIsOpen] = useState({
         earn: false,
         weekly: false,
@@ -73,6 +72,7 @@ const MenuNav2 = ({removeAct, addAct, refActive}) => {
     <div className='menu-nav'>
             
             {/* <NavLink className='button-nav' to="/earn-strategies/0x4E8d2157cE9A79319AF4bcAF336F5ab4A8C51912" onClick={removeAct}> Earn TradeAi Pass</NavLink> */}
+            <NavLink className='button-nav' to="/stake" onClick={removeAct}> Stake</NavLink>
             <NavLink className='button-nav' to="/earn-strategies/0x95E257Ba297E705B968c605BbDb5937a0CF95334" onClick={removeAct}> Anarkey</NavLink>
             {/* <NavLink className='button-nav' to="/earn-strategies/0x818F3eE1E66773165f1B4e1b815c57a275E6e807" onClick={removeAct}> Public</NavLink> */}
             {/* <div>

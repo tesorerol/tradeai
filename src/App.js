@@ -8,7 +8,7 @@ import Header from "./Components/Header";
 import NotFound from "./Components/NotFound";
 import RecentTransactions from "./Components/RecentTransactions";
 import EarnDinamic from "./pages/Earns/EarnDinamic";
-import YieldBox from './pages/YieldBox'
+import YieldBox from "./pages/YieldBox";
 import Login from "./pages/Login/Login";
 import { WalletContext } from "./Providers/WallectConnect";
 
@@ -56,7 +56,7 @@ function App() {
 
   return (
     <div className="container-all">
-      {!true ? (
+      {!isAllowed ? (
         <Login isAllowed={isAllowed} setIsAllowed={setIsAllowed} />
       ) : (
         <>
@@ -76,10 +76,7 @@ function App() {
                   path="/earn-strategies/:address"
                   element={<EarnDinamic />}
                 />
-                 <Route
-                  path="/stake"
-                  element={<YieldBox />}
-                />
+                <Route exact path="/stake" element={<YieldBox />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </div>

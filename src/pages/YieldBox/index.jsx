@@ -4,11 +4,10 @@ import Tab from "@material-ui/core/Tab";
 import Tabs from "@material-ui/core/Tabs";
 import { Select, Tooltip } from "antd";
 import React from "react";
-import useWindowSize from "../../hooks/useWindowSize";
 import { useStyles, useTabPanelStyles } from "./styles";
 import "./styles/index.scss";
 import Summary from "./Summary";
-
+import useWindowSize from '../../hooks/useWindowSize'
 
 const StyledTabs = withStyles({
   indicator: {
@@ -16,9 +15,7 @@ const StyledTabs = withStyles({
     justifyContent: "center",
     backgroundColor: "transparent",
   },
-})((props) => (
-  <Tabs {...props} TabIndicatorProps={{ children: <span /> }} />
-));
+})((props) => <Tabs {...props} TabIndicatorProps={{ children: <span /> }} />);
 
 const StyledTab = withStyles((theme) =>
   createStyles({
@@ -63,12 +60,12 @@ const a11yProps = (index) => {
 
 const TAB_NAMES = ["Summary", "Reward"];
 
+
 const YieldBox = () => {
   const classes = useStyles();
   const { width } = useWindowSize();
 
   const [value, setValue] = React.useState(0);
-
   const handleChange = (event, newValue) => {
     console.log({ newValue });
     setValue(newValue);

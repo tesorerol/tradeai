@@ -4,7 +4,7 @@ const TABLET_PX = 1024;
 const DESKTOP_PX = 1400;
 
 const useWindowSize = () => {
-  const [windowSize, setWindowSize] = useState<any>({
+  const [windowSize, setWindowSize] = useState({
     width: window.innerWidth,
     height: window.innerHeight,
   });

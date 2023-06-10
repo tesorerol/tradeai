@@ -11,6 +11,7 @@ const ModalListNft = (props) => {
       closable={true}
       footer={footer ? footer : null}
       destroyOnClose={true}
+      maskClosable={false}
       {...props}
       wrapClassName={`${wrapClassName ?? ''}`}
     >
