@@ -7,7 +7,7 @@ import Swal from "sweetalert2";
 import Web3Modal from "web3modal";
 import { apiService } from "../apis";
 import ENV from "../utils/env";
-import { convertToHex } from "../Helpers";
+import { convertToHex, getChainIdBaseUrl } from "../Helpers";
 const web3modalStorageKey = "WEB3_CONNECT_CACHED_PROVIDER";
 
 export const WalletContext = createContext({});
@@ -179,8 +179,13 @@ const WallectConnect = ({ children }) => {
         disconnectWallet();
       }
     });
-    connection.on("networkChanged", async (chainID) => {
-      setCurrentChainId(Number(chainID));
+    connection.on("networkChanged", async (chainId) => {
+      const validChainId = getChainIdBaseUrl(window.location.pathname);
+
+      if (Number(validChainId) === Number(chainId)) {
+        window.location.reload();
+      }
+      setCurrentChainId(Number(chainId));
     });
   };
 
@@ -199,6 +204,12 @@ const WallectConnect = ({ children }) => {
 
     // Subscribe to chainId change
     WallectConnectProvider.on("chainChanged", (chainId) => {
+      const validChainId = getChainIdBaseUrl(window.location.pathname);
+
+      if (Number(validChainId) === Number(chainId)) {
+        window.location.reload();
+      }
+
       setCurrentChainId(Number(chainId));
       console.log(chainId);
     });
@@ -244,7 +255,6 @@ const WallectConnect = ({ children }) => {
             params: [{ chainId: chainId }],
           })
           .then((data) => {
-            window.location.reload();
             resolve(data);
           })
           .catch((error) => {
