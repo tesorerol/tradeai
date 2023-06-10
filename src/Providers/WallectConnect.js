@@ -188,6 +188,8 @@ const WallectConnect = ({ children }) => {
     await WallectConnectProvider.enable();
     const provider = new ethers.providers.Web3Provider(WallectConnectProvider);
     await subscribeProvider(provider);
+    const chainID = (await provider.detectNetwork()).chainId;
+    setCurrentChainId(chainID);
     setProvider(provider);
     setWalletAddress(provider);
 
