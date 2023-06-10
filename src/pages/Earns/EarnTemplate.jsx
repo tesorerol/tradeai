@@ -93,19 +93,9 @@ const EarnTemplate = (props) => {
 
   const getMaxEntry = useCallback(async () => {
     try {
-      if (!address) {
-        contract
-          .MinAmount()
-          .then((r) => setmintAmount(ethers.utils.formatEther(r)));
-        contract
-          .MaxAmount()
-          .then((r) => setmaxAmount(ethers.utils.formatEther(r)));
-        return;
-      }
-
       const res = await apiService.checkEntry(address);
 
-      if (res.data.status !== 200) {
+      if (res.status !== 200) {
         throw new Error(res.data.message);
       }
 
@@ -114,7 +104,7 @@ const EarnTemplate = (props) => {
     } catch (e) {
       console.log(e);
     }
-  }, [address, contract]);
+  }, [address]);
 
   useEffect(() => {
     TotalRecolect();
@@ -141,7 +131,7 @@ const EarnTemplate = (props) => {
       setpercentOfContract("0");
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [address, EarnContract]);
+  }, [address, EarnContract, currentChainId]);
 
   // function getMaxAmount() {
   //   contract.getMaxPerUser(address).then((r) => {
@@ -319,6 +309,8 @@ const EarnTemplate = (props) => {
       .balanceOf(EarnContract)
       .then((r) => setUsdtBalanceContract(ethers.utils.formatEther(r)));
   }
+
+  console.log(maxAmount, mintAmount);
 
   return (
     <div className="earn-strategies">

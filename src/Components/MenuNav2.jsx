@@ -14,11 +14,10 @@ const MenuNav2 = ({ removeAct, addAct, refActive }) => {
     useContext(WalletContext);
 
   const canDisplaySwitchButton =
-    (Provider.provider &&
-      Provider.provider.isMetamask &&
-      Number(currentChainId) !== Number(ENV.depositChainId) &&
-      isEarnPage) ||
-    (isStakePage && Number(currentChainId) !== Number(ENV.chainId));
+    Provider.provider &&
+    Provider.provider.isMetaMask &&
+    ((Number(currentChainId) !== Number(ENV.depositChainId) && isEarnPage) ||
+      (isStakePage && Number(currentChainId) !== Number(ENV.chainId)));
 
   const [isOpen, setIsOpen] = useState({
     earn: false,
