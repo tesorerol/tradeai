@@ -12,6 +12,9 @@ const ENV = {
 
   //staking
   keyStaking: 2022,
+  
+  // deposit chain
+  depositChainId: 56
 };
 
 export default ENV;

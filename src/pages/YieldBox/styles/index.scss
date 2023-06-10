@@ -11,6 +11,10 @@ $bg-grey: #353a41;
   color: $text-color-white;
   padding: 20px 30px;
 
+  .ant-modal-footer {
+    border: none;
+  }
+
   .ant-modal-header {
     padding: 0;
     border: none;
@@ -18,7 +22,6 @@ $bg-grey: #353a41;
     color: $text-color-white;
 
     .ant-modal-title {
-      font-family: 'Montserrat-SemiBold';
       color: $text-color-white;
       font-size: 24px;
       line-height: 24px;
@@ -46,42 +49,103 @@ $bg-grey: #353a41;
 }
 
 .text-explain {
-  font-size: 12;
-  font-family: 'Montserrat-Regular';
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 20px;
   margin-left: -16px;
   text-align: left;
+  margin-top: 56px;
+  display: flex;
+  justify-content: space-between;
+
+  .time-checkbox {
+    color: #ffffff;
+
+    & > .ant-checkbox {
+      border: 1px solid #fff;
+    }
+  }
 }
 
 .footer {
   margin-top: 10px;
-  button {
-    margin-top: 20px;
+
+  .action {
+    display: flex;
+    justify-content: center;
+
+    button {
+      margin-top: 20px;
+    }
+
+    .button-cancel-stake-nft {
+      min-width: 100px;
+      color: black;
+      background: white !important;
+      min-width: 150;
+      font-size: 14px;
+      text-transform: initial !important;
+      padding: 9px 23px;
+      border-radius: 8px;
+      margin-right: 23px;
+
+      &:hover {
+        color: black;
+        background: white;
+      }
+      text-transform: none;
+    }
+
+    .button-stake-modal {
+      min-width: 100px;
+      margin-right: -16px;
+      margin-left: 20px;
+      text-transform: initial !important;
+      color: #fff !important;
+      background: linear-gradient(
+        102.92deg,
+        #282062 6.55%,
+        #27366b 47.11%,
+        #264674 71.51%,
+        #235c80 98.22%
+      );
+      border-radius: 7px;
+    }
   }
 }
 
-.button-stake-modal {
-  margin-right: -16px;
-  margin-left: 20px;
-}
-
 .modal-stake-nft {
+  font-family: "Chakra Petch", sans-serif;
+
+  .ant-modal-title {
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 24px;
+    text-align: center;
+    margin-bottom: 28px;
+  }
+
   .ant-modal-content {
-    width: 550px;
+    padding: 34px 20px 41px;
+
+    @media screen and (min-width: 590px) {
+      width: 550px;
+    }
   }
 }
 
 .section-carousel-wrapper {
   background: $bg-grey;
-  padding: 14px 21px;
+  padding: 17px 21px 22px;
   border-radius: 10px;
   // width: 500px;
 
   .section-carousel-title {
-    font-family: 'Montserrat-SemiBold';
     font-size: 16px;
     color: #ffffff;
-    margin-bottom: 12px;
+    margin-bottom: 14px;
     line-height: 24px;
+    font-weight: 600;
   }
 }
 
@@ -89,6 +153,9 @@ $bg-grey: #353a41;
   display: flex;
   flex-direction: column;
   align-items: center;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
 
   .section-list-nft {
     background: $bg-grey;
@@ -97,7 +164,7 @@ $bg-grey: #353a41;
     display: flex;
     flex-direction: column;
     align-items: center;
-    max-height: 370px;
+    height: 198px;
     overflow-x: auto;
     width: 100%;
 
@@ -115,17 +182,34 @@ $bg-grey: #353a41;
 
     .text-item {
       margin-bottom: 10px;
-      font-family: 'Montserrat-Regular';
     }
   }
 }
 
 .modal-list-nft {
+  .ant-modal-title {
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 24px;
+    text-align: center;
+  }
+
+  .ant-modal-content {
+    position: relative;
+
+    .back-button {
+      position: absolute;
+      top: 20px;
+      left: 31px;
+      cursor: pointer;
+    }
+  }
+
   .ant-modal {
     width: 320px !important;
   }
   .ant-modal-close-x {
-    color: white;
+    display: none;
   }
 }
 
@@ -139,8 +223,22 @@ $bg-grey: #353a41;
 }
 
 .section-button {
+  display: flex;
+  align-items: center;
+
   > .button-stake-modal {
-    margin-left: 0;
+    margin-top: 57px;
+    min-width: 100px;
+    text-transform: initial !important;
+    color: #fff !important;
+    background: linear-gradient(
+      102.92deg,
+      #282062 6.55%,
+      #27366b 47.11%,
+      #264674 71.51%,
+      #235c80 98.22%
+    );
+    border-radius: 7px;
   }
 }
 
@@ -164,7 +262,7 @@ $bg-grey: #353a41;
     padding: 50px 0;
 
     .title {
-      font-size: 'Montserrat-SemiBold';
+      font-size: "Montserrat-SemiBold";
       font-size: 22px;
       line-height: 32px;
       margin-top: 18px;
@@ -175,7 +273,7 @@ $bg-grey: #353a41;
       cursor: pointer;
 
       span {
-        font-size: 'Montserrat-Medium';
+        font-size: "Montserrat-Medium";
         color: #0961fe;
         font-size: 12px;
         line-height: 16px;
@@ -231,7 +329,7 @@ $bg-grey: #353a41;
       }
 
       .ant-select-selection-item {
-        font-size: 'Montserrat-Regular';
+        font-size: "Montserrat-Regular";
         color: #ffffff;
         font-size: 16px;
         line-height: 26px;
@@ -254,7 +352,7 @@ $bg-grey: #353a41;
   border-radius: 5px;
 
   .ant-select-item {
-    font-size: 'Montserrat-Regular';
+    font-size: "Montserrat-Regular";
     color: #ffffff;
     font-size: 16px;
     line-height: 26px;
@@ -272,7 +370,7 @@ $bg-grey: #353a41;
 }
 
 #video-bg-yield-box::before {
-  content: '';
+  content: "";
   position: absolute;
   width: 100%;
   height: 100%;
@@ -289,14 +387,14 @@ $bg-grey: #353a41;
     }
     .t-text1 {
       font-size: 14px;
-      font-family: 'Montserrat-Bold';
+      font-family: "Montserrat-Bold";
     }
     .t-text2 {
       font-size: 13px;
       @media screen and (max-width: 450px) {
         font-size: 11px;
       }
-      font-family: 'Montserrat-Regular';
+      font-family: "Montserrat-Regular";
     }
   }
 }

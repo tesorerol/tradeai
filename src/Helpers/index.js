@@ -130,4 +130,8 @@ const formatMoney2 = (
   }
 }
 
-export { GetBalance, Allowance, Approve, MModeTimer, formatMoney, formatMoney2 }
+const convertToHex = (value) => {
+  return `0x${value.toString(16)}`
+}
+
+export { GetBalance, Allowance, Approve, MModeTimer, formatMoney, formatMoney2, convertToHex }

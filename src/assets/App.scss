@@ -385,6 +385,7 @@ a{
             justify-content: space-between;
             min-height: 130px;
             align-items: center;
+            z-index: 100;
             // padding-right: 30px;
             // background-color: #12131236;
             // background-color: #202a43;
@@ -2135,7 +2136,7 @@ a{
     }
       
     .progress-section{
-      width: 70% !important;
+      width: 75% !important;
     }
     
     .progress-section-details{
@@ -2397,7 +2398,7 @@ a{
     }
 
     .progress-section{
-      width: 70% !important;
+      width: 75% !important;
     }
 
     .progress-section-details-bar-2{

@@ -1,7 +1,7 @@
-import { ButtonBase, Button as ButtonMui } from "@material-ui/core";
-import { Col, Row, Spin } from "antd";
+import { Button as ButtonMui } from "@material-ui/core";
+import { Col, Row, Spin, Checkbox } from "antd";
 
-import { useContext, useEffect, useMemo, useState } from "react";
+import { useCallback, useContext, useEffect, useMemo, useState } from "react";
 
 import { antIcon } from ".";
 import SectionCarousel from "../Carousel";
@@ -16,9 +16,10 @@ import ENV from "../../../utils/env";
 
 import Swal from "sweetalert2";
 import { WalletContext } from "../../../Providers/WallectConnect";
+import backButton from "../../../assets/icons/back-button.svg";
 
 const ListNft = ({ forceRefresh, setForceRefresh }) => {
-  const { address: account } = useContext(WalletContext);
+  const { address: account, checkWhiteList } = useContext(WalletContext);
 
   const [myNftsNotyetStake, setMyNftsNotyetStake] = useState([]);
   const [openModal, setOpenModal] = useState(false);
@@ -34,11 +35,7 @@ const ListNft = ({ forceRefresh, setForceRefresh }) => {
     return myNftsNotyetStake.filter((item) => item.isChecked);
   }, [myNftsNotyetStake]);
 
-  useEffect(() => {
-    fetchNftsIdle();
-  }, [account, forceRefresh]);
-
-  const fetchNftsIdle = async () => {
+  const fetchNftsIdle = useCallback(async () => {
     try {
       setLoading(true);
       const res = await apiService.listIdle(account);
@@ -50,7 +47,11 @@ const ListNft = ({ forceRefresh, setForceRefresh }) => {
       console.error(error);
       setLoading(false);
     }
-  };
+  }, [account]);
+
+  useEffect(() => {
+    fetchNftsIdle();
+  }, [fetchNftsIdle, forceRefresh]);
 
   const onSelectNft = (token_id, checked) => {
     const newData = myNftsNotyetStake.map((item) => {
@@ -89,6 +90,7 @@ const ListNft = ({ forceRefresh, setForceRefresh }) => {
         setModalListNFT(false);
         setLoadingConfirm(false);
         setForceRefresh(Date.now());
+        checkWhiteList();
         Swal.fire({
           title: "Success!",
           icon: "success",
@@ -136,7 +138,7 @@ const ListNft = ({ forceRefresh, setForceRefresh }) => {
             })}
           </Row>
         ) : (
-          <div>Wallet Empty!</div>
+          <p className="empty-collection">Wallet Empty!</p>
         )}
       </>
     );
@@ -147,13 +149,13 @@ const ListNft = ({ forceRefresh, setForceRefresh }) => {
       <div className="background-gradient">
         <div className="list-nft">
           <div className="flex title mt-0">
-            <div className="text1">{"IDLE"}</div>
+            <div className="text1">IDLE</div>
 
             <div className="text2">
               <span className="text-select" onClick={handleSelectAll}>
                 Select All
               </span>
-              &nbsp;|&nbsp;
+              <span className="divide">|</span>
               <div className="text-select" onClick={handleSelectNone}>
                 Select None
               </div>
@@ -181,24 +183,33 @@ const ListNft = ({ forceRefresh, setForceRefresh }) => {
         title="Stake Your NFT"
         footer={[
           <div className="footer">
-            <div className="text-explain">Stake Your NFT For: 30 days</div>
-            <ButtonBase
-              className="button-cancel-stake-nft"
-              onClick={() => setOpenModal(false)}
-            >
-              Cancel
-            </ButtonBase>
-            <ButtonBase
-              className="button-stake-modal"
-              shape="square"
-              onClick={() => {
-                setOpenModal(false);
-                setModalListNFT(true);
-                handleStake();
-              }}
-            >
-              Stake Now
-            </ButtonBase>
+            <div className="text-explain">
+              <p> Stake Your NFT For:</p>
+              <div>
+                <Checkbox defaultChecked={true} className="time-checkbox">
+                  30 days
+                </Checkbox>
+              </div>
+            </div>
+            <div className="action">
+              <ButtonMui
+                className="button-cancel-stake-nft"
+                onClick={() => setOpenModal(false)}
+              >
+                Cancel
+              </ButtonMui>
+              <ButtonMui
+                className="button-stake-modal"
+                shape="square"
+                onClick={() => {
+                  setOpenModal(false);
+                  setModalListNFT(true);
+                  handleStake();
+                }}
+              >
+                Stake Now
+              </ButtonMui>
+            </div>
           </div>,
         ]}
         wrapClassName="modal-stake-nft"
@@ -209,7 +220,7 @@ const ListNft = ({ forceRefresh, setForceRefresh }) => {
           </div>
           <SectionCarousel>
             {dataSelected.map((item, index) => {
-              return <NftCard item={item} key={index} showCheckbox={false} />;
+              return <NftCard item={item} key={index} showCheckbox={true} />;
             })}
           </SectionCarousel>
         </div>
@@ -220,6 +231,9 @@ const ListNft = ({ forceRefresh, setForceRefresh }) => {
         wrapClassName="modal-list-nft"
         onCancel={() => setModalListNFT(false)}
       >
+        <div className="back-button" onClick={() => setModalListNFT(false)}>
+          <img src={backButton} alt="back-button" />
+        </div>
         <div className="section-list-nft-wrapper">
           <div className="section-list-nft">
             <div className="text-item">Staked NFT(s):</div>
@@ -231,14 +245,14 @@ const ListNft = ({ forceRefresh, setForceRefresh }) => {
           </div>
           <div className="line-horizontal"></div>
           <div className="section-button">
-            <ButtonBase
+            <ButtonMui
               disabled={loadingConfirm}
               className="button-stake-modal"
               shape="square"
               onClick={handleStake}
             >
               {loadingConfirm ? antIcon(24) : "Confirm"}
-            </ButtonBase>
+            </ButtonMui>
           </div>
         </div>
       </ModalListNft>
