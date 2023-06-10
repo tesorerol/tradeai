@@ -19,7 +19,7 @@ import { WalletContext } from "../../../Providers/WallectConnect";
 import backButton from "../../../assets/icons/back-button.svg";
 
 const ListNft = ({ forceRefresh, setForceRefresh }) => {
-  const { address: account } = useContext(WalletContext);
+  const { address: account, checkWhiteList } = useContext(WalletContext);
 
   const [myNftsNotyetStake, setMyNftsNotyetStake] = useState([]);
   const [openModal, setOpenModal] = useState(false);
@@ -90,6 +90,7 @@ const ListNft = ({ forceRefresh, setForceRefresh }) => {
         setModalListNFT(false);
         setLoadingConfirm(false);
         setForceRefresh(Date.now());
+        checkWhiteList();
         Swal.fire({
           title: "Success!",
           icon: "success",

@@ -29,7 +29,7 @@ const ListNftStaked = (props) => {
   const { contractStake } = useContract();
   const { approved, handleApproveAll } = useApproveNftAll();
 
-  const { address: account } = useContext(WalletContext);
+  const { address: account, checkWhiteList } = useContext(WalletContext);
 
   const handleUntake = async () => {
     if (!approved) {
@@ -48,6 +48,7 @@ const ListNftStaked = (props) => {
         setLoadingConfirm(false);
         setModalListNFT(false);
         setForceRefresh(Date.now());
+        checkWhiteList();
         Swal.fire({
           title: "Success!",
           icon: "success",
