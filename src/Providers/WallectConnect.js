@@ -1,5 +1,5 @@
 import { ethers } from "ethers";
-import React, { useEffect, useState, createContext } from "react";
+import React, { useEffect, useState, createContext, useCallback } from "react";
 import Swal from "sweetalert2";
 import Web3Modal from "web3modal";
 import WalletConnect from "@walletconnect/client";
@@ -7,6 +7,7 @@ import QRCodeModal from "@walletconnect/qrcode-modal";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import ENV from "../utils/env";
 import { apiService } from "../apis";
+import mobile from 'is-mobile';
 const web3modalStorageKey = "WEB3_CONNECT_CACHED_PROVIDER";
 
 export const WalletContext = createContext({});
@@ -22,7 +23,7 @@ const WallectConnectProvider = new WalletConnectProvider({
 const WallectConnect = ({ children }) => {
   const [address, setAddress] = useState(undefined);
   const [iswhiteList, setWhiteList] = useState("");
-
+  const [currentChainId, setCurrentChainId] = useState(Number(ENV.chainId));
   const [isAllowed, setIsAllowed] = useState(null);
   const [balance, setBalance] = useState(undefined);
   const [Provider, setProvider] = useState(
@@ -33,7 +34,7 @@ const WallectConnect = ({ children }) => {
   const web3Modal =
     typeof window !== "undefined" && new Web3Modal({ cacheProvider: true });
   // const chainID = 97;
-  const chainID = 5;
+  const chainID = ENV.stakeChainID;
   /* This effect will fetch wallet address if user has already connected his/her wallet */
   useEffect(() => {
     async function checkConnection() {
@@ -59,6 +60,8 @@ const WallectConnect = ({ children }) => {
       if (!address) throw Error("No address");
       const res = await apiService.checkWhiteList(address);
       setWhiteList(res?.data?.isWL);
+
+      return res?.data?.isWL;
     } catch (err) {
       console.error("checkWhiteList", err);
     }
@@ -113,10 +116,10 @@ const WallectConnect = ({ children }) => {
       //chainId
       if (connection.networkVersion !== ENV.chainId) {
         Swal.fire({
-          title: "error",
-          icon: "error",
-          text: "wrong network, please swicht to BSC",
-        });
+          title: 'error',
+          icon: 'error',
+          text: 'wrong network, please switch to ETH',
+        })
         let RequestSend = {
           id: 1337,
           jsonrpc: "2.0",
@@ -177,6 +180,9 @@ const WallectConnect = ({ children }) => {
         disconnectWallet();
       }
     });
+    connection.on('networkChanged', async (chainID) => {
+      setCurrentChainId(Number(chainID));
+    });
   };
 
   async function WallectConnect() {
@@ -206,6 +212,56 @@ const WallectConnect = ({ children }) => {
     });
   }
 
+  
+  const addConnection = useCallback(async (provider, networkInfo) => {
+    return provider.request({
+      method: "wallet_addEthereumChain",
+      params: [
+        {
+          ...(networkInfo.details || {}),
+        },
+      ],
+    });
+  }, []);
+
+  const switchNetwork = useCallback(
+    (chainId) => {
+      const provider = Provider.provider;
+
+      if (!provider) {
+        throw new Error("Invalid provider");
+      }
+
+      if(!provider.isMetaMask) {
+        return;
+      }
+
+      return new Promise((resolve, reject) => {
+        provider
+          .request({
+            method: "wallet_switchEthereumChain",
+            params: [{ chainId: chainId }],
+          })
+          .then((data) => {
+            resolve(data);
+          })
+          .catch((error) => {
+            if (error.code === 4902 || (mobile() && error.code === -32603)) {
+              return addConnection(provider, ENV.BSC_INFO).catch(
+                (addConnectError) => {
+                  reject(addConnectError);
+                }
+              );
+            }
+
+            reject(error);
+          });
+      });
+    },
+    [Provider.provider, addConnection]
+  );
+
+
   return (
     <WalletContext.Provider
       value={{
@@ -215,12 +271,14 @@ const WallectConnect = ({ children }) => {
         error,
         Provider,
         isAllowed,
+        currentChainId,
         connectToWallet,
         disconnectWallet,
         WallectConnect,
         setIsAllowed,
         iswhiteList,
         checkWhiteList,
+        switchNetwork
       }}
     >
       {children}
