@@ -55,7 +55,7 @@ const WallectConnect = ({ children }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const checkWhiteList = async (address) => {
+  const checkWhiteList = async () => {
     try {
       if (!address) throw Error("No address");
       const res = await apiService.checkWhiteList(address);

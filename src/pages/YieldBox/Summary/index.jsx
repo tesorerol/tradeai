@@ -43,7 +43,7 @@ const Summary = (props) => {
     maxAllocation: 0,
   });
 
-  const { address: account, currentChainId } = useContext(WalletContext);
+  const { address: account, currentChainId, checkWhiteList } = useContext(WalletContext);
 
   useEffect(() => {
     if (Number(currentChainId) !== Number(ENV.chainId)) {
@@ -68,6 +68,7 @@ const Summary = (props) => {
 
   useEffect(() => {
     getUserStakeInfo();
+    checkWhiteList();
   }, [getUserStakeInfo, forceRefresh]);
 
   return (
