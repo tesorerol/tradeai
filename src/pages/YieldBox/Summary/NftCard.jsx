@@ -1,12 +1,13 @@
 import { Checkbox } from 'antd';
 import moment from 'moment';
 import './index.scss';
+import clockIcon from '../../../assets/icons/clock.svg'
 
 const NftCard = (props) => {
   const { item, showCheckbox = false, onSelect } = props;
 
   const formatDateUnix = (unix) => {
-    return moment.unix(unix).format('LT, LL');
+    return moment.unix(unix).format("hh:mm A, DD MMM YYYY");
   };
 
   return (
@@ -22,7 +23,7 @@ const NftCard = (props) => {
         <div className="name">{item?.name}</div>
         {item?.staked_at && (
           <div className="date">
-            <img src="/images/icons/date-icons-nfts.svg" alt="icon-date" /> {formatDateUnix(Number(item.staked_at))}
+            <img src={clockIcon} alt="icon-date" /> {formatDateUnix(Number(item.staked_at))}
           </div>
         )}
       </div>

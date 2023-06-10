@@ -57,6 +57,11 @@ html {
       z-index: -5;
       background: #245b780c;
     }
+    & > body {
+      & > iframe {
+        pointer-events: none;
+      }
+    }
 }
 
 @keyframes moveBg {

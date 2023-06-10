@@ -78,10 +78,12 @@
 }
 
 .nft-card {
+  width: 136px;
+  height: 191px;
+  box-sizing: border-box;
   background: #262628;
   border-radius: 5px;
   // padding: 8px;
-  margin: 5px;
   flex-direction: column;
   position: relative;
 

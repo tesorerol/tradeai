@@ -1,212 +1,114 @@
-import { Button as ButtonMui } from '@material-ui/core';
-import { Col, Row, Spin, Tooltip } from 'antd';
-// import { ETHER_SCAN_URL } from 'constants/network';
-// import { useTypedSelector } from 'hooks/useTypedSelector';
-// import { useWeb3ReactLocal } from 'hooks/useWeb3ReactLocal';
-import { useEffect, useMemo, useState } from 'react';
-import { useDispatch } from 'react-redux';
-// import { getListNftOfUserNotyetStake, getListStake, getPoolStakeDetail } from 'request/pool';
-// import { alertFailure } from 'store/actions/alert';
-// import { isEqual2Strings } from 'utils/campaign';
-// import { getContract } from 'utils/contract';
-import { antIcon, STATUS } from '.';
-import SectionCarousel from '../Carousel';
-import ModalListNft from '../modals/ModalListNft';
-import ModalStakeNft from '../modals/ModalStakeNft';
-import ModalSuccess from '../modals/ModalSuccess';
-import '../styles/index.scss';
-import './index.scss';
-import NftCard from './NftCard';
+import { ButtonBase, Button as ButtonMui } from "@material-ui/core";
+import { Col, Row, Spin } from "antd";
 
+import { useContext, useEffect, useMemo, useState } from "react";
 
-const ListNft = (props) => {
-  const { onStatus, status, onMyNftsNotyetStake, isApprovedNft, onApproved, onPoolDetail } = props;
-  // const { account, library } = useWeb3ReactLocal();
-  const dispatch = useDispatch();
+import { antIcon } from ".";
+import SectionCarousel from "../Carousel";
+import ModalListNft from "../modals/ModalListNft";
+import ModalStakeNft from "../modals/ModalStakeNft";
+import "../styles/index.scss";
+import "./index.scss";
+import NftCard from "./NftCard";
+import { apiService } from "../../../apis";
+import { useApproveNftAll, useContract } from "../../../hooks/useContracts";
+import ENV from "../../../utils/env";
+
+import Swal from "sweetalert2";
+import { WalletContext } from "../../../Providers/WallectConnect";
+
+const ListNft = ({ forceRefresh, setForceRefresh }) => {
+  const { address: account } = useContext(WalletContext);
 
   const [myNftsNotyetStake, setMyNftsNotyetStake] = useState([]);
   const [openModal, setOpenModal] = useState(false);
   const [openModalListNFT, setModalListNFT] = useState(false);
-  const [openModalSuccess, setOpenModalSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
   const [loadingConfirm, setLoadingConfirm] = useState(false);
-  const [txHash, setTxHash] = useState('');
 
-  const [idPoolStake, setIdPoolStake] = useState();
-  const [poolDetail, setPoolDetail] = useState();
+  const { approved, handleApproveAll } = useApproveNftAll();
 
-  // const { appChainID } = useTypedSelector((state) => state.appNetwork).data;
+  const { contractStake } = useContract();
 
-  // const stakeContractAddress = process.env.REACT_APP_CONTRACT_STAKING ;
+  const dataSelected = useMemo(() => {
+    return myNftsNotyetStake.filter((item) => item.isChecked);
+  }, [myNftsNotyetStake]);
 
-  // const contractStake = getContract(stakeContractAddress, StakingABI, library, account);
+  useEffect(() => {
+    fetchNftsIdle();
+  }, [account, forceRefresh]);
 
-  // const wrongNetwork = !isEqual2Strings(appChainID, process.env.REACT_APP_ETH_CHAIN_ID || '');
-
-  // const disabledButton = useMemo(() => {
-  //   if (poolDetail && Number(poolDetail?.is_display) === 0) {
-  //     return true;
-  //   }
-  //   const noItemChoose = myNftsNotyetStake.filter((item) => item.isChecked).length < 1;
-  //   return wrongNetwork || noItemChoose;
-  // }, [myNftsNotyetStake, wrongNetwork, poolDetail]);
-
-  // const collectionAddress = useMemo(() => {
-  //   if (myNftsNotyetStake.length > 0) {
-  //     return myNftsNotyetStake[0].address;
-  //   }
-  //   return '';
-  // }, [myNftsNotyetStake]);
-
-  // const contractErc721 = useMemo(() => {
-  //   if (collectionAddress && library) {
-  //     return getContract(collectionAddress, Erc721ABI, library, account);
-  //   }
-  // }, [collectionAddress, account, library]);
-
-  // const dataSelected = useMemo(() => {
-  //   return myNftsNotyetStake.filter((item) => item.isChecked);
-  // }, [myNftsNotyetStake]);
-
-  // useEffect(() => {
-  //   fetchMyNftsNotyetStake();
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [account]);
-
-  // useEffect(() => {
-  //   if (status === STATUS.SUCCESS) {
-  //     fetchMyNftsNotyetStake();
-  //   }
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [status]);
-
-  // useEffect(() => {
-  //   fetchListStake();
-  // }, []);
-
-  // useEffect(() => {
-  //   if (Number(idPoolStake) > 0) {
-  //     fetchDetailPool();
-  //   }
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [idPoolStake]);
-
-  // const fetchListStake = async () => {
-  //   try {
-  //     const res = await getListStake();
-  //     if (res?.status === 200 && res?.data?.data) {
-  //       const data = res?.data?.data;
-  //       if (data?.length > 0) {
-  //         const id = data[0]?.id;
-  //         setIdPoolStake(id);
-  //       }
-  //     }
-  //   } catch (error) {
-  //     console.error({ error });
-  //   }
-  // };
-
-  // const fetchDetailPool = async () => {
-  //   try {
-  //     const res = await getPoolStakeDetail(idPoolStake);
-  //     if (res?.status === 200 && res?.data) {
-  //       const poolDetail = res?.data?.pool_detail;
-  //       onPoolDetail(poolDetail);
-  //       setPoolDetail(poolDetail);
-  //     }
-  //   } catch (error) {
-  //     console.error({ error });
-  //   }
-  // };
-
-  // const handleApprove = async () => {
-  //   if (contractErc721) {
-  //     onStatus(STATUS.LOADING);
-  //     try {
-  //       const transaction = await contractErc721?.setApprovalForAll(stakeContractAddress, true);
-  //       await transaction.wait(1);
-  //       setLoading(false);
-  //       onStatus(STATUS.SUCCESS);
-  //       onApproved(true);
-  //     } catch (error) {
-  //       onStatus(STATUS.FAIL);
-  //       onApproved(false);
-  //       if (error?.code === 4001) {
-  //         dispatch(alertFailure('User Reject'));
-  //       }
-  //     }
-  //   }
-  // };
-
-  // const fetchMyNftsNotyetStake = async () => {
-  //   try {
-  //     setLoading(true);
-  //     const res = await getListNftOfUserNotyetStake();
-  //     if (res?.status === 200) {
-  //       const { data } = res;
-  //       if (data && data.length >= 0) {
-  //         setMyNftsNotyetStake(data);
-  //         onMyNftsNotyetStake(data);
-  //       }
-  //     }
-  //     setLoading(false);
-  //   } catch (error) {
-  //     console.error(error);
-  //     setLoading(false);
-  //   }
-  // };
-
-  const isEqual2Strings = (a ,b) => a === b; 
+  const fetchNftsIdle = async () => {
+    try {
+      setLoading(true);
+      const res = await apiService.listIdle(account);
+      if (res?.status === 200) {
+        setMyNftsNotyetStake(res.data);
+      }
+      setLoading(false);
+    } catch (error) {
+      console.error(error);
+      setLoading(false);
+    }
+  };
 
   const onSelectNft = (token_id, checked) => {
     const newData = myNftsNotyetStake.map((item) => {
-      if (isEqual2Strings(token_id, item.token_id)) return { ...item, isChecked: checked };
+      if (item.token_id === token_id) return { ...item, isChecked: checked };
       return item;
     });
     setMyNftsNotyetStake(newData);
   };
 
-  const getListNftByChecked = (isChecked) => {
-    return myNftsNotyetStake.map((item) => ({
-      ...item,
-      isChecked,
-    }));
-  };
-
   const handleSelectAll = () => {
-    if (poolDetail && Number(poolDetail?.is_display) > 0) {
-      setMyNftsNotyetStake(getListNftByChecked(true));
-    }
+    setMyNftsNotyetStake(
+      myNftsNotyetStake.map((item) => ({ ...item, isChecked: true }))
+    );
   };
 
   const handleSelectNone = () => {
-    setMyNftsNotyetStake(getListNftByChecked(false));
+    setMyNftsNotyetStake(
+      myNftsNotyetStake.map((item) => ({ ...item, isChecked: false }))
+    );
   };
+  console.log("user approved", approved);
 
-  // const handleStake = async () => {
-  //   onStatus(STATUS.LOADING);
-  //   setLoadingConfirm(true);
-  //   const ids = dataSelected.map((item) => item.token_id);
-  //   const key = process.env.REACT_APP_KEY_STAKING || '2022';
-  //   try {
-  //     const transaction = await contractStake.stakeNFT(ids, key);
-  //     setTxHash(transaction?.hash);
-  //     await transaction.wait(1);
-  //     setTimeout(async () => {
-  //       // wait crawl data
-  //       setOpenModalSuccess(true);
-  //       setLoading(false);
-  //       onStatus(STATUS.SUCCESS);
-  //     }, 20000);
-  //   } catch (error) {
-  //     console.error(error);
-  //     setLoadingConfirm(false);
-  //     onStatus(STATUS.FAIL);
-  //     if (error?.code === 4001) {
-  //       dispatch(alertFailure('User Reject'));
-  //     }
-  //   }
-  // };
+  const handleStake = async () => {
+    setLoadingConfirm(true);
+    if (!approved) {
+      const isApprove = await handleApproveAll();
+      if (!isApprove) throw Error("");
+    }
+    const ids = dataSelected.map((item) => item.token_id);
+    if (!ids) throw Error("");
+    try {
+      const transaction = await contractStake.stakeNFT(ids, ENV.keyStaking);
+      await transaction.wait(1);
+      setTimeout(async () => {
+        // wait crawl data
+        setModalListNFT(false);
+        setLoadingConfirm(false);
+        setForceRefresh(Date.now());
+        Swal.fire({
+          title: "Success!",
+          icon: "success",
+        });
+      }, ENV.waitingCrawlTime);
+    } catch (error) {
+      console.error("handleStake", error);
+      setLoadingConfirm(false);
+      Swal.fire({
+        title: "Something went wrong!",
+        icon: "error",
+      });
+      if (error?.code === 4001) {
+        Swal.fire({
+          title: "User reject",
+          icon: "error",
+        });
+      }
+    }
+  };
 
   const renderData = () => {
     return (
@@ -216,7 +118,7 @@ const ListNft = (props) => {
             {myNftsNotyetStake.map((item, index) => {
               return (
                 <Col
-                  key={index}
+                  key={item.id}
                   xs={{ span: 12 }}
                   sm={{ span: 12 }}
                   md={{ span: 12 }}
@@ -226,7 +128,7 @@ const ListNft = (props) => {
                 >
                   <NftCard
                     item={item}
-                    showCheckbox={isApprovedNft && poolDetail && Number(poolDetail?.is_display) > 0}
+                    showCheckbox={true}
                     onSelect={onSelectNft}
                   />
                 </Col>
@@ -234,26 +136,18 @@ const ListNft = (props) => {
             })}
           </Row>
         ) : (
-          // <Empty text="Wallet Empty!" />
           <div>Wallet Empty!</div>
         )}
       </>
     );
   };
 
-  const showTextStake = true;
-
-  // const showTextStake =
-  //   myNftsNotyetStake.length === 0 ||
-  //   (myNftsNotyetStake.length > 0 && isApprovedNft) ||
-  //   !isEqual2Strings(appChainID, process.env.REACT_APP_ETH_CHAIN_ID || '');
-
   return (
     <>
       <div className="background-gradient">
         <div className="list-nft">
           <div className="flex title mt-0">
-            <div className="text1">{'IDLE'}</div>
+            <div className="text1">{"IDLE"}</div>
 
             <div className="text2">
               <span className="text-select" onClick={handleSelectAll}>
@@ -266,36 +160,15 @@ const ListNft = (props) => {
             </div>
           </div>
           <div className="flex center">
-            {showTextStake ? (
-              wrongNetwork && myNftsNotyetStake.length ? (
-                <Tooltip
-                  placement="bottom"
-                  title={<div>Please change network to ETH</div>}
-                  overlayClassName="custom-tooltip-stake-wrong-network"
-                >
-                  <div>
-                    <Button disabled={true} className="button-stake" shape="square">
-                      Stake
-                    </Button>
-                  </div>
-                </Tooltip>
-              ) : (
-                <Button
-                  style={disabledButton ? { cursor: 'no-drop' } : { cursor: 'pointer' }}
-                  disabled={disabledButton}
-                  className="button-stake"
-                  shape="square"
-                  onClick={() => setOpenModal(true)}
-                >
-                  Stake
-                </Button>
-              )
-            ) : (
-              <Button className="button-stake" shape="square" onClick={handleApprove} disabled={wrongNetwork}>
-                {status === STATUS.LOADING && antIcon(24)}
-                {status !== STATUS.LOADING && 'Approve'}
-              </Button>
-            )}
+            <ButtonMui
+              disabled={dataSelected.length === 0}
+              style={{ cursor: "pointer" }}
+              className="button-stake"
+              shape="square"
+              onClick={() => setOpenModal(true)}
+            >
+              Stake
+            </ButtonMui>
           </div>
           <div className="list">
             {loading && <Spin indicator={antIcon(50)} />}
@@ -308,29 +181,32 @@ const ListNft = (props) => {
         title="Stake Your NFT"
         footer={[
           <div className="footer">
-            <div className="text-explain">
-              *After each staking action, you cannot unstake in {poolDetail?.lock_period}{' '}
-              {Number(poolDetail?.lock_period) > 1 ? 'hours' : 'hour'}.{' '}
-            </div>
-            <ButtonMui className="button-cancel-stake-nft" onClick={() => setOpenModal(false)}>
+            <div className="text-explain">Stake Your NFT For: 30 days</div>
+            <ButtonBase
+              className="button-cancel-stake-nft"
+              onClick={() => setOpenModal(false)}
+            >
               Cancel
-            </ButtonMui>
-            <Button
+            </ButtonBase>
+            <ButtonBase
               className="button-stake-modal"
               shape="square"
               onClick={() => {
                 setOpenModal(false);
                 setModalListNFT(true);
+                handleStake();
               }}
             >
               Stake Now
-            </Button>
+            </ButtonBase>
           </div>,
         ]}
         wrapClassName="modal-stake-nft"
       >
         <div className="section-carousel-wrapper">
-          <div className="section-carousel-title">Total: {dataSelected.length} NFTs</div>
+          <div className="section-carousel-title">
+            Total: {dataSelected.length} NFTs
+          </div>
           <SectionCarousel>
             {dataSelected.map((item, index) => {
               return <NftCard item={item} key={index} showCheckbox={false} />;
@@ -355,37 +231,17 @@ const ListNft = (props) => {
           </div>
           <div className="line-horizontal"></div>
           <div className="section-button">
-            <Button disabled={loadingConfirm} className="button-stake-modal" shape="square" onClick={handleStake}>
-              {loadingConfirm && antIcon(24)}
-              {!loadingConfirm && 'Confirm'}
-            </Button>
+            <ButtonBase
+              disabled={loadingConfirm}
+              className="button-stake-modal"
+              shape="square"
+              onClick={handleStake}
+            >
+              {loadingConfirm ? antIcon(24) : "Confirm"}
+            </ButtonBase>
           </div>
         </div>
       </ModalListNft>
-      <ModalSuccess
-        visible={openModalSuccess}
-        wrapClassName="modal-success"
-        onCancel={() => {
-          setOpenModalSuccess(false);
-          setModalListNFT(false);
-        }}
-      >
-        <div className="modal-success-wrapper">
-          <div>
-            <img src="/images/icons/successfully-icon.svg" alt="icon" />
-          </div>
-          <div className="title">Staked successfully</div>
-          <div
-            className="transaction-hash"
-            onClick={() => {
-              window.open(`${ETHER_SCAN_URL}/tx/${txHash}`, '_blank');
-            }}
-          >
-            <span>View transaction details</span>&nbsp;
-            <img src="/images/icons/external-link-icon.svg" alt="icon" />
-          </div>
-        </div>
-      </ModalSuccess>
     </>
   );
 };
