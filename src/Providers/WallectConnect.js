@@ -132,9 +132,7 @@ const WallectConnect = ({ children }) => {
           icon: "error",
           text: "Wrong network, please switch to ETH",
         });
-        await switchNetwork(convertToHex(ENV.chainId), provider.provider).catch(
-          (e) => console.error(e)
-        );
+        await switchNetwork(convertToHex(ENV.chainId), provider.provider);
         // setCurrentChainId(Number(connectChainId));
         // setProvider(provider);
         // setWalletAddress(provider);
