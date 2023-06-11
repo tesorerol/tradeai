@@ -54,7 +54,7 @@ const Summary = (props) => {
   useEffect(() => {
     if (Number(currentChainId) !== Number(ENV.chainId)) {
       Swal.fire({
-        title: "error",
+        title: "Error",
         icon: "error",
         text: "Wrong network, please switch to ETH",
       }).then(() => {
@@ -77,7 +77,7 @@ const Summary = (props) => {
   useEffect(() => {
     getUserStakeInfo();
     checkWhiteList();
-  }, [getUserStakeInfo, forceRefresh]);
+  }, [getUserStakeInfo, forceRefresh, checkWhiteList]);
 
   return (
     <Row gutter={[16, 16]}>

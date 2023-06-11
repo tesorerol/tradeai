@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 
 import { WalletContext } from "../Providers/WallectConnect";
 import { getContract } from "../utils/contract";
@@ -12,7 +12,7 @@ export const useApproveNftAll = () => {
   const [loading, setLoading] = useState(false);
   const [approved, setApproved] = useState(false);
 
-  const checkApprove = async () => {
+  const checkApprove = useCallback(async () => {
     try {
       setLoading(true);
       const nftContract = await getContract(
@@ -31,9 +31,9 @@ export const useApproveNftAll = () => {
       console.error(err);
       setLoading(false);
     }
-  };
+  }, [Provider, address]);
 
-  const handleApproveAll = async () => {
+  const handleApproveAll = useCallback(async () => {
     try {
       setLoading(true);
       const nftContract = await getContract(
@@ -55,11 +55,11 @@ export const useApproveNftAll = () => {
       setLoading(false);
       return false;
     }
-  };
+  }, [Provider, address]);
 
   useEffect(() => {
     checkApprove();
-  }, []);
+  }, [checkApprove]);
 
   return {
     approved,

@@ -4,7 +4,6 @@ import metamaskLogo from "../../assets/icons/metamask.png.png";
 import walletConnect from "../../assets/icons/wallet-connect.png";
 import trustWallet from "../../assets/icons/trust-w.png";
 import marcoContent from "../../assets/login/marco-card.png";
-import marcoButton from "../../assets/login/marco-boton.png";
 import marcoMobile from "../../assets/login/marco-mobile.png";
 import { WalletContext } from "../../Providers/WallectConnect";
 
@@ -74,7 +73,7 @@ const Login = ({ isAllowed, setIsAllowed }) => {
             </ul>
           </div>
         </div>
-        <div className="request-whitelist aparecer2">
+        {/* <div className="request-whitelist aparecer2">
           <img
             className="request-whitelist-bg"
             src={marcoButton}
@@ -88,7 +87,7 @@ const Login = ({ isAllowed, setIsAllowed }) => {
           >
             Request to add to Whitelist
           </a>
-        </div>
+        </div> */}
       </div>
     </div>
   );
