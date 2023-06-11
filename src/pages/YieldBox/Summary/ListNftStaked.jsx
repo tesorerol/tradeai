@@ -109,11 +109,14 @@ const ListNftStaked = (props) => {
     setMyStakedNfts(newData);
   };
 
+  const canUnstake = (item) => {
+    const endDate = moment(item.staked_at * 1000).add(30, "minutes");
+    return moment().diff(endDate) >= 0;
+  };
+
   const handleSelectAll = () => {
     const myStakedNftsValid = myStakedNfts.map((item) => {
-      const endDate = moment(item.staked_at * 1000).add(30, "days");
-      
-      return moment().diff(endDate) >= 0
+      return canUnstake(item)
         ? { ...item, isChecked: true }
         : { ...item, isChecked: false };
     });
@@ -132,8 +135,7 @@ const ListNftStaked = (props) => {
         {myStakedNfts.length > 0 ? (
           <Row gutter={[16, 16]}>
             {myStakedNfts.map((item) => {
-              const endDate = moment(item.staked_at * 1000).add(30, "days");
-              const isShowCheckBox = moment().diff(endDate) >= 0;
+              const isShowCheckBox = canUnstake(item);
               return (
                 <Col
                   key={item.token_id}

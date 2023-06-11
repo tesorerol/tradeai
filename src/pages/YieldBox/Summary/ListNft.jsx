@@ -199,7 +199,7 @@ const ListNft = ({ forceRefresh, setForceRefresh }) => {
             <div className="text-explain">
               <p> Stake Your NFT For:</p>
               <div>
-                <Checkbox defaultChecked={true} className="time-checkbox">
+                <Checkbox checked={true} className="time-checkbox">
                   30 days
                 </Checkbox>
               </div>
