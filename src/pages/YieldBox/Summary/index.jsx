@@ -160,7 +160,7 @@ const Summary = (props) => {
           <span className="weight-500 font-size-18 user-staked">
             Max Allocation:{" "}
             <span className="weight-700 font-size-18">
-              {formatMoney(stakedInfo?.maxAllocation || 0, "", 2, ".", ",")}
+              {formatMoney(stakedInfo?.maxAllocation || 0, "USDT", 2, ".", ",")}
             </span>
           </span>
           <br />
@@ -184,7 +184,7 @@ const Summary = (props) => {
               alt="icon"
               style={{ cursor: "pointer" }}
               onClick={() =>
-                window.open("https://opensea.io/collection/xborg-nft", "_blank")
+                window.open("https://opensea.io/collection/anarkey", "_blank")
               }
             />
             <img
