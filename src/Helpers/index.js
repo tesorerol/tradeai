@@ -1,5 +1,6 @@
 import AbiERC20 from '../artifacts/contracts/BeNFT.sol/BeNFT.json'
 import { ethers } from 'ethers'
+import ENV from '../utils/env'
 async function GetBalance(provider, wallet, token) {
   let contract = new ethers.Contract(token, AbiERC20.abi, provider)
   let Tokens = await contract.balanceOf(wallet)
@@ -134,4 +135,8 @@ const convertToHex = (value) => {
   return `0x${value.toString(16)}`
 }
 
-export { GetBalance, Allowance, Approve, MModeTimer, formatMoney, formatMoney2, convertToHex }
+function getChainIdBaseUrl(url) {
+  return !url.includes('earn-strategies') ? ENV.chainId : ENV.depositChainId;
+}
+
+export { GetBalance, Allowance, Approve, MModeTimer, formatMoney, formatMoney2, convertToHex, getChainIdBaseUrl }
