@@ -19,7 +19,11 @@ import { WalletContext } from "../../../Providers/WallectConnect";
 import backButton from "../../../assets/icons/back-button.svg";
 
 const ListNft = ({ forceRefresh, setForceRefresh }) => {
-  const { address: account, checkWhiteList } = useContext(WalletContext);
+  const {
+    address: account,
+    checkWhiteList,
+    currentChainId,
+  } = useContext(WalletContext);
 
   const [myNftsNotyetStake, setMyNftsNotyetStake] = useState([]);
   const [openModal, setOpenModal] = useState(false);
@@ -163,11 +167,20 @@ const ListNft = ({ forceRefresh, setForceRefresh }) => {
           </div>
           <div className="flex center">
             <ButtonMui
-              disabled={dataSelected.length === 0}
+              disabled={
+                dataSelected.length === 0 ||
+                Number(currentChainId) !== Number(ENV.chainId)
+              }
               style={{ cursor: "pointer" }}
               className="button-stake"
               shape="square"
-              onClick={() => setOpenModal(true)}
+              onClick={() => {
+                if (Number(currentChainId) !== Number(ENV.chainId)) {
+                  return;
+                }
+
+                setOpenModal(true);
+              }}
             >
               Stake
             </ButtonMui>

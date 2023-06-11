@@ -11,7 +11,13 @@ import { BsQuestionSquare } from "react-icons/bs";
 import { ethers } from "ethers";
 import { WalletContext } from "../../Providers/WallectConnect";
 import ERC20 from "../../artifacts/contracts/USDT.sol/TetherToken.json";
-import { Allowance, Approve, MModeTimer, formatMoney } from "../../Helpers";
+import {
+  Allowance,
+  Approve,
+  MModeTimer,
+  convertToHex,
+  formatMoney,
+} from "../../Helpers";
 import Swal from "sweetalert2";
 import Loader from "../../Components/Loading";
 import ProgressBar from "../../Components/ProgressBar";
@@ -36,7 +42,7 @@ const EarnTemplate = (props) => {
     unique,
   } = props;
   const nav = useNavigate();
-  const { Provider, address, currentChainId, checkWhiteList } =
+  const { Provider, address, currentChainId, checkWhiteList, switchNetwork } =
     useContext(WalletContext);
 
   let USDT = "0x55d398326f99059fF775485246999027B3197955";
@@ -70,9 +76,13 @@ const EarnTemplate = (props) => {
         title: "error",
         icon: "error",
         text: "Wrong network, please switch to BSC",
+      }).then(() => {
+        switchNetwork(convertToHex(ENV.depositChainId)).catch((e) =>
+          console.error(e)
+        );
       });
     }
-  }, [currentChainId]);
+  }, [currentChainId, switchNetwork]);
 
   const canNavigatePage = useCallback(async () => {
     const isWhiteList = await checkWhiteList();
@@ -81,9 +91,9 @@ const EarnTemplate = (props) => {
       Swal.fire({
         title: "Sorry you are not in whitelist",
         icon: "error",
+      }).then(() => {
+        nav("/stake");
       });
-
-      nav("/stake");
     }
   }, [checkWhiteList, nav]);
 
@@ -421,7 +431,14 @@ const EarnTemplate = (props) => {
               {Aprove ? (
                 <button
                   className="button2"
+                  disabled={
+                    Number(currentChainId) !== Number(ENV.depositChainId)
+                  }
                   onClick={() => {
+                    if (Number(currentChainId) !== Number(ENV.depositChainId)) {
+                      return;
+                    }
+
                     setLoading(true);
                     Approve(Provider, EarnContract, USDT)
                       .then((r) => {
@@ -500,9 +517,19 @@ const EarnTemplate = (props) => {
                     </div>
                   </div>
                   <button
-                    disabled={!desposit ? true : false}
+                    disabled={
+                      !desposit ||
+                      Number(currentChainId) !== Number(ENV.depositChainId)
+                        ? true
+                        : false
+                    }
                     className="button2"
-                    onClick={() => (desposit ? Deposit() : console.log())}
+                    onClick={() =>
+                      desposit &&
+                      Number(currentChainId) === Number(ENV.depositChainId)
+                        ? Deposit()
+                        : console.log()
+                    }
                   >
                     {desposit ? (
                       <span className="button-content">Deposit</span>
