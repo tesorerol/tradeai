@@ -1,3 +1,4 @@
+import { ethers } from "ethers";
 import React, {
   useCallback,
   useContext,
@@ -6,11 +7,11 @@ import React, {
   useRef,
   useState,
 } from "react";
-import usdt from "../../assets/icons/usdt.png";
 import { BsQuestionSquare } from "react-icons/bs";
-import { ethers } from "ethers";
-import { WalletContext } from "../../Providers/WallectConnect";
-import ERC20 from "../../artifacts/contracts/USDT.sol/TetherToken.json";
+import { useNavigate } from "react-router";
+import Swal from "sweetalert2";
+import Loader from "../../Components/Loading";
+import ProgressBar from "../../Components/ProgressBar";
 import {
   Allowance,
   Approve,
@@ -18,12 +19,11 @@ import {
   convertToHex,
   formatMoney,
 } from "../../Helpers";
-import Swal from "sweetalert2";
-import Loader from "../../Components/Loading";
-import ProgressBar from "../../Components/ProgressBar";
+import { WalletContext } from "../../Providers/WallectConnect";
 import { apiService } from "../../apis";
+import ERC20 from "../../artifacts/contracts/USDT.sol/TetherToken.json";
+import usdt from "../../assets/icons/usdt.png";
 import ENV from "../../utils/env";
-import { useNavigate } from "react-router";
 
 const EarnTemplate = (props) => {
   const [percentage, setPercentage] = useState(null);
@@ -63,23 +63,25 @@ const EarnTemplate = (props) => {
   const [limitAmount, setlimitAmount] = useState("0");
   const [percentOfContract, setpercentOfContract] = useState("0");
   const [Loading, setLoading] = useState(false);
-  let contract = useMemo(
+  const contract = useMemo(
     () => new ethers.Contract(EarnContract, Abi.abi, Provider),
     [Abi.abi, EarnContract, Provider]
   );
-  let intervalid;
-  const bar = useRef();
+  const intervalid = useRef(null);
 
   useEffect(() => {
     if (currentChainId !== ENV.depositChainId) {
       Swal.fire({
-        title: "error",
+        title: "Error",
         icon: "error",
         text: "Wrong network, please switch to BSC",
       }).then(() => {
-        switchNetwork(convertToHex(ENV.depositChainId)).catch((e) =>
-          console.error(e)
-        );
+        setLoading(true);
+        switchNetwork(convertToHex(ENV.depositChainId))
+          .catch((e) => console.error(e))
+          .finally(() => {
+            setLoading(false);
+          });
       });
     }
   }, [currentChainId, switchNetwork]);
@@ -116,80 +118,66 @@ const EarnTemplate = (props) => {
     }
   }, [address]);
 
-  useEffect(() => {
-    TotalRecolect();
-    // MaxAmount()
-    // MinAmount()
-    PercentOfContract();
-    GetUsdtBalanceContracts();
-    getMaxEntry();
-    if (address) {
-      GetUserInfo();
-      Intermitente();
-      GetBusdBalance();
-      Allowance(Provider, address, EarnContract, USDT).then((r) => {
-        if (parseInt(ethers.utils.formatEther(r)) >= 1000000) {
-          setAmountAprove(ethers.utils.formatEther(r));
-          setAprove(false);
-        } else {
-          setAprove(true);
-        }
-      });
-    }
-    return () => {
-      clearInterval(intervalid);
-      setpercentOfContract("0");
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [address, EarnContract, currentChainId]);
-
   // function getMaxAmount() {
   //   contract.getMaxPerUser(address).then((r) => {
   //     setgetMaxUser(ethers.utils.formatEther(r))
   //   })
   // }
-  function TotalRecolect() {
-    contract.recolect().then((total) => {
-      contract.limit().then((limit) => {
-        setlimitAmount(ethers.utils.formatEther(limit));
-        setRecolect(ethers.utils.formatEther(total));
-        // bar.current.style.width = `${
-        //   (parseFloat(ethers.utils.formatEther(total)) /
-        //     parseFloat(ethers.utils.formatEther(limit))) *
-        //   100
-        // }%`
+  const TotalRecolect = useCallback(() => {
+    contract
+      .recolect()
+      .then((total) => {
+        contract
+          .limit()
+          .then((limit) => {
+            setlimitAmount(ethers.utils.formatEther(limit));
+            setRecolect(ethers.utils.formatEther(total));
+            // bar.current.style.width = `${
+            //   (parseFloat(ethers.utils.formatEther(total)) /
+            //     parseFloat(ethers.utils.formatEther(limit))) *
+            //   100
+            // }%`
 
-        const percent = parseFloat(
-          Math.floor(
-            (ethers.utils.formatEther(total) /
-              parseFloat(ethers.utils.formatEther(limit))) *
-              100
-          )
-        );
-        setPercentage(percent);
+            const percent = parseFloat(
+              Math.floor(
+                (ethers.utils.formatEther(total) /
+                  parseFloat(ethers.utils.formatEther(limit))) *
+                  100
+              )
+            );
+            setPercentage(percent);
 
-        // bar.current.style.width = (parseFloat(ethers.utils.formatEther(total)) / parseFloat(ethers.utils.formatEther(limit))) * 100
+            // bar.current.style.width = (parseFloat(ethers.utils.formatEther(total)) / parseFloat(ethers.utils.formatEther(limit))) * 100
+          })
+          .catch((e) => console.error(e));
+      })
+      .catch((e) => console.error(e));
+  }, [contract]);
+
+  // function MinAmount() {
+  //   contract.MinAmount().then((r) => setmintAmount(ethers.utils.formatEther(r)))
+  // }
+
+  // function MinAmount() {
+  //   contract.MinAmount().then((r) => setmintAmount(ethers.utils.formatEther(r)))
+  // }
+
+  const PercentOfContract = useCallback(() => {
+    contract
+      .PercentEarn()
+      .then((r) => {
+        setpercentOfContract(r.toString());
+      })
+      .catch((e) => {
+        console.error("PercentOfContract", e);
       });
-    });
-  }
-
-  // function MinAmount() {
-  //   contract.MinAmount().then((r) => setmintAmount(ethers.utils.formatEther(r)))
-  // }
-
-  // function MinAmount() {
-  //   contract.MinAmount().then((r) => setmintAmount(ethers.utils.formatEther(r)))
-  // }
-
-  function PercentOfContract() {
-    contract.PercentEarn().then((r) => setpercentOfContract(r.toString()));
-  }
+  }, [contract]);
 
   // function MaxAmount() {
   //   contract.MaxAmount().then((r) => setmaxAmount(ethers.utils.formatEther(r)))
   // }
 
-  function GetUserInfo() {
+  const GetUserInfo = useCallback(() => {
     contract
       .balanceUser(address)
       .then((r) => {
@@ -199,13 +187,14 @@ const EarnTemplate = (props) => {
         });
         setFinishTime(MModeTimer(r.finishTime.toString()));
       })
-      .catch((e) => console.log(e));
-  }
-  function Intermitente() {
-    intervalid = setInterval(() => {
+      .catch((e) => console.error(e));
+  }, [address, contract]);
+
+  const Intermitente = useCallback(() => {
+    intervalid.current = setInterval(() => {
       GetUserInfo();
     }, 1000);
-  }
+  }, [GetUserInfo]);
 
   async function Deposit() {
     let signer = Provider.getSigner();
@@ -305,22 +294,62 @@ const EarnTemplate = (props) => {
     }
   }
 
-  function GetBusdBalance() {
+  const GetBusdBalance = useCallback(() => {
     let signer = Provider.getSigner();
     let contract2 = new ethers.Contract(USDT, ERC20.abi, signer);
     contract2
       .balanceOf(address)
-      .then((r) => setUsdtBalance(ethers.utils.formatEther(r)));
-  }
+      .then((r) => setUsdtBalance(ethers.utils.formatEther(r)))
+      .catch((e) => console.error(e));
+  }, [Provider, USDT, address]);
 
-  function GetUsdtBalanceContracts() {
+  const GetUsdtBalanceContracts = useCallback(() => {
     let contract2 = new ethers.Contract(USDT, ERC20.abi, Provider);
     contract2
       .balanceOf(EarnContract)
-      .then((r) => setUsdtBalanceContract(ethers.utils.formatEther(r)));
-  }
+      .then((r) => setUsdtBalanceContract(ethers.utils.formatEther(r)))
+      .catch((e) => console.error(e));
+  }, [EarnContract, Provider, USDT]);
 
-  console.log(maxAmount, mintAmount);
+  useEffect(() => {
+    TotalRecolect();
+    // MaxAmount()
+    // MinAmount()
+    PercentOfContract();
+    GetUsdtBalanceContracts();
+    getMaxEntry();
+    if (address) {
+      GetUserInfo();
+      Intermitente();
+      GetBusdBalance();
+      Allowance(Provider, address, EarnContract, USDT)
+        .then((r) => {
+          if (parseInt(ethers.utils.formatEther(r)) >= 1000000) {
+            setAmountAprove(ethers.utils.formatEther(r));
+            setAprove(false);
+          } else {
+            setAprove(true);
+          }
+        })
+        .catch((e) => console.error(e));
+    }
+    return () => {
+      clearInterval(intervalid.current);
+      setpercentOfContract("0");
+    };
+  }, [
+    EarnContract,
+    GetBusdBalance,
+    GetUsdtBalanceContracts,
+    GetUserInfo,
+    Intermitente,
+    PercentOfContract,
+    Provider,
+    TotalRecolect,
+    USDT,
+    address,
+    getMaxEntry,
+  ]);
 
   return (
     <div className="earn-strategies">

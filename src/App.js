@@ -66,12 +66,7 @@ function App() {
             <Header toggleModal={toggleModal} />
             <div className="container-routes">
               <Routes>
-                <Route
-                  path="/"
-                  element={
-                    <Navigate to="/earn-strategies/0x95E257Ba297E705B968c605BbDb5937a0CF95334" />
-                  }
-                />
+                <Route path="/" element={<Navigate to="/stake" />} />
                 <Route
                   path="/earn-strategies/:address"
                   element={<EarnDinamic />}

@@ -3,11 +3,12 @@ import WalletConnectProvider from "@walletconnect/web3-provider";
 import { ethers } from "ethers";
 import mobile from "is-mobile";
 import React, { createContext, useCallback, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import Web3Modal from "web3modal";
+import { convertToHex } from "../Helpers";
 import { apiService } from "../apis";
 import ENV from "../utils/env";
-import { convertToHex, getChainIdBaseUrl } from "../Helpers";
 const web3modalStorageKey = "WEB3_CONNECT_CACHED_PROVIDER";
 
 export const WalletContext = createContext({});
@@ -20,6 +21,7 @@ const WallectConnectProvider = new WalletConnectProvider({
   bridge: "https://bridge.walletconnect.org", // Required
   qrcodeModal: QRCodeModal,
 });
+
 const WallectConnect = ({ children }) => {
   const [address, setAddress] = useState(undefined);
   const [iswhiteList, setWhiteList] = useState("");
@@ -33,6 +35,7 @@ const WallectConnect = ({ children }) => {
   const [error, setError] = useState(false);
   const web3Modal =
     typeof window !== "undefined" && new Web3Modal({ cacheProvider: true });
+  const nav = useNavigate();
   // const chainID = 97;
   // const chainID = ENV.stakeChainID;
   /* This effect will fetch wallet address if user has already connected his/her wallet */
@@ -55,7 +58,7 @@ const WallectConnect = ({ children }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const checkWhiteList = async () => {
+  const checkWhiteList = useCallback(async () => {
     try {
       if (!address) throw Error("No address");
       const res = await apiService.checkWhiteList(address);
@@ -65,10 +68,11 @@ const WallectConnect = ({ children }) => {
     } catch (err) {
       console.error("checkWhiteList", err);
     }
-  };
+  }, [address]);
+
   useEffect(() => {
     checkWhiteList();
-  }, [address]);
+  }, [checkWhiteList]);
 
   const setWalletAddress = async (provider) => {
     try {
@@ -94,6 +98,8 @@ const WallectConnect = ({ children }) => {
   const disconnectWallet = () => {
     setIsAllowed(null);
     setAddress(undefined);
+    // Clear event:
+    Provider.provider._events = {};
     web3Modal && web3Modal.clearCachedProvider();
   };
 
@@ -121,56 +127,84 @@ const WallectConnect = ({ children }) => {
       }
 
       if (connection.networkVersion !== connectChainId) {
-        Swal.fire({
-          title: "error",
+        await Swal.fire({
+          title: "Error",
           icon: "error",
-          text: "wrong network, please switch to ETH",
+          text: "Wrong network, please switch to ETH",
         });
-        let RequestSend = {
-          id: 1337,
-          jsonrpc: "2.0",
-          method: "wallet_addEthereumChain",
-          // params: [
-          //   {
-          //     chainId: '0x61',
-          //     chainName: 'Binance Smart Chain TestNet',
-          //     nativeCurrency: {
-          //       name: 'Binance Coin',
-          //       symbol: 'TBNB', // 2-6 characters long
-          //       decimals: 18,
-          //     },
-          //     rpcUrls: ['https://data-seed-prebsc-1-s3.binance.org:8545/'],
-          //     blockExplorerUrls: ['https://testnet.bscscan.com/'],
-          //   },
-          // ],
-          params: [
-            {
-              ...ENV.networkInfos[convertToHex(Number(ENV.chainId))],
-            },
-          ],
-        };
-        connection.request(RequestSend);
-        return;
+        await switchNetwork(convertToHex(ENV.chainId), provider.provider).catch(
+          (e) => console.error(e)
+        );
+        // setCurrentChainId(Number(connectChainId));
+        // setProvider(provider);
+        // setWalletAddress(provider);
+        // setLoading(false);
+        // if (type !== "reload") {
+        //   nav("/stake");
+        // }
+
+        // let RequestSend = {
+        //   id: 1337,
+        //   jsonrpc: "2.0",
+        //   method: "wallet_addEthereumChain",
+        //   // params: [
+        //   //   {
+        //   //     chainId: '0x61',
+        //   //     chainName: 'Binance Smart Chain TestNet',
+        //   //     nativeCurrency: {
+        //   //       name: 'Binance Coin',
+        //   //       symbol: 'TBNB', // 2-6 characters long
+        //   //       decimals: 18,
+        //   //     },
+        //   //     rpcUrls: ['https://data-seed-prebsc-1-s3.binance.org:8545/'],
+        //   //     blockExplorerUrls: ['https://testnet.bscscan.com/'],
+        //   //   },
+        //   // ],
+        //   params: [
+        //     {
+        //       ...ENV.networkInfos[convertToHex(Number(ENV.chainId))],
+        //     },
+        //   ],
+        // };
+        // connection.request(RequestSend);
+        //return;
       }
+      setCurrentChainId(
+        type === "reload" ? Number(connection.networkVersion) : ENV.chainId
+      );
       await subscribeProvider(connection);
-      setCurrentChainId(Number(connection.networkVersion));
       setProvider(provider);
       setWalletAddress(provider);
       setLoading(false);
+      if (type !== "reload") {
+        nav("/stake");
+      }
     } catch (error) {
       setLoading(false);
       console.log(
         error,
-        "got this error on connectToWallet catch block while connecting the wallet"
+        "Got this error on connectToWallet catch block while connecting the wallet"
       );
     }
   };
+
+  const getProvider = useCallback(() => {
+    if (!web3Modal) {
+      return;
+    }
+
+    web3Modal.connect().then((connection) => {
+      const provider = new ethers.providers.Web3Provider(connection);
+      setProvider(provider);
+    });
+  }, []);
 
   const subscribeProvider = async (connection) => {
     connection.on("close", () => {
       disconnectWallet();
     });
     connection.on("accountsChanged", async (accounts) => {
+      getProvider();
       if (accounts?.length) {
         setAddress(accounts[0]);
         const provider = new ethers.providers.Web3Provider(connection);
@@ -180,11 +214,7 @@ const WallectConnect = ({ children }) => {
       }
     });
     connection.on("networkChanged", async (chainId) => {
-      const validChainId = getChainIdBaseUrl(window.location.pathname);
-
-      if (Number(validChainId) === Number(chainId)) {
-        window.location.reload();
-      }
+      getProvider();
       setCurrentChainId(Number(chainId));
     });
   };
@@ -198,18 +228,14 @@ const WallectConnect = ({ children }) => {
     setProvider(provider);
     setWalletAddress(provider);
 
-    WallectConnectProvider.on("accountsChanged", (accounts) => {
+    WallectConnectProvider.on("accountsChanged", async (accounts) => {
+      getProvider();
       console.log(accounts);
     });
 
     // Subscribe to chainId change
     WallectConnectProvider.on("chainChanged", (chainId) => {
-      const validChainId = getChainIdBaseUrl(window.location.pathname);
-
-      if (Number(validChainId) === Number(chainId)) {
-        window.location.reload();
-      }
-
+      getProvider();
       setCurrentChainId(Number(chainId));
       console.log(chainId);
     });
@@ -237,8 +263,8 @@ const WallectConnect = ({ children }) => {
   }, []);
 
   const switchNetwork = useCallback(
-    (chainId) => {
-      const provider = Provider.provider;
+    (chainId, currrentProvider = null) => {
+      const provider = currrentProvider ?? Provider.provider;
 
       if (!provider) {
         throw new Error("Invalid provider");
