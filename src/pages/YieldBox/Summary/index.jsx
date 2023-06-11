@@ -12,7 +12,7 @@ import iconDiamond from "../../../assets/icons/summary-logo-diamond.svg";
 import iconBlur from "../../../assets/icons/summary-logo-blur.svg";
 import Swal from "sweetalert2";
 import ENV from "../../../utils/env";
-import { convertToHex } from "../../../Helpers";
+import { convertToHex, formatMoney } from "../../../Helpers";
 
 export const antIcon = (size = 50) => {
   return (
@@ -160,7 +160,7 @@ const Summary = (props) => {
           <span className="weight-500 font-size-18 user-staked">
             Max Allocation:{" "}
             <span className="weight-700 font-size-18">
-              {stakedInfo?.maxAllocation || 0}
+              {formatMoney(stakedInfo?.maxAllocation || 0, "", 2, ".", ",")}
             </span>
           </span>
           <br />
