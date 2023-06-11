@@ -2,7 +2,7 @@ import { ButtonBase, Button as ButtonMui } from "@material-ui/core";
 import { Col, Row, Spin } from "antd";
 
 import { useCallback, useContext, useEffect, useMemo, useState } from "react";
-
+import moment from "moment";
 import Swal from "sweetalert2";
 import { antIcon } from ".";
 import { WalletContext } from "../../../Providers/WallectConnect";
@@ -121,6 +121,8 @@ const ListNftStaked = (props) => {
         {myStakedNfts.length > 0 ? (
           <Row gutter={[16, 16]}>
             {myStakedNfts.map((item) => {
+              const endDate = moment(item.staked_at * 1000).add(30, "days");
+              const isShowCheckBox = moment().diff(endDate) >= 0;
               return (
                 <Col
                   key={item.token_id}
@@ -133,7 +135,7 @@ const ListNftStaked = (props) => {
                 >
                   <NftCard
                     item={item}
-                    showCheckbox={true}
+                    showCheckbox={isShowCheckBox}
                     onSelect={onSelectNft}
                   />
                 </Col>
