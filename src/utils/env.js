@@ -21,7 +21,7 @@ const ENV = {
       chainName: "Binance Smart Chain Mainnet",
       nativeCurrency: {
         name: "Binance Coin",
-        symbol: "bnb", // 2-6 characters long
+        symbol: "BNB", // 2-6 characters long
         decimals: 18,
       },
       rpcUrls: ["https://bsc-dataseed1.binance.org/"],

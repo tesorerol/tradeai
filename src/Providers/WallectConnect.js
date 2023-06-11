@@ -2,7 +2,13 @@ import QRCodeModal from "@walletconnect/qrcode-modal";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import { ethers } from "ethers";
 import mobile from "is-mobile";
-import React, { createContext, useCallback, useEffect, useState } from "react";
+import React, {
+  createContext,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import Web3Modal from "web3modal";
@@ -33,8 +39,11 @@ const WallectConnect = ({ children }) => {
   );
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-  const web3Modal =
-    typeof window !== "undefined" && new Web3Modal({ cacheProvider: true });
+  const web3Modal = useMemo(
+    () =>
+      typeof window !== "undefined" && new Web3Modal({ cacheProvider: true }),
+    []
+  );
   const nav = useNavigate();
   // const chainID = 97;
   // const chainID = ENV.stakeChainID;
@@ -89,19 +98,19 @@ const WallectConnect = ({ children }) => {
     }
   };
 
-  const getBalance = async (provider, walletAddress) => {
+  const getBalance = useCallback(async (provider, walletAddress) => {
     const walletBalance = await provider.getBalance(walletAddress);
     const balanceInEth = ethers.utils.formatEther(walletBalance);
     setBalance(balanceInEth);
-  };
+  }, []);
 
-  const disconnectWallet = () => {
+  const disconnectWallet = useCallback(() => {
     setIsAllowed(null);
     setAddress(undefined);
     // Clear event:
     Provider.provider._events = {};
     web3Modal && web3Modal.clearCachedProvider();
-  };
+  }, [Provider.provider, web3Modal]);
 
   const checkIfExtensionIsAvailable = () => {
     if (
@@ -194,8 +203,12 @@ const WallectConnect = ({ children }) => {
     web3Modal.connect().then((connection) => {
       const provider = new ethers.providers.Web3Provider(connection);
       setProvider(provider);
+      const signer = provider.getSigner();
+      if (signer) {
+        signer.getAddress().then((address) => getBalance(provider, address));
+      }
     });
-  }, []);
+  }, [getBalance, web3Modal]);
 
   const subscribeProvider = async (connection) => {
     connection.on("close", () => {
@@ -205,6 +218,7 @@ const WallectConnect = ({ children }) => {
       getProvider();
       if (accounts?.length) {
         setAddress(accounts[0]);
+        getBalance();
         const provider = new ethers.providers.Web3Provider(connection);
         getBalance(provider, accounts[0]);
       } else {

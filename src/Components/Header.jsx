@@ -1,13 +1,20 @@
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext, useMemo, useRef, useState } from "react";
 import { FiLogOut } from "react-icons/fi";
 import { IoIosArrowDown } from "react-icons/io";
 import { WalletContext } from "../Providers/WallectConnect";
 import MenuMobile from "./MenuMobile";
 import Navbar from "./Navbar";
+import { convertToHex } from "../Helpers";
+import ENV from "../utils/env";
 
 const Header = ({ toggleModal }) => {
-  const { address, disconnectWallet, balance, connectToWallet } =
+  const { address, disconnectWallet, balance, currentChainId } =
     useContext(WalletContext);
+
+  const symbol = useMemo(() => {
+    const hexChain = convertToHex(currentChainId);
+    return ENV.networkInfos[hexChain]?.nativeCurrency?.symbol || "";
+  }, [currentChainId]);
 
   function disableScroll() {
     document.body.classList.add("stop-scrolling");
@@ -63,7 +70,7 @@ const Header = ({ toggleModal }) => {
             }`}
           >
             <p>
-              BNB: <span className="span-balance">{balance}</span>
+              {symbol}: <span className="span-balance">{balance}</span>
             </p>
 
             <p onClick={() => disconnectWallet()}>
