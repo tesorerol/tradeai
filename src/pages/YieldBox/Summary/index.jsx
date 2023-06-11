@@ -173,7 +173,7 @@ const Summary = (props) => {
               textAlign: "center",
             }}
             onClick={() =>
-              window.open("https://opensea.io/collection/xborg-nft", "_blank")
+              window.open("https://opensea.io/collection/anarkey", "_blank")
             }
           >
             Increase your yield
@@ -193,7 +193,7 @@ const Summary = (props) => {
               style={{ cursor: "pointer" }}
               onClick={() =>
                 window.open(
-                  "https://looksrare.org/collections/0xb452Ff31B35Dee74f2FdfD5194B91Af1BaD07b91",
+                  "https://looksrare.org/collections/0xA88b82AF76ecF08cf652846D10857eAeeCa40C97",
                   "_blank"
                 )
               }

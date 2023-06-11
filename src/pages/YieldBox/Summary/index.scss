@@ -99,7 +99,13 @@
 .nft-card {
   width: 150px;
   box-sizing: border-box;
-  background: #262628;
+  background: linear-gradient(
+    155.14deg,
+    #030303 0%,
+    #19191a 39.36%,
+    #3a3a3c 74.44%,
+    #636467 106.44%
+  );
   border-radius: 5px;
   // padding: 8px;
   flex-direction: column;
