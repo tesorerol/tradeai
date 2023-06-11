@@ -110,7 +110,14 @@ const ListNftStaked = (props) => {
   };
 
   const handleSelectAll = () => {
-    setMyStakedNfts(myStakedNfts.map((item) => ({ ...item, isChecked: true })));
+    const myStakedNftsValid = myStakedNfts.map((item) => {
+      const endDate = moment(item.staked_at * 1000).add(30, "days");
+      
+      return moment().diff(endDate) >= 0
+        ? { ...item, isChecked: true }
+        : { ...item, isChecked: false };
+    });
+    setMyStakedNfts(myStakedNftsValid);
   };
 
   const handleSelectNone = () => {
