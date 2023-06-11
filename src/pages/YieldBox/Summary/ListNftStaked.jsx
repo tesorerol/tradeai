@@ -29,7 +29,11 @@ const ListNftStaked = (props) => {
   const { contractStake } = useContract();
   const { approved, handleApproveAll } = useApproveNftAll();
 
-  const { address: account, checkWhiteList } = useContext(WalletContext);
+  const {
+    address: account,
+    checkWhiteList,
+    currentChainId,
+  } = useContext(WalletContext);
 
   const handleUntake = async () => {
     if (!approved) {
@@ -168,11 +172,20 @@ const ListNftStaked = (props) => {
 
           <div className="flex center">
             <ButtonMui
-              disabled={dataSelected.length === 0}
+              disabled={
+                dataSelected.length === 0 ||
+                Number(currentChainId) !== Number(ENV.chainId)
+              }
               style={{ cursor: "pointer" }}
               className="button-stake"
               shape="square"
-              onClick={() => setOpenModal(true)}
+              onClick={() => {
+                if (Number(currentChainId) !== Number(ENV.chainId)) {
+                  return;
+                }
+
+                setOpenModal(true);
+              }}
             >
               Unstake
             </ButtonMui>

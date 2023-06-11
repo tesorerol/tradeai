@@ -4,7 +4,7 @@ import Tab from "@material-ui/core/Tab";
 import Tabs from "@material-ui/core/Tabs";
 import { Select } from "antd";
 import React from "react";
-import useWindowSize from '../../hooks/useWindowSize';
+import useWindowSize from "../../hooks/useWindowSize";
 import Summary from "./Summary";
 import { useStyles, useTabPanelStyles } from "./styles";
 import "./styles/index.scss";
@@ -58,7 +58,7 @@ const a11yProps = (index) => {
   };
 };
 
-const TAB_NAMES = ["Summary", "Reward"];
+const TAB_NAMES = ["Summary"];
 
 const YieldBox = () => {
   const classes = useStyles();
@@ -131,10 +131,10 @@ const YieldBox = () => {
                   value: 0,
                   label: "Summary",
                 },
-                {
-                  value: 1,
-                  label: "Reward",
-                },
+                // {
+                //   value: 1,
+                //   label: "Reward",
+                // },
               ]}
             />
           </div>

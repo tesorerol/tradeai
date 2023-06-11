@@ -1,23 +1,9 @@
 import React, { useContext, useState } from "react";
-import { NavLink, useLocation } from "react-router-dom";
-import { convertToHex } from "../Helpers";
+import { NavLink } from "react-router-dom";
 import { WalletContext } from "../Providers/WallectConnect";
-import ENV from "../utils/env";
 
 const MenuNav2 = ({ removeAct, addAct, refActive }) => {
-  const location = useLocation();
-
-  const isEarnPage = location.pathname.includes("earn-strategies");
-  const isStakePage = location.pathname.includes("stake");
-
-  const { switchNetwork, currentChainId, Provider, iswhiteList } =
-    useContext(WalletContext);
-
-  const canDisplaySwitchButton =
-    Provider.provider &&
-    Provider.provider.isMetaMask &&
-    ((Number(currentChainId) !== Number(ENV.depositChainId) && isEarnPage) ||
-      (isStakePage && Number(currentChainId) !== Number(ENV.chainId)));
+  const { iswhiteList } = useContext(WalletContext);
 
   const [isOpen, setIsOpen] = useState({
     earn: false,
@@ -96,19 +82,6 @@ const MenuNav2 = ({ removeAct, addAct, refActive }) => {
         <a className="button-nav" href={undefined}>
           Anarkey
         </a>
-      )}
-
-      {canDisplaySwitchButton && (
-        <NavLink
-          className="button-nav"
-          onClick={() =>
-            switchNetwork(
-              convertToHex(isStakePage ? ENV.chainId : ENV.depositChainId)
-            ).catch((e) => console.error(e))
-          }
-        >
-          Switch Network
-        </NavLink>
       )}
       {/* <NavLink className='button-nav' to="/earn-strategies/0x818F3eE1E66773165f1B4e1b815c57a275E6e807" onClick={removeAct}> Public</NavLink> */}
       {/* <div>

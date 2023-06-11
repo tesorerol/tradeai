@@ -12,6 +12,7 @@ import iconDiamond from "../../../assets/icons/summary-logo-diamond.svg";
 import iconBlur from "../../../assets/icons/summary-logo-blur.svg";
 import Swal from "sweetalert2";
 import ENV from "../../../utils/env";
+import { convertToHex } from "../../../Helpers";
 
 export const antIcon = (size = 50) => {
   return (
@@ -43,7 +44,12 @@ const Summary = (props) => {
     maxAllocation: 0,
   });
 
-  const { address: account, currentChainId, checkWhiteList } = useContext(WalletContext);
+  const {
+    address: account,
+    currentChainId,
+    checkWhiteList,
+    switchNetwork,
+  } = useContext(WalletContext);
 
   useEffect(() => {
     if (Number(currentChainId) !== Number(ENV.chainId)) {
@@ -51,9 +57,11 @@ const Summary = (props) => {
         title: "error",
         icon: "error",
         text: "Wrong network, please switch to ETH",
+      }).then(() => {
+        switchNetwork(convertToHex(ENV.chainId)).catch((e) => console.error(e));
       });
     }
-  }, [currentChainId]);
+  }, [currentChainId, switchNetwork]);
 
   const getUserStakeInfo = useCallback(async () => {
     try {
