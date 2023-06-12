@@ -134,7 +134,7 @@ const WallectConnect = ({ children }) => {
         connectChainId = connection.networkVersion;
       }
 
-      if (connection.networkVersion !== connectChainId) {
+      if (String(connection.networkVersion) !== String(connectChainId)) {
         await Swal.fire({
           title: "Error",
           icon: "error",
@@ -143,7 +143,9 @@ const WallectConnect = ({ children }) => {
         await switchNetwork(convertToHex(ENV.chainId), provider.provider);
       }
       setCurrentChainId(
-        type === "reload" ? Number(connection.networkVersion) : ENV.chainId
+        type === "reload"
+          ? Number(connection.networkVersion)
+          : Number(ENV.chainId)
       );
       await subscribeProvider(connection);
       setProvider(provider);
@@ -265,7 +267,8 @@ const WallectConnect = ({ children }) => {
             if (error.code === 4902 || (mobile() && error.code === -32603)) {
               return addConnection(
                 provider,
-                ENV.networkInfos[chainId] || ENV.networkInfos?.["0x5"]
+                ENV.networkInfos[chainId] ||
+                  ENV.networkInfos?.[convertToHex(Number(ENV.chainId))]
               ).catch((addConnectError) => {
                 reject(addConnectError);
               });

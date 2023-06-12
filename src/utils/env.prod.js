@@ -6,7 +6,7 @@ const ENV_PROD = {
   chainId: "1",
 
   // backend
-  baseURL: "http://34.202.74.117:3333/api",
+  baseURL: "https://staking.anarkey.io/api",
   waitingCrawlTime: 20000,
 
   //staking
@@ -34,10 +34,12 @@ const ENV_PROD = {
         symbol: "ETH",
         decimals: 18,
       },
-      rpcUrls: ["https://mainnet.infura.io/v3/e43e5aa80c4c4e3ca72ef2641b2d23e9"],
+      rpcUrls: [
+        "https://mainnet.infura.io/v3/e43e5aa80c4c4e3ca72ef2641b2d23e9",
+      ],
       blockExplorerUrls: ["https://etherscan.io/"],
     },
   },
 };
 
-export default ENV_PROD
+export default ENV_PROD;
