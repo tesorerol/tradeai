@@ -110,7 +110,7 @@ const ListNftStaked = (props) => {
   };
 
   const canUnstake = (item) => {
-    const endDate = moment(item.staked_at * 1000).add(30, "minutes");
+    const endDate = moment(item.staked_at * 1000).add(30, "days");
     return moment().diff(endDate) >= 0;
   };
 
