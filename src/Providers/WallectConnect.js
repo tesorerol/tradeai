@@ -134,7 +134,7 @@ const WallectConnect = ({ children }) => {
         connectChainId = connection.networkVersion;
       }
 
-      if (connection.networkVersion !== connectChainId) {
+      if (String(connection.networkVersion) !== String(connectChainId)) {
         await Swal.fire({
           title: "Error",
           icon: "error",
@@ -176,7 +176,9 @@ const WallectConnect = ({ children }) => {
         //return;
       }
       setCurrentChainId(
-        type === "reload" ? Number(connection.networkVersion) : ENV.chainId
+        type === "reload"
+          ? Number(connection.networkVersion)
+          : Number(ENV.chainId)
       );
       await subscribeProvider(connection);
       setProvider(provider);
