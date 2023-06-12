@@ -34,7 +34,7 @@ const WallectConnect = ({ children }) => {
   const [isAllowed, setIsAllowed] = useState(null);
   const [balance, setBalance] = useState(undefined);
   const [Provider, setProvider] = useState(
-    address ? "" : new ethers.providers.JsonRpcProvider(ENV.goerliRPC)
+    address ? "" : new ethers.providers.JsonRpcProvider(ENV.chainIdRPC)
   );
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -141,39 +141,6 @@ const WallectConnect = ({ children }) => {
           text: "Wrong network, please switch to ETH",
         });
         await switchNetwork(convertToHex(ENV.chainId), provider.provider);
-        // setCurrentChainId(Number(connectChainId));
-        // setProvider(provider);
-        // setWalletAddress(provider);
-        // setLoading(false);
-        // if (type !== "reload") {
-        //   nav("/stake");
-        // }
-
-        // let RequestSend = {
-        //   id: 1337,
-        //   jsonrpc: "2.0",
-        //   method: "wallet_addEthereumChain",
-        //   // params: [
-        //   //   {
-        //   //     chainId: '0x61',
-        //   //     chainName: 'Binance Smart Chain TestNet',
-        //   //     nativeCurrency: {
-        //   //       name: 'Binance Coin',
-        //   //       symbol: 'TBNB', // 2-6 characters long
-        //   //       decimals: 18,
-        //   //     },
-        //   //     rpcUrls: ['https://data-seed-prebsc-1-s3.binance.org:8545/'],
-        //   //     blockExplorerUrls: ['https://testnet.bscscan.com/'],
-        //   //   },
-        //   // ],
-        //   params: [
-        //     {
-        //       ...ENV.networkInfos[convertToHex(Number(ENV.chainId))],
-        //     },
-        //   ],
-        // };
-        // connection.request(RequestSend);
-        //return;
       }
       setCurrentChainId(
         type === "reload" ? Number(connection.networkVersion) : ENV.chainId
