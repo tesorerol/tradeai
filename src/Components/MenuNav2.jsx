@@ -1,81 +1,90 @@
-import React, { useState } from 'react'
-import { Link, NavLink } from 'react-router-dom'
-import { FaMoneyBillWaveAlt } from 'react-icons/fa';
-import {GiTwoCoins} from "react-icons/gi"
-import { HiHome } from 'react-icons/hi';
-import { MdHowToVote, MdCollections } from 'react-icons/md';
-import {AiOutlineArrowDown} from "react-icons/ai";
-import {IoIosArrowDown} from "react-icons/io";
-import {BsArrowBarRight, BsArrowRightShort,BsArrowRight} from "react-icons/bs"
-import data from "../Data/contracts.json"
+import React, { useContext, useState } from "react";
+import { NavLink } from "react-router-dom";
+import { WalletContext } from "../Providers/WallectConnect";
 
-const MenuNav2 = ({removeAct, addAct, refActive}) => {
+const MenuNav2 = ({ removeAct, addAct, refActive }) => {
+  const { iswhiteList } = useContext(WalletContext);
 
-    const [isOpen,setIsOpen] = useState({
-        earn: false,
-        weekly: false,
-        monthly: false,
-        private: false,
-        vispx: false,
-        claim: false,
-    })
+  const [isOpen, setIsOpen] = useState({
+    earn: false,
+    weekly: false,
+    monthly: false,
+    private: false,
+    vispx: false,
+    claim: false,
+  });
 
-
-    const toggleEarn = (id)=>{
-        const nEarn = {...isOpen}
-        if(id=="earn"){
-            nEarn.earn = !nEarn.earn
-            nEarn.weekly = false
-            nEarn.monthly = false
-            nEarn.private = false
-            nEarn.vispx = false
-            nEarn.claim = false
-            setIsOpen(nEarn)
-        }else if(id=="weekly"){
-            nEarn.weekly = !nEarn.weekly
-            nEarn.monthly = false
-            nEarn.private = false
-            nEarn.vispx = false
-            nEarn.claim = false
-            setIsOpen(nEarn)
-        }else if(id=="monthly"){
-            nEarn.monthly = !nEarn.monthly
-            nEarn.weekly = false
-            nEarn.private = false
-            nEarn.vispx = false
-            nEarn.claim = false
-            setIsOpen(nEarn)
-        }else if(id=="private"){
-            nEarn.private = !nEarn.private
-            nEarn.weekly = false
-            nEarn.monthly = false
-            nEarn.vispx = false
-            nEarn.claim = false
-            setIsOpen(nEarn)
-        }else if(id=="vispx"){
-            nEarn.vispx = !nEarn.vispx
-            nEarn.weekly = false
-            nEarn.monthly = false
-            nEarn.private = false
-            nEarn.claim = false
-            setIsOpen(nEarn)
-        }else if(id=="claim"){
-            nEarn.claim = !nEarn.claim
-            nEarn.weekly = false
-            nEarn.monthly = false
-            nEarn.private = false
-            nEarn.vispx = false
-            setIsOpen(nEarn)
-        }
+  const toggleEarn = (id) => {
+    const nEarn = { ...isOpen };
+    if (id == "earn") {
+      nEarn.earn = !nEarn.earn;
+      nEarn.weekly = false;
+      nEarn.monthly = false;
+      nEarn.private = false;
+      nEarn.vispx = false;
+      nEarn.claim = false;
+      setIsOpen(nEarn);
+    } else if (id == "weekly") {
+      nEarn.weekly = !nEarn.weekly;
+      nEarn.monthly = false;
+      nEarn.private = false;
+      nEarn.vispx = false;
+      nEarn.claim = false;
+      setIsOpen(nEarn);
+    } else if (id == "monthly") {
+      nEarn.monthly = !nEarn.monthly;
+      nEarn.weekly = false;
+      nEarn.private = false;
+      nEarn.vispx = false;
+      nEarn.claim = false;
+      setIsOpen(nEarn);
+    } else if (id == "private") {
+      nEarn.private = !nEarn.private;
+      nEarn.weekly = false;
+      nEarn.monthly = false;
+      nEarn.vispx = false;
+      nEarn.claim = false;
+      setIsOpen(nEarn);
+    } else if (id == "vispx") {
+      nEarn.vispx = !nEarn.vispx;
+      nEarn.weekly = false;
+      nEarn.monthly = false;
+      nEarn.private = false;
+      nEarn.claim = false;
+      setIsOpen(nEarn);
+    } else if (id == "claim") {
+      nEarn.claim = !nEarn.claim;
+      nEarn.weekly = false;
+      nEarn.monthly = false;
+      nEarn.private = false;
+      nEarn.vispx = false;
+      setIsOpen(nEarn);
     }
+  };
 
   return (
-    <div className='menu-nav'>
-            
-            {/* <NavLink className='button-nav' to="/earn-strategies/0x4E8d2157cE9A79319AF4bcAF336F5ab4A8C51912" onClick={removeAct}> Earn TradeAi Pass</NavLink> */}
-            <NavLink className='button-nav' to="/earn-strategies/0x95E257Ba297E705B968c605BbDb5937a0CF95334" onClick={removeAct}> Anarkey</NavLink>
-            {/* <NavLink className='button-nav' to="/earn-strategies/0x818F3eE1E66773165f1B4e1b815c57a275E6e807" onClick={removeAct}> Public</NavLink> */}
-            {/* <div>
+    <div className="menu-nav">
+      {/* <NavLink className='button-nav' to="/earn-strategies/0x4E8d2157cE9A79319AF4bcAF336F5ab4A8C51912" onClick={removeAct}> Earn TradeAi Pass</NavLink> */}
+      <NavLink className="button-nav" to="/stake" onClick={removeAct}>
+        {" "}
+        Stake
+      </NavLink>
+      {iswhiteList ? (
+        <NavLink
+          className="button-nav"
+          to="/earn-strategies/0x95E257Ba297E705B968c605BbDb5937a0CF95334"
+          onClick={removeAct}
+        >
+          {" "}
+          Anarkey
+        </NavLink>
+      ) : (
+        <a className="button-nav" href={undefined}>
+          Anarkey
+        </a>
+      )}
+      {/* <NavLink className='button-nav' to="/earn-strategies/0x818F3eE1E66773165f1B4e1b815c57a275E6e807" onClick={removeAct}> Public</NavLink> */}
+      {/* <div>
                 <p ref={refActive} onClick={()=>toggleEarn("earn")} data-aos="fade-right" data-aos-delay="300" className='earn-p menu-nav-options'>
                     <span className="ms-1 d-sm-inline"><FaMoneyBillWaveAlt className='me-1' size={"20px"} color="#9ed0ed"/> Earn Strategies <IoIosArrowDown className={`${!isOpen.earn ? "arrow-close" : "arrow-open"}`}/></span>
                 </p>
@@ -167,11 +176,10 @@ const MenuNav2 = ({removeAct, addAct, refActive}) => {
                 }
 
             </div> */}
-           
-            
-            {/* <NavLink onClick={removeAct} className='menu-nav-options' to="/collection" data-aos="fade-right" data-aos-duration="1000" data-aos-delay="400"><MdCollections size={"20px"} color="#9ed0ed"/> Collection</NavLink> */}
-        </div>
-  )
-}
 
-export default MenuNav2
+      {/* <NavLink onClick={removeAct} className='menu-nav-options' to="/collection" data-aos="fade-right" data-aos-duration="1000" data-aos-delay="400"><MdCollections size={"20px"} color="#9ed0ed"/> Collection</NavLink> */}
+    </div>
+  );
+};
+
+export default MenuNav2;

@@ -1,0 +1,420 @@
+// $header-img: image-url('images/nfts/bg-staked.png', false, false);
+
+// .background-gradient {
+//   width: 100%;
+//   background-image: linear-gradient(180deg, #b347ff, #454cf9, #02acd3);
+//   padding: 2.2px;
+//   border-radius: 10px;
+// }
+
+.list-nft {
+  width: 100%;
+  //   height: 523px;
+  background: #172d3b;
+  border-radius: 9px;
+  padding-top: 25px;
+  border: 1.5px solid #4b4b4b;
+  // border: 1.2px solid #ca80ff;
+  // border: 1.2px solid linear-gradient(180deg, #b347ff 100%, #454cf9 100%, #02acd3 100%);
+
+  .title {
+    justify-content: space-between;
+    margin: 0 23px;
+    margin-top: 25px;
+
+    .text1 {
+      font-size: 24px;
+      color: #ffffff;
+      font-weight: 600;
+    }
+
+    .text2 {
+      font-weight: 400;
+      font-size: 14px;
+      color: #ffffff;
+      line-height: 40px;
+
+      .divide {
+        margin: 0 12px;
+      }
+    }
+
+    .text-select {
+      display: inline;
+      cursor: pointer;
+    }
+  }
+
+  .empty-collection {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 24px;
+    text-align: center;
+    margin-top: 157px;
+  }
+
+  .button-stake {
+    font-size: 13px;
+    line-height: 24px;
+    color: #ffffff;
+    margin: 0 8px;
+    padding: "12px 12px";
+    background: linear-gradient(
+      102.92deg,
+      #282062 6.55%,
+      #27366b 47.11%,
+      #264674 71.51%,
+      #235c80 98.22%
+    );
+    text-transform: initial;
+    width: 80px;
+
+    &:disabled {
+      opacity: 0.6;
+      color: #fff;
+    }
+  }
+
+  .list {
+    margin-top: 15px;
+    padding: 0 22px 22px;
+    overflow-x: auto;
+    height: 520px;
+
+    &::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+      margin-bottom: 5px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: #ffffff;
+    }
+  }
+}
+
+.nft-card {
+  width: 150px;
+  box-sizing: border-box;
+  background: linear-gradient(
+    155.14deg,
+    #030303 0%,
+    #19191a 39.36%,
+    #3a3a3c 74.44%,
+    #636467 106.44%
+  );
+  border-radius: 5px;
+  // padding: 8px;
+  flex-direction: column;
+  position: relative;
+  font-family: "Chakra Petch", sans-serif;
+
+  @media (max-width: 1400px) {
+    width: 120px;
+  }
+
+  @media (max-width: 450px) {
+    width: 120px;
+  }
+
+  .ant-checkbox {
+    border: 2px solid #ffffff;
+    border-radius: 2px;
+  }
+
+  .wrapper {
+    padding: 10px;
+  }
+
+  .collection-name {
+    white-space: nowrap;
+    overflow: hidden;
+    font-weight: 400;
+    font-size: 12px;
+    text-overflow: ellipsis;
+    line-height: 19px;
+    margin-top: 5px;
+  }
+
+  .name {
+    white-space: nowrap;
+    overflow: hidden;
+    font-weight: 400;
+    font-size: 12px;
+    text-overflow: ellipsis;
+    line-height: 19px;
+  }
+
+  .date {
+    white-space: nowrap;
+    overflow: hidden;
+    font-weight: 400;
+    font-size: 10px;
+    margin-top: 3px;
+    min-height: 15px;
+    text-overflow: ellipsis;
+    line-height: 19px;
+  }
+
+  .image {
+    border-radius: 5px;
+    margin-bottom: 5px;
+
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+
+    // @media (max-width: 750px) {
+    //   width: 110px;
+    //   height: 110px;
+    // }
+    // max-width: 120px;
+  }
+
+  .checkbox {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+  }
+}
+
+.anarkey {
+  .background-image {
+    background-image: url("../../../assets/images/progress-bg.png");
+    // background-image: url('../../../asset/images/bg-staked-ver-2.png');
+    background-repeat: no-repeat;
+    // background-position: top center;
+    // object-fit: contain;
+    // background-size: cover;
+    max-width: 100%;
+    height: 270px;
+  }
+
+  .title {
+    color: #ffffff;
+    padding: 6px 0 0 26px;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 21px;
+  }
+
+  .progress-section {
+    margin-top: 18px;
+    margin-bottom: 24px;
+    padding-left: 12px;
+    height: 140px;
+
+    .ant-progress {
+      height: 100%;
+    }
+
+    .progress {
+      background: #172d3b;
+
+      .ant-progress-text {
+        color: #ffffff;
+        font-weight: 600;
+        font-size: 24px;
+        line-height: 22px;
+      }
+
+      .staked {
+        font-size: 14px;
+        margin-top: 5px;
+      }
+    }
+  }
+
+  .total {
+    width: 164px;
+    text-align: center;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+  }
+
+  .des {
+    width: 164px;
+    margin-top: 40px;
+    font-size: 14px;
+
+    text-align: left;
+
+    .user-staked {
+      margin-bottom: 44px;
+      display: block;
+    }
+
+    .weight-500 {
+      font-weight: 500;
+    }
+
+    .weight-600 {
+      font-weight: 600;
+    }
+
+    .weight-700 {
+      font-weight: 700;
+    }
+
+    .font-size-14 {
+      font-size: 14px;
+    }
+
+    .font-size-18 {
+      font-size: 18px;
+    }
+
+    .icon-section {
+      display: flex;
+      justify-content: center;
+      margin-top: 26px;
+
+      img {
+        margin-right: 12px;
+
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+  }
+}
+
+.flex {
+  display: flex;
+}
+
+.center {
+  justify-content: center;
+}
+
+.ant-checkbox-wrapper:hover .ant-checkbox-inner,
+.ant-checkbox:hover .ant-checkbox-inner,
+.ant-checkbox-input:focus + .ant-checkbox-inner {
+  border-color: #262628;
+}
+
+.ant-checkbox-checked .ant-checkbox-inner {
+  background-color: #262628;
+}
+
+.ant-checkbox-checked::after {
+  border: 1px solid #262628;
+}
+
+.ant-checkbox-wrapper {
+  .ant-checkbox {
+    .ant-checkbox-inner {
+      background: transparent;
+      border: 1px solid #262628;
+    }
+  }
+
+  .ant-checkbox.ant-checkbox-checked {
+    .ant-checkbox-inner {
+      border-color: transparent;
+      background-color: #262628;
+    }
+  }
+}
+
+.react-multiple-carousel__arrow--right {
+  background: #fff !important;
+  width: 28px;
+  height: 28px;
+  right: 1px;
+  z-index: 1;
+
+  @media screen and (max-width: 844px) {
+    min-width: 28px;
+    width: 28px;
+    height: 28px;
+    min-height: 28px;
+    z-index: 3 !important;
+  }
+
+  &::before {
+    color: #000000 !important;
+    font-size: 16px;
+    font-weight: 900;
+  }
+
+  &:hover {
+    background: #fff !important;
+  }
+}
+
+.react-multiple-carousel__arrow--left {
+  background: #fff !important;
+  width: 28px;
+  height: 28px;
+  z-index: 1;
+
+  @media screen and (max-width: 844px) {
+    min-width: 28px;
+    width: 28px;
+    height: 28px;
+    min-height: 28px;
+    z-index: 3 !important;
+  }
+
+  left: 1px;
+
+  &::before {
+    color: #000000 !important;
+    font-size: 16px;
+    font-weight: 900;
+  }
+
+  &:hover {
+    background: #fff !important;
+  }
+}
+
+.button-cancel {
+  color: black;
+  background: white;
+  min-width: 150;
+  font-size: 14px;
+
+  padding: "9px 23px";
+
+  &:hover {
+    color: black;
+    background: white;
+  }
+  text-transform: none;
+}
+
+.ant-spin-spinning {
+  width: 100%;
+}
+.ant-spin {
+  color: #b347ff;
+}
+
+.unstake {
+  .ant-modal-footer {
+    border-top: none;
+  }
+}
+
+.mt-0 {
+  margin-top: 0 !important;
+}
+
+.custom-tooltip-stake-wrong-network {
+  .ant-tooltip-arrow {
+    display: none;
+  }
+
+  .ant-tooltip-inner {
+    background: #44454b;
+    text-align: center;
+    width: 246px;
+  }
+}

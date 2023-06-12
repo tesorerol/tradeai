@@ -1,0 +1,400 @@
+$bg-black: #06071c;
+$color-grey-5: #d1d1d1;
+$text-color-white: #fff;
+$color-pure-black: #000000;
+$bg-grey: #353a41;
+
+.ant-modal-content {
+  background: $bg-black;
+  //   border: 1px solid $color-grey-5;
+  border-radius: 8px;
+  color: $text-color-white;
+  padding: 20px 30px;
+
+  .ant-modal-footer {
+    border: none;
+  }
+
+  .ant-modal-header {
+    padding: 0;
+    border: none;
+    background: $bg-black;
+    color: $text-color-white;
+
+    .ant-modal-title {
+      color: $text-color-white;
+      font-size: 24px;
+      line-height: 24px;
+    }
+  }
+
+  .ant-modal-body {
+    padding: 0;
+    margin-top: 20px;
+  }
+
+  .ant-modal-footer {
+    margin-top: 20px;
+    width: 97%;
+    margin-left: 8px;
+  }
+}
+
+.close-modal-icon {
+  color: $color-pure-black;
+}
+
+.close-modal-icon.Dark {
+  color: $text-color-white;
+}
+
+.text-explain {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 20px;
+  margin-left: -16px;
+  text-align: left;
+  margin-top: 56px;
+  display: flex;
+  justify-content: space-between;
+
+  .time-checkbox {
+    color: #ffffff;
+
+    & > .ant-checkbox {
+      border: 1px solid #fff;
+    }
+  }
+}
+
+.footer {
+  margin-top: 10px;
+
+  .action {
+    display: flex;
+    justify-content: center;
+
+    button {
+      margin-top: 20px;
+    }
+
+    .button-cancel-stake-nft {
+      min-width: 100px;
+      color: black;
+      background: white !important;
+      min-width: 150;
+      font-size: 14px;
+      text-transform: initial !important;
+      padding: 9px 23px;
+      border-radius: 8px;
+      margin-right: 23px;
+
+      &:hover {
+        color: black;
+        background: white;
+      }
+      text-transform: none;
+    }
+
+    .button-stake-modal {
+      min-width: 100px;
+      margin-right: -16px;
+      margin-left: 20px;
+      text-transform: initial !important;
+      color: #fff !important;
+      background: linear-gradient(
+        102.92deg,
+        #282062 6.55%,
+        #27366b 47.11%,
+        #264674 71.51%,
+        #235c80 98.22%
+      );
+      border-radius: 7px;
+    }
+  }
+}
+
+.modal-stake-nft {
+  font-family: "Chakra Petch", sans-serif;
+
+  .ant-modal-title {
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 24px;
+    text-align: center;
+    margin-bottom: 28px;
+  }
+
+  .ant-modal-content {
+    padding: 34px 20px 41px;
+
+    @media screen and (min-width: 590px) {
+      width: 550px;
+    }
+  }
+}
+
+.section-carousel-wrapper {
+  background: $bg-grey;
+  padding: 17px 21px 22px;
+  border-radius: 10px;
+  // width: 500px;
+
+  .section-carousel-title {
+    font-size: 16px;
+    color: #ffffff;
+    margin-bottom: 14px;
+    line-height: 24px;
+    font-weight: 600;
+  }
+}
+
+.section-list-nft-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+
+  .section-list-nft {
+    background: $bg-grey;
+    border-radius: 10px;
+    padding: 20px 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 198px;
+    overflow-x: auto;
+    width: 100%;
+
+    &::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: #5d6167;
+    }
+
+    .text-item {
+      margin-bottom: 10px;
+    }
+  }
+}
+
+.modal-list-nft {
+  .ant-modal-title {
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 24px;
+    text-align: center;
+  }
+
+  .ant-modal-content {
+    position: relative;
+
+    .back-button {
+      position: absolute;
+      top: 20px;
+      left: 31px;
+      cursor: pointer;
+    }
+  }
+
+  .ant-modal {
+    width: 320px !important;
+  }
+  .ant-modal-close-x {
+    display: none;
+  }
+}
+
+.line-horizontal {
+  height: 1px;
+  width: 100%;
+  opacity: 0.1;
+  background: 1px solid #ffffff;
+  margin: 25px 0;
+  margin-top: 0;
+}
+
+.section-button {
+  display: flex;
+  align-items: center;
+
+  > .button-stake-modal {
+    margin-top: 57px;
+    min-width: 100px;
+    text-transform: initial !important;
+    color: #fff !important;
+    background: linear-gradient(
+      102.92deg,
+      #282062 6.55%,
+      #27366b 47.11%,
+      #264674 71.51%,
+      #235c80 98.22%
+    );
+    border-radius: 7px;
+  }
+}
+
+.modal-success {
+  .ant-modal {
+    width: 360px !important;
+  }
+
+  .ant-modal .ant-modal-content {
+    .ant-modal-close {
+      .ant-modal-close-x .anticon {
+        color: #ffffff;
+      }
+    }
+  }
+
+  .modal-success-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 50px 0;
+
+    .title {
+      font-size: "Montserrat-SemiBold";
+      font-size: 22px;
+      line-height: 32px;
+      margin-top: 18px;
+      margin-bottom: 10px;
+    }
+
+    .transaction-hash {
+      cursor: pointer;
+
+      span {
+        font-size: "Montserrat-Medium";
+        color: #0961fe;
+        font-size: 12px;
+        line-height: 16px;
+      }
+    }
+  }
+}
+
+.select-section-mobile {
+  margin-bottom: 20px;
+
+  // .select-yield-box-mobile.ant-select-focused {
+  //   box-shadow: none !important;
+  //   outline: none !important;
+
+  //   .ant-select-selector {
+  //     box-shadow: none !important;
+  //     outline: none !important;
+
+  //     &:focus,
+  //     &:active {
+  //       box-shadow: none !important;
+  //       outline: none !important;
+  //     }
+
+  //     &::after {
+  //       box-shadow: none !important;
+  //       outline: none !important;
+  //     }
+  //   }
+  // }
+
+  .ant-select.select-yield-box-mobile {
+    width: 100% !important;
+
+    .ant-select-selector {
+      background: transparent;
+      height: 40px;
+      border: 1px solid #83838e;
+      border-radius: 5px;
+
+      &:hover {
+        border-color: #83838e;
+        box-shadow: none;
+        outline: none;
+      }
+
+      &:focus,
+      &:active {
+        border-color: #83838e;
+        box-shadow: none;
+        outline: none;
+      }
+
+      .ant-select-selection-item {
+        font-size: "Montserrat-Regular";
+        color: #ffffff;
+        font-size: 16px;
+        line-height: 26px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+      }
+    }
+
+    .ant-select-arrow {
+      .anticon-down {
+        color: #ffffff;
+      }
+    }
+  }
+}
+
+.select-yield-box-mobile-popup {
+  background: #000000;
+  border: 1px solid #83838e;
+  border-radius: 5px;
+
+  .ant-select-item {
+    font-size: "Montserrat-Regular";
+    color: #ffffff;
+    font-size: 16px;
+    line-height: 26px;
+  }
+
+  .ant-select-item-option-active {
+    background: #353a41;
+  }
+}
+
+.video-bg-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+#video-bg-yield-box::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  // background: linear-gradient(180deg, rgba(6, 7, 28, 0) 0%, #06071d 100%);
+}
+
+.custom-tooltip {
+  .ant-tooltip-inner {
+    background: #44454b;
+    text-align: center;
+    width: 378px;
+    @media screen and (max-width: 450px) {
+      width: 300px;
+    }
+    .t-text1 {
+      font-size: 14px;
+      font-family: "Montserrat-Bold";
+    }
+    .t-text2 {
+      font-size: 13px;
+      @media screen and (max-width: 450px) {
+        font-size: 11px;
+      }
+      font-family: "Montserrat-Regular";
+    }
+  }
+}

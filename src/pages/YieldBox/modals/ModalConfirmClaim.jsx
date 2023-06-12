@@ -1,0 +1,21 @@
+import { Modal } from 'antd';
+import React from 'react';
+import '../styles/index.scss';
+
+
+const ModalConfirmClaim = (props) => {
+  const { children, footer, wrapClassName } = props;
+
+  return (
+    <Modal
+      footer={footer ? footer : null}
+      destroyOnClose={true}
+      {...props}
+      wrapClassName={`${wrapClassName ?? ''}`}
+    >
+      {children}
+    </Modal>
+  );
+};
+
+export default ModalConfirmClaim;
