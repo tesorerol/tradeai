@@ -298,7 +298,8 @@ const WallectConnect = ({ children }) => {
             if (error.code === 4902 || (mobile() && error.code === -32603)) {
               return addConnection(
                 provider,
-                ENV.networkInfos[chainId] || ENV.networkInfos?.["0x5"]
+                ENV.networkInfos[chainId] ||
+                  ENV.networkInfos?.[convertToHex(Number(ENV.chainId))]
               ).catch((addConnectError) => {
                 reject(addConnectError);
               });
