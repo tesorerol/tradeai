@@ -21,8 +21,7 @@ export const WalletContext = createContext({});
 
 const WallectConnectProvider = new WalletConnectProvider({
   rpc: {
-    // 56: "https://bsc-dataseed1.binance.org/",
-    5: ENV.goerliRPC,
+    [ENV.chainId]: ENV.chainIdRPC,
   },
   bridge: "https://bridge.walletconnect.org", // Required
   qrcodeModal: QRCodeModal,
