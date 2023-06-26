@@ -335,47 +335,18 @@ const EarnTemplate = (props) => {
           <div className='earn-strategies-ai-details-deposit'>
             <h2>Deposit</h2>
             <div className="approve">
-                {Aprove ? (
-                  <button className='button2' onClick={() => {
-                    setLoading(true)
-                    Approve(Provider, EarnContract, USDT)
-                      .then((r) => {
-                        Allowance(Provider, address, EarnContract, USDT).then(
-                          (r) => {
-                            if (
-                              parseInt(ethers.utils.formatEther(r)) >= 1000000
-                            ) {
-                              setAprove(false)
-                              Swal.fire({
-                                icon: 'success',
-                                title: 'Tokens Approve',
-                                showConfirmButton: true,
-                              })
-                            } else {
-                              setAprove(true)
-                              Swal.fire({
-                                icon: 'error',
-                                title: 'you need approve more than 0 or use max default',
-                                showConfirmButton: true,
-                              })
-                            }
-                            setLoading(false)
-                          },
-                        )
-                      })
-                      .catch((r) => setLoading(false))
-                  }}>
-                    <span className='button-content'>Approve</span>
-                  </button>
-                  
-                ) : (
-                  <p className="amount-approved">
-                    Amount approved for use:{' '}
-                    <span>
-                      {formatMoney(AmountAprove, 'USDT', 2, '.', ',')}
-                    </span>
-                  </p>
-                )}
+                {
+                  !Aprove &&
+                  (
+                    <p className="amount-approved">
+                      Amount approved for use:{' '}
+                      <span>
+                        {formatMoney(AmountAprove, 'USDT', 2, '.', ',')}
+                      </span>
+                    </p>
+                  )
+                }
+                
               </div>
               <div className="details-staked">
                 <div className="details-staked-input">
@@ -417,9 +388,43 @@ const EarnTemplate = (props) => {
                         </button>
                       </div>
                     </div>
-                    <button disabled={!desposit?true:false} className="button2" onClick={() => desposit?Deposit():console.log()}>
-                      {desposit? <span className='button-content'>Deposit</span> : <span className='button-content'>Deposit</span>}
-                    </button>
+                    {Aprove ? (
+                  <button className='button2' onClick={() => {
+                    setLoading(true)
+                    Approve(Provider, EarnContract, USDT)
+                      .then((r) => {
+                        Allowance(Provider, address, EarnContract, USDT).then(
+                          (r) => {
+                            if (
+                              parseInt(ethers.utils.formatEther(r)) >= 1000000
+                            ) {
+                              setAprove(false)
+                              Swal.fire({
+                                icon: 'success',
+                                title: 'Tokens Approve',
+                                showConfirmButton: true,
+                              })
+                            } else {
+                              setAprove(true)
+                              Swal.fire({
+                                icon: 'error',
+                                title: 'you need approve more than 0 or use max default',
+                                showConfirmButton: true,
+                              })
+                            }
+                            setLoading(false)
+                          },
+                        )
+                      })
+                      .catch((r) => setLoading(false))
+                  }}>
+                    <span className='button-content'>Approve</span>
+                  </button>
+                  
+                ) : (<button disabled={!desposit?true:false} className="button2" onClick={() => desposit?Deposit():console.log()}>
+                {desposit?"Deposit":"Deposit disabled"}
+                </button>
+                )}
                   </div>
                 </div>
               </div>
