@@ -11,5 +11,29 @@
             "visible":"true",
             "claim":true,
             "desposit":true
-        } 
+        },
+        {
+            "address":"0xe10Df02431A01eE836F3B2a6D6Da9C7252681cf7",
+            "namePool": "28th summit private",
+            "strategy":"Trading and arbitrage",
+            "risk": "Low",
+            "token": "USDT",
+            "type":"28 days",
+            "AbiType":"pass",
+            "visible":"false",
+            "claim":true,
+            "desposit":true
+        },
+        {
+            "address":"0x25FFC76D6ecBD341f78c479c2d8123eA1D1De446",
+            "namePool": "28th summit admin",
+            "strategy":"Trading and arbitrage",
+            "risk": "Low",
+            "token": "USDT",
+            "type":"Weekly",
+            "AbiType":"pass",
+            "visible":"false",
+            "claim":true,
+            "desposit":true
+        }   
 ]
