@@ -73,7 +73,7 @@ const MenuNav2 = ({removeAct, addAct, refActive}) => {
     <div className='menu-nav'>
             
             {/* <NavLink className='button-nav' to="/earn-strategies/0x4E8d2157cE9A79319AF4bcAF336F5ab4A8C51912" onClick={removeAct}> Earn TradeAi Pass</NavLink> */}
-            <NavLink className='button-nav' to="/earn-strategies/0xe10Df02431A01eE836F3B2a6D6Da9C7252681cf7" onClick={removeAct}> Summit</NavLink>
+            <NavLink className='button-nav' to="/earn-strategies/0x9b8a82B85034df40EfE34c4087c36D41fc559914" onClick={removeAct}>The Treehouse</NavLink>
             {/* <NavLink className='button-nav' to="/earn-strategies/0x818F3eE1E66773165f1B4e1b815c57a275E6e807" onClick={removeAct}> Public</NavLink> */}
             {/* <div>
                 <p ref={refActive} onClick={()=>toggleEarn("earn")} data-aos="fade-right" data-aos-delay="300" className='earn-p menu-nav-options'>
