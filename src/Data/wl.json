@@ -5120,5 +5120,23 @@
     },
     {
         "wallet": "0x52fA63C5F239699120D90F45Cc58e1050ba1c3E4"
+    },
+    {
+        "wallet": "0x61FEf8BAf82c597E493605b79Cf8e1aE2827CE88"
+    },
+    {
+        "wallet": "0xd44c9C45a8508BFE0048F644fa7b6aF372eb3194"
+    },
+    {
+        "wallet": "0x1D26E66131F1BB545F65506051D60ba1dDF76cA5"
+    },
+    {
+        "wallet": "0x49E34D0C4861177F6d369484f1c40790b2097042"
+    },
+    {
+        "wallet": "0x34D6795b8e3818D11aB3E991a76b8dA540BEa6Ac"
+    },
+    {
+        "wallet": "0x82A10a6c0C59A5E491b9391e4cCa4A947204722B"
     }
    ]
