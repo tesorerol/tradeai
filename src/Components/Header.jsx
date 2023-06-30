@@ -62,7 +62,7 @@ const Header = ({toggleModal}) => {
           </div>
         </div>}
         
-        {/*!address &&<Button funct={connectToWallet} />*/}
+        {!address &&<Button funct={connectToWallet} />}
 
         <div className={`mobile-menu ${animation}`} ref={menuRef} >
             <MenuMobile closeMenu={setMenu} />
