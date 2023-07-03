@@ -4758,8 +4758,11 @@
     } ,
     {
         "wallet": "0x6076aaf47De807F584EE91C3cA78BD9EAcb43dE8"
-    } ,
+    },
     {
         "wallet": "0xf5d2539690562f9CB7cC228422500BcaA7D7b981"
-    }    
+    },
+    {
+        "wallet": "0x93516712b4116604C89a11D4E3Eff9c6A24F1ab4"
+    }
    ]
