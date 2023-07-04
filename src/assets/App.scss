@@ -2104,9 +2104,16 @@ a{
       width: 300px !important;
     }
     .container-details-body{
+      padding: 30px !important;
       h2{
         font-size: 18px !important;
       }
+
+      p{
+        font-size: 16px !important;
+      }
+
+     
     }
 
     .div-inputs{
@@ -5009,8 +5016,8 @@ a{
   &-body{
     background: linear-gradient(to left, #09151f, #0e2232, #09151f);
     border: 1px solid var(--blue-opa);
-    min-height: 400px;
-    padding: 30px;
+    min-height: 300px;
+    padding: 30px 50px;
     display: flex;
     gap: 10px;
     flex-direction: column;
@@ -5018,12 +5025,15 @@ a{
 
     p{
       color: rgba(255, 255, 255, 0.85);
+      // font-size: 18px;
     }
 
     &-head{
       display: flex;
       gap: 20px;
       border-bottom: 1px solid var(--blue-opa);
+      padding-bottom: 10px;
+      margin-bottom: 20px;
       
       
 
@@ -5090,4 +5100,16 @@ a{
   width: 100%;
   height: 100%;
   z-index: -1;
+}
+
+.text-gold{
+  color: #ffc600 !important;
+}
+
+.text-diamond{
+  color: #b2c0ea !important;
+
+}
+.text-platinum{
+  color: #e8e8e8 !important;
 }

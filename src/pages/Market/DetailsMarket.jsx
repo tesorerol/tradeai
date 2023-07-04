@@ -1,8 +1,8 @@
 import React, { useContext, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import titanium from "../../assets/market/bg-titanium.png"
-import diamond from "../../assets/market/bg-diamond.png"
-import platinum from "../../assets/market/bg-platinium.png"
+import gold from "../../assets/market/bg-gold.jpg"
+import diamond from "../../assets/market/bg-diamond.jpg"
+import platinum from "../../assets/market/bg-platinum.jpg"
 import { BsQuestionSquare } from 'react-icons/bs'
 import {Approve , Allowance} from "../../Helpers"
 import { WalletContext } from '../../Providers/WallectConnect'
@@ -11,7 +11,7 @@ import { ethers } from 'ethers'
 import Loader from '../../Components/Loading'
 
 
-const DetailsMarket = ({pair,interval, max, id,maxCount,weeklyCost,leverage,type}) => {
+const DetailsMarket = ({pair,interval, max, id,maxCount,weeklyCost,leverage,type,name,description,description2,description3}) => {
 
     const { Provider, address } = useContext(WalletContext)
     const EarnContract = ""
@@ -22,7 +22,7 @@ const DetailsMarket = ({pair,interval, max, id,maxCount,weeklyCost,leverage,type
     
     const [valueInput, setValue] = useState('');
     const [selectedOption, setSelectedOption] = useState(1);
-    const [description,setDescription] = useState(1)
+    const [descriptionActive,setDescription] = useState(1)
     const [isHovered,setIsHovered] = useState("")
 
 
@@ -55,13 +55,13 @@ const DetailsMarket = ({pair,interval, max, id,maxCount,weeklyCost,leverage,type
         <div className='container-details'>
             <div className='container-details-head'>
                 <div className='head-img'>
-                    {type === "titanium" && <img src={titanium} alt="titanium TradeAI" />}
+                    {type === "gold" && <img src={gold} alt="titanium TradeAI" />}
                     {type === "platinum" && <img src={platinum} alt="platinium TradeAI" />} 
                     {type === "diamond" && <img src={diamond} alt="diamond TradeAI" />}
                 </div>
                 <div className='head-info'>
                     <div className='head-info-details'>
-                        <h2>{pair}</h2>
+                        <h2 className={`${type === "gold" ? "text-gold" : type === "platinum" ? "text-platinum" : type === "diamond" ? "text-diamond" : ""}`}>{name}</h2>
                         <span>{id}</span>
                         <p>Interval: {interval}</p>
                         <p>Max Margin per slot: {max}</p>
@@ -173,20 +173,25 @@ const DetailsMarket = ({pair,interval, max, id,maxCount,weeklyCost,leverage,type
             <div className='container-details-body'>
                 <div className='container-details-body-head'>
                     <div>
-                        <h2 onClick={()=>setDescription(1)} className={`h2-description ${description===1 ? "active-description" : ""}`}>Description</h2>
+                        <h2 onClick={()=>setDescription(1)} className={`h2-description ${descriptionActive===1 ? "active-description" : ""}`}>Description</h2>
                     </div>
                     <div>
-                        <h2 onClick={()=>setDescription(2)} className={`${description===2 ? "active-description" : ""}`}>How to</h2>
+                        <h2 onClick={()=>setDescription(2)} className={`${descriptionActive===2 ? "active-description" : ""}`}>How to</h2>
                     </div>
                 </div>
-                {description === 1 && 
+                {descriptionActive === 1 && 
                 <div className='aparecer'>
-                    <p>High frequency leverage trading strategy combining 10+ indicators. Backtested and audited.</p>
+                    <p>{description}</p>
+                    <p>{description2}</p>
+                    <p>{description3}</p>
+                    <p>Supported Cexs Binance, Bybit and Kucoin.</p>
                 </div>}
                 {
-                    description === 2 &&
+                    descriptionActive === 2 &&
                     <div className='aparecer'>
-                        <p>Once TradeAI portal is live you can use this strategies connected to your CEX.</p>
+                        <p>Pre-sale of the strategies is first come-first served model. Portal to use them live on August 1 .</p>
+                        <p>Strategies connect via API to the users exchange to place the trades automatically.</p>
+                        <p>Documentation on usage and training will be provided on TradeAIs Discord.</p>
                     </div>
                 }
             </div>
