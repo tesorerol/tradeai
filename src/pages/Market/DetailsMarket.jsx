@@ -139,7 +139,7 @@ const DetailsMarket = ({pair,interval, max, id,maxCount,weeklyCost,leverage,type
                         {
                             isHovered === 1 && 
                             <div className='table-tooltip aparecer'>
-                                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quas architecto reiciendis dicta</p>
+                              <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quas architecto reiciendis dicta</p>
                             </div>
                         }
                     </div>
