@@ -19,9 +19,9 @@ const Market = () => {
                     <p>Interval: {item.interval}</p>
                     <p>Margin per slot: {item.max}</p>
                     {/* <p>Price: ${item.weeklyCost}</p> */}
-                    {/* <Link to={`/market/${item.id}`}> */}
-                    <button className='button2'>Soon</button>
-                    {/* </Link> */}
+                    <Link to={`/market/${item.id}`}>
+                    <button className='button2'>View Details</button>
+                    </Link> 
                     {item.type === "gold" && <img className='card-bg' src={cardGold} alt="" />} 
                     {item.type === "diamond" && <img className='card-bg' src={cardDiamond} alt="" />} 
                     {item.type === "platinum" && <img className='card-bg' src={cardPlatinum} alt="" />} 

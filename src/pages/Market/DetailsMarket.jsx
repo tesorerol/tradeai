@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import gold from "../../assets/market/bg-gold.jpg"
 import diamond from "../../assets/market/bg-diamond.jpg"
@@ -6,15 +6,16 @@ import platinum from "../../assets/market/bg-platinum.jpg"
 import { BsQuestionSquare } from 'react-icons/bs'
 import {Approve , Allowance} from "../../Helpers"
 import { WalletContext } from '../../Providers/WallectConnect'
+import SlotAbi from '../../artifacts/slots/abi.json'
 import Swal from 'sweetalert2'
 import { ethers } from 'ethers'
 import Loader from '../../Components/Loading'
 
 
-const DetailsMarket = ({pair,interval, max, id,maxCount,weeklyCost,leverage,type,name,description,description2,description3}) => {
+const DetailsMarket = ({scid,pair,interval, max, id,maxCount,weeklyCost,leverage,type,name,description,description2,description3}) => {
 
     const { Provider, address } = useContext(WalletContext)
-    const EarnContract = ""
+    const EarnContract = "0x836AaF1A00eaDEe459d64636222ac80Ee27c673D"
     let USDT = '0x55d398326f99059fF775485246999027B3197955'
 
     const [Loading, setLoading] = useState(false)
@@ -24,6 +25,19 @@ const DetailsMarket = ({pair,interval, max, id,maxCount,weeklyCost,leverage,type
     const [selectedOption, setSelectedOption] = useState(1);
     const [descriptionActive,setDescription] = useState(1)
     const [isHovered,setIsHovered] = useState("")
+
+
+    useEffect(() => {
+        if (address) {
+          Allowance(Provider, address, EarnContract, USDT).then((r) => {
+            if (parseInt(ethers.utils.formatEther(r)) >= 1000000) {
+              setAprove(false)
+            } else {
+              setAprove(true)
+            }
+          })
+        }
+      }, [address, EarnContract])
 
 
     const handleChange = (e) => {
@@ -41,6 +55,31 @@ const DetailsMarket = ({pair,interval, max, id,maxCount,weeklyCost,leverage,type
     const handleChangeSelect = (e) => {
         setSelectedOption(e.target.value);
     };
+
+    async function BuySlot() {
+        let signer = Provider.getSigner()
+        setLoading(true)
+        let contract2 = new ethers.Contract(EarnContract, SlotAbi, signer)
+        contract2
+          .BuySlot(valueInput,scid,selectedOption)
+          .then(async (r) => {
+            r.wait()
+              .then((r) => {
+                setLoading(false)
+              })
+              .catch((e) => {
+                console.log(e)
+              })
+          })
+          .catch((e) => {
+            setLoading(false)
+            const errorMessage = e.error.data.message
+            Swal.fire({
+              icon: 'error',
+              title: errorMessage,
+            })
+          })
+      }
 
     const formatMax = max.replace("$", "").replace(",", "");
     const formatMaxInt = parseInt(formatMax);
@@ -89,6 +128,13 @@ const DetailsMarket = ({pair,interval, max, id,maxCount,weeklyCost,leverage,type
                                 <option value="2">2</option>
                                 <option value="3">3</option>
                                 <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                
                             </select>
                         </div>
 
@@ -127,7 +173,7 @@ const DetailsMarket = ({pair,interval, max, id,maxCount,weeklyCost,leverage,type
                     <span className='button-content'>Approve</span>
                   </button>
                   
-                ) : ( <button className='button2'>BUY</button>)
+                ) : ( <button className='button2' onClick={()=>BuySlot()}>BUY</button>)
                 }
             
                 </div>

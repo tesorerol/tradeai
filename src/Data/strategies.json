@@ -1,6 +1,7 @@
 [
     {
         "id":"GMJ-002",
+        "scid":1,
         "pair":"BTC/USDT & ETH/USDT",
         "name":"PLATINUM STRATEGY",
         "interval":"5 minutes",
@@ -18,6 +19,7 @@
     },
     {
         "id":"ANR-010",
+        "scid":2,
         "pair":"BTC/USDT & ETH/USDT",
         "name":"DIAMOND STRATEGY",
         "interval":"15 minutes",
@@ -35,6 +37,7 @@
     },
     {
         "id":"GMJ-003",
+        "scid":3,
         "pair":"ETH/USDT",
         "name":"GOLD STRATEGY",
         "interval":"5 minutes",
