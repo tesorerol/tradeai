@@ -13,6 +13,8 @@ import NotFound from './Components/NotFound';
 import NewEarn from './pages/NewEarn/NewEarn';
 import Genv2 from './pages/NewEarn/gen2v2';
 import Home from './pages/Home/Home';
+import Market from './pages/Market/Market';
+import DetailsDinamic from './pages/Market/DetailsDinamic';
 
 
 function App() {
@@ -73,6 +75,8 @@ document.addEventListener("keydown", function(e) {
                 <Routes>
                   <Route path="/" element={<Navigate to="/earn-strategies/0x9b8a82B85034df40EfE34c4087c36D41fc559914"/>} />
                   <Route path="/earn-strategies/:address" element={<EarnDinamic />} />
+                  <Route path="/market" element={<Market />} />
+                  <Route path="/market/:id" element={<DetailsDinamic />} />
                   <Route path="*" element={<NotFound/>} />
                 </Routes>
               </div>

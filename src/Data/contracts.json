@@ -6,7 +6,6 @@
             "risk": "Low",
             "token": "USDT",
             "type":"Weekly",
-            "AbiType":"pass",
             "visible":"true",
             "claim":true,
             "desposit":true

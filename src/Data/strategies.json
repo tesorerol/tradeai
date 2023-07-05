@@ -1,0 +1,53 @@
+[
+    {
+        "id":"GMJ-002",
+        "pair":"BTC/USDT & ETH/USDT",
+        "name":"PLATINUM STRATEGY",
+        "interval":"5 minutes",
+        "max": "$5,000",
+        "leverage":"20X",
+        "strategyCap": "$10,000,000",
+        "slots":"2,000",
+        "totalRev":"$500,000",
+        "maxCount":"500",
+        "weeklyCost":"250",
+        "type":"platinum",
+        "description":"2 pairs, 5 minute candle interval strategy based on market volatility and volumes.",
+        "description2":"Tested - sending an average of 9 entry points daily",
+        "description3": "Correlates SL levels, TPs and leverage for max optimization while running."
+    },
+    {
+        "id":"ANR-010",
+        "pair":"BTC/USDT & ETH/USDT",
+        "name":"DIAMOND STRATEGY",
+        "interval":"15 minutes",
+        "max": "$5,000",
+        "leverage":"15X",
+        "strategyCap": "$10,000,000",
+        "slots":"2,000",
+        "totalRev":"$400,000",
+        "maxCount":"500",
+        "weeklyCost":"200",
+        "type":"diamond",
+        "description":"2 pairs, 15 minute candle interval strategy based on market volatility, key daily timeframes and resistance levels.",
+        "description2":"Tested - sending an average of 5 entry points daily",
+        "description3": "Correlates SL levels, TPs and leverage for max optimization while running."
+    },
+    {
+        "id":"GMJ-003",
+        "pair":"ETH/USDT",
+        "name":"GOLD STRATEGY",
+        "interval":"5 minutes",
+        "max": "$5,000",
+        "leverage":"20X",
+        "strategyCap": "$10,000,000",
+        "slots":"2,000",
+        "totalRev":"$300,000",
+        "maxCount":"500",
+        "weeklyCost":"150",
+        "type":"gold",
+        "description":"1 pair, 5 minute candle interval strategy based on market volatility and volumes. ",
+        "description2":"Tested - sending an average of 9 entry points daily",
+        "description3": "Correlates SL levels, TPs and leverage for max optimization while running."
+    }
+]
