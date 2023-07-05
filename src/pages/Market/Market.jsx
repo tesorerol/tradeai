@@ -18,9 +18,10 @@ const Market = () => {
                     <h2 className={`${item.type === "gold" ? "text-gold" : item.type === "platinum" ? "text-platinum" : item.type === "diamond" ? "text-diamond" : ""}`}>{item.name}</h2>
                     <p>Interval: {item.interval}</p>
                     <p>Margin per slot: {item.max}</p>
-                    <Link to={`/market/${item.id}`}>
-                    <button className='button2'>Details</button>
-                    </Link>
+                    {/* <p>Price: ${item.weeklyCost}</p> */}
+                    {/* <Link to={`/market/${item.id}`}> */}
+                    <button className='button2'>Soon</button>
+                    {/* </Link> */}
                     {item.type === "gold" && <img className='card-bg' src={cardGold} alt="" />} 
                     {item.type === "diamond" && <img className='card-bg' src={cardDiamond} alt="" />} 
                     {item.type === "platinum" && <img className='card-bg' src={cardPlatinum} alt="" />} 

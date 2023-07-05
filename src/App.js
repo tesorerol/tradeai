@@ -15,12 +15,15 @@ import Genv2 from './pages/NewEarn/gen2v2';
 import Home from './pages/Home/Home';
 import Market from './pages/Market/Market';
 import DetailsDinamic from './pages/Market/DetailsDinamic';
+import PopUp from './Components/PopUp';
 
 
 function App() {
   const [modal,setModal] = useState(false)
 
   const {isAllowed,setIsAllowed} = useContext(WalletContext);
+  const [loginActive,setLoginActive] = useState(false)
+  const [modalPopUp,setModalPopUp] = useState(true)
 
   document.addEventListener("keydown", function(e) {
     if (e.keyCode == 123) {
@@ -62,20 +65,23 @@ document.addEventListener("keydown", function(e) {
       setPopUp(!popUp)
     }
 
+    const prueba = true;
+
   return (
    
       <div className='container-all'>
           {
-            !isAllowed ? <Login isAllowed={isAllowed} setIsAllowed={setIsAllowed}/> : 
+            !loginActive ? <Login isAllowed={isAllowed} setIsAllowed={setIsAllowed} loginActive={loginActive} setLoginActive={setLoginActive}/> : 
             <>
             {/* <Menu /> */}
             
             <div className='container-right'>
-              <Header toggleModal={toggleModal} />
+              <Header toggleModal={toggleModal} setLoginActive={setLoginActive}/>
               <div className='container-routes'>
                 <Routes>
-                  <Route path="/" element={<Navigate to="/earn-strategies/0x95E257Ba297E705B968c605BbDb5937a0CF95334"/>} />
-                  <Route path="/earn-strategies/:address" element={<EarnDinamic />} />
+                  <Route path="/" element={<Navigate to="/market"/>} />
+                  <Route path="/earn-strategies/:address"  element={isAllowed ? <EarnDinamic /> : <NotFound />} />
+                  {/* <Route path="/earn-strategies/:address" render={() => isAllowed ? (<EarnDinamic />) : (null)} /> */}
                   <Route path="/market" element={<Market />} />
                   <Route path="/market/:id" element={<DetailsDinamic />} />
                   <Route path="*" element={<NotFound/>} />
@@ -83,7 +89,7 @@ document.addEventListener("keydown", function(e) {
               </div>
             </div>
             {modal && <RecentTransactions toggleModal={toggleModal}/> } 
-                      
+            {/* {modalPopUp && <PopUp setModalPopUp={setModalPopUp}/>}      */}
             </>
           }
         </div>      

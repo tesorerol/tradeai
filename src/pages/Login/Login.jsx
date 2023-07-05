@@ -11,7 +11,7 @@ import WL from '../../Data/wl.json'
 import Swal from 'sweetalert2'
 
 
-const Login = ({ isAllowed, setIsAllowed }) => {
+const Login = ({ isAllowed, setIsAllowed , loginActive, setLoginActive}) => {
   const { connectToWallet, WallectConnect, address, disconnectWallet } = useContext(WalletContext)
 
   useEffect(() => {
@@ -19,13 +19,17 @@ const Login = ({ isAllowed, setIsAllowed }) => {
       let wl = WL.filter((wl) => wl.wallet.toLowerCase() === address.toLowerCase())
       if(wl.length>0){
         setIsAllowed(!isAllowed)
+        setLoginActive(!loginActive)
       }else{
-        Swal.fire({
-            title:"Sorry you are not in whitelist",
-            icon:"error"
-        })
-        disconnectWallet();
+        setLoginActive(!loginActive)
       }
+      // else{
+      //   Swal.fire({
+      //       title:"Sorry you are not in whitelist",
+      //       icon:"error"
+      //   })
+      //   disconnectWallet();
+      // }
     }
   }, [address])
 

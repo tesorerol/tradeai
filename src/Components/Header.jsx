@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import Button from './Button'
 import MenuMobile from './MenuMobile'
 import {IoIosArrowDown} from "react-icons/io";
@@ -7,7 +7,7 @@ import { WalletContext } from '../Providers/WallectConnect';
 import Navbar from './Navbar';
 
 
-const Header = ({toggleModal}) => {
+const Header = ({toggleModal,setLoginActive}) => {
   const { address, disconnectWallet, balance,connectToWallet } = useContext(WalletContext);
 
     function disableScroll() {
@@ -38,6 +38,12 @@ const Header = ({toggleModal}) => {
         }
       }
 
+      useEffect(()=>{
+        if(!address){
+          setLoginActive(false)
+        }
+      },[address])
+
   return (
     <div className='header'>
         <div className='header-left'>
@@ -62,7 +68,7 @@ const Header = ({toggleModal}) => {
           </div>
         </div>}
         
-        {/*!address &&<Button funct={connectToWallet} />*/}
+        {!address &&<Button funct={connectToWallet} />}
 
         <div className={`mobile-menu ${animation}`} ref={menuRef} >
             <MenuMobile closeMenu={setMenu} />

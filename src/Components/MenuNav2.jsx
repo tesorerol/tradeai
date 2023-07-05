@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import { FaMoneyBillWaveAlt } from 'react-icons/fa';
 import {GiTwoCoins} from "react-icons/gi"
@@ -8,8 +8,11 @@ import {AiOutlineArrowDown} from "react-icons/ai";
 import {IoIosArrowDown} from "react-icons/io";
 import {BsArrowBarRight, BsArrowRightShort,BsArrowRight} from "react-icons/bs"
 import data from "../Data/contracts.json"
+import { WalletContext } from '../Providers/WallectConnect';
 
 const MenuNav2 = ({removeAct, addAct, refActive}) => {
+
+    const {isAllowed,setIsAllowed} = useContext(WalletContext);
 
     const [isOpen,setIsOpen] = useState({
         earn: false,
@@ -72,8 +75,10 @@ const MenuNav2 = ({removeAct, addAct, refActive}) => {
   return (
     <div className='menu-nav'>
             
-            <NavLink className='button-nav' to="/earn-strategies/0x95E257Ba297E705B968c605BbDb5937a0CF95334" onClick={removeAct}> Anarkey</NavLink>
-            {/* <NavLink className='button-nav' to="/market" onClick={removeAct}> Market</NavLink> */}
+            {
+                isAllowed && <NavLink className='button-nav' to="/earn-strategies/0x95E257Ba297E705B968c605BbDb5937a0CF95334" onClick={removeAct}> Anarkey</NavLink>
+            }
+            <NavLink className='button-nav' to="/market" onClick={removeAct}> Market</NavLink>
             
     </div>
   )
