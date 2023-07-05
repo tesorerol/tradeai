@@ -6,7 +6,6 @@
             "risk": "Low",
             "token": "USDT",
             "type":"28 days",
-            "AbiType":"pass",
             "visible":"false",
             "claim":true,
             "desposit":true
@@ -18,7 +17,6 @@
             "risk": "Low",
             "token": "USDT",
             "type":"Weekly",
-            "AbiType":"pass",
             "visible":"false",
             "claim":true,
             "desposit":true
