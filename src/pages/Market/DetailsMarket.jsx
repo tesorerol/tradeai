@@ -17,7 +17,7 @@ const DetailsMarket = ({scid,pair,interval, max, id,maxCount,weeklyCost,leverage
     const { Provider, address } = useContext(WalletContext)
     const EarnContract = "0x836AaF1A00eaDEe459d64636222ac80Ee27c673D"
     let USDT = '0x55d398326f99059fF775485246999027B3197955'
-
+    let contractConsult = new ethers.Contract(EarnContract, SlotAbi, Provider)
     const [Loading, setLoading] = useState(false)
     const [Aprove, setAprove] = useState(true)
     
@@ -25,9 +25,13 @@ const DetailsMarket = ({scid,pair,interval, max, id,maxCount,weeklyCost,leverage
     const [selectedOption, setSelectedOption] = useState(1);
     const [descriptionActive,setDescription] = useState(1)
     const [isHovered,setIsHovered] = useState("")
+    const [SlotLeft,setSlotLeft] = useState([])
+    const [UserPurchase,setUserPurchase] = useState([])
 
 
     useEffect(() => {
+        getSlotLefts()
+        GetPucharse()
         if (address) {
           Allowance(Provider, address, EarnContract, USDT).then((r) => {
             if (parseInt(ethers.utils.formatEther(r)) >= 1000000) {
@@ -57,6 +61,13 @@ const DetailsMarket = ({scid,pair,interval, max, id,maxCount,weeklyCost,leverage
     };
 
     async function BuySlot() {
+        if(valueInput<=0){
+            Swal.fire({
+                icon: 'error',
+                title: "You must put a number greater than 0 in max count",
+              })
+              return
+        }
         let signer = Provider.getSigner()
         setLoading(true)
         let contract2 = new ethers.Contract(EarnContract, SlotAbi, signer)
@@ -78,6 +89,25 @@ const DetailsMarket = ({scid,pair,interval, max, id,maxCount,weeklyCost,leverage
               icon: 'error',
               title: errorMessage,
             })
+          })
+      }
+
+
+      async function GetPucharse() {
+        contractConsult
+          .getAllUserPurchases(address)
+          .then(async (r) => {
+            setUserPurchase(r);
+          })
+      }
+
+
+      async function getSlotLefts() {
+        
+        contractConsult
+          .getAllDaySlots(scid)
+          .then(async (r) => {
+            setSlotLeft(r);
           })
       }
 
@@ -244,96 +274,96 @@ const DetailsMarket = ({scid,pair,interval, max, id,maxCount,weeklyCost,leverage
                 </div>
             
                 <div className='container-body-table'>
-                    <h3>Slots</h3>
+                    <h3>Remaining Slots</h3>
                     <table className='body-table'>
                         <tbody>
                         <tr>
                             <td>Week 1</td>
-                            <td>500</td>
+                            <td>{SlotLeft.length>0&&SlotLeft[0].toString()}</td>
                         </tr>
                         <tr>
                             <td>Week 2</td>
-                            <td>500</td>
+                            <td>{SlotLeft.length>0&&SlotLeft[1].toString()}</td>
                         </tr>
                         <tr>
                             <td>Week 3</td>
-                            <td>500</td>
+                            <td>{SlotLeft.length>0&&SlotLeft[2].toString()}</td>
                         </tr>
                         <tr>
                             <td>Week 4</td>
-                            <td>500</td>
+                            <td>{SlotLeft.length>0&&SlotLeft[3].toString()}</td>
                         </tr>
                         <tr>
                             <td>Week 5</td>
-                            <td>500</td>
+                            <td>{SlotLeft.length>0&&SlotLeft[4].toString()}</td>
                         </tr>
                         <tr>
                             <td>Week 6</td>
-                            <td>500</td>
+                            <td>{SlotLeft.length>0&&SlotLeft[5].toString()}</td>
                         </tr>
                         <tr>
                             <td>Week 7</td>
-                            <td>500</td>
+                            <td>{SlotLeft.length>0&&SlotLeft[6].toString()}</td>
                         </tr>
                         <tr>
                             <td>Week 8</td>
-                            <td>500</td>
+                            <td>{SlotLeft.length>0&&SlotLeft[7].toString()}</td>
                         </tr>
                         <tr>
                             <td>Week 9</td>
-                            <td>500</td>
+                            <td>{SlotLeft.length>0&&SlotLeft[8].toString()}</td>
                         </tr>
                         <tr>
                             <td>Week 10</td>
-                            <td>500</td>
+                            <td>{SlotLeft.length>0&&SlotLeft[9].toString()}</td>
                         </tr>
                         
                         </tbody>
                     </table>
                 </div>
                 <div className='container-body-table'>
-                    <h3>Slots</h3>
+                    <h3>Your Slots</h3>
                     <table className='body-table'>
                     <tbody>
                         <tr>
                             <td>Week 1</td>
-                            <td>500</td>
+                            <td>{UserPurchase.length>0&&UserPurchase[0].toString()}</td>
                         </tr>
                         <tr>
                             <td>Week 2</td>
-                            <td>500</td>
+                            <td>{UserPurchase.length>0&&UserPurchase[1].toString()}</td>
                         </tr>
                         <tr>
                             <td>Week 3</td>
-                            <td>500</td>
+                            <td>{UserPurchase.length>0&&UserPurchase[2].toString()}</td>
                         </tr>
                         <tr>
                             <td>Week 4</td>
-                            <td>500</td>
+                            <td>{UserPurchase.length>0&&UserPurchase[3].toString()}</td>
                         </tr>
                         <tr>
                             <td>Week 5</td>
-                            <td>500</td>
+                            <td>{UserPurchase.length>0&&UserPurchase[4].toString()}</td>
                         </tr>
                         <tr>
                             <td>Week 6</td>
-                            <td>500</td>
+                            <td>{UserPurchase.length>0&&UserPurchase[5].toString()}</td>
                         </tr>
                         <tr>
                             <td>Week 7</td>
-                            <td>500</td>
+                            <td>{UserPurchase.length>0&&UserPurchase[6].toString()}</td>
                         </tr>
                         <tr>
                             <td>Week 8</td>
-                            <td>500</td>
+                            <td>{UserPurchase.length>0&&UserPurchase[7].toString()}</td>
                         </tr>
                         <tr>
                             <td>Week 9</td>
-                            <td>500</td>
+                            <td>{UserPurchase.length>0&&UserPurchase[8].toString()}</td>
                         </tr>
                         <tr>
                             <td>Week 10</td>
-                            <td>500</td>
+                            <td>{UserPurchase.length>0&&UserPurchase[9].toString()}</td>
                         </tr>
                         
                         </tbody>
