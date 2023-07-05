@@ -185,7 +185,7 @@ const DetailsMarket = ({scid,pair,interval, max, id,maxCount,weeklyCost,leverage
                         {
                             isHovered === 1 && 
                             <div className='table-tooltip aparecer'>
-                              <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quas architecto reiciendis dicta</p>
+                              <p></p>
                             </div>
                         }
                     </div>
@@ -195,7 +195,7 @@ const DetailsMarket = ({scid,pair,interval, max, id,maxCount,weeklyCost,leverage
                         {
                             isHovered === 2 && 
                             <div className='table-tooltip tooltip-2 aparecer'>
-                                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quas architecto reiciendis dicta</p>
+                                <p></p>
                             </div>
                         }
                     </div>
@@ -205,7 +205,7 @@ const DetailsMarket = ({scid,pair,interval, max, id,maxCount,weeklyCost,leverage
                         {
                             isHovered === 3 && 
                             <div className='table-tooltip aparecer'>
-                                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quas architecto reiciendis dicta </p>
+                                <p> </p>
                             </div>
                         }
                     </div>
