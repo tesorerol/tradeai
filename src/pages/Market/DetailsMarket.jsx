@@ -170,30 +170,130 @@ const DetailsMarket = ({pair,interval, max, id,maxCount,weeklyCost,leverage,type
 
                 </div>
             </div>
-            <div className='container-details-body'>
-                <div className='container-details-body-head'>
-                    <div>
-                        <h2 onClick={()=>setDescription(1)} className={`h2-description ${descriptionActive===1 ? "active-description" : ""}`}>Description</h2>
+            <div className='container-body'>
+                <div className='container-details-body'>
+                    <div className='container-details-body-head'>
+                        <div>
+                            <h2 onClick={()=>setDescription(1)} className={`h2-description ${descriptionActive===1 ? "active-description" : ""}`}>Description</h2>
+                        </div>
+                        <div>
+                            <h2 onClick={()=>setDescription(2)} className={`${descriptionActive===2 ? "active-description" : ""}`}>How to</h2>
+                        </div>
                     </div>
-                    <div>
-                        <h2 onClick={()=>setDescription(2)} className={`${descriptionActive===2 ? "active-description" : ""}`}>How to</h2>
-                    </div>
-                </div>
-                {descriptionActive === 1 && 
-                <div className='aparecer'>
-                    <p>{description}</p>
-                    <p>{description2}</p>
-                    <p>{description3}</p>
-                    <p>Supported Cexs Binance, Bybit and Kucoin.</p>
-                </div>}
-                {
-                    descriptionActive === 2 &&
+                    {descriptionActive === 1 && 
                     <div className='aparecer'>
-                        <p>Pre-sale of the strategies is first come-first served model. Portal to use them live on August 1 .</p>
-                        <p>Strategies connect via API to the users exchange to place the trades automatically.</p>
-                        <p>Documentation on usage and training will be provided on TradeAIs Discord.</p>
-                    </div>
-                }
+                        <p>{description}</p>
+                        <p>{description2}</p>
+                        <p>{description3}</p>
+                        <p>Supported Cexs Binance, Bybit and Kucoin.</p>
+                    </div>}
+                    {
+                        descriptionActive === 2 &&
+                        <div className='aparecer'>
+                            <p>Pre-sale of the strategies is first come-first served model. Portal to use them live on August 1 .</p>
+                            <p>Strategies connect via API to the users exchange to place the trades automatically.</p>
+                            <p>Documentation on usage and training will be provided on TradeAIs Discord.</p>
+                        </div>
+                    }
+                </div>
+            
+                <div className='container-body-table'>
+                    <h3>Slots</h3>
+                    <table className='body-table'>
+                        <tbody>
+                        <tr>
+                            <td>Week 1</td>
+                            <td>500</td>
+                        </tr>
+                        <tr>
+                            <td>Week 2</td>
+                            <td>500</td>
+                        </tr>
+                        <tr>
+                            <td>Week 3</td>
+                            <td>500</td>
+                        </tr>
+                        <tr>
+                            <td>Week 4</td>
+                            <td>500</td>
+                        </tr>
+                        <tr>
+                            <td>Week 5</td>
+                            <td>500</td>
+                        </tr>
+                        <tr>
+                            <td>Week 6</td>
+                            <td>500</td>
+                        </tr>
+                        <tr>
+                            <td>Week 7</td>
+                            <td>500</td>
+                        </tr>
+                        <tr>
+                            <td>Week 8</td>
+                            <td>500</td>
+                        </tr>
+                        <tr>
+                            <td>Week 9</td>
+                            <td>500</td>
+                        </tr>
+                        <tr>
+                            <td>Week 10</td>
+                            <td>500</td>
+                        </tr>
+                        
+                        </tbody>
+                    </table>
+                </div>
+                <div className='container-body-table'>
+                    <h3>Slots</h3>
+                    <table className='body-table'>
+                    <tbody>
+                        <tr>
+                            <td>Week 1</td>
+                            <td>500</td>
+                        </tr>
+                        <tr>
+                            <td>Week 2</td>
+                            <td>500</td>
+                        </tr>
+                        <tr>
+                            <td>Week 3</td>
+                            <td>500</td>
+                        </tr>
+                        <tr>
+                            <td>Week 4</td>
+                            <td>500</td>
+                        </tr>
+                        <tr>
+                            <td>Week 5</td>
+                            <td>500</td>
+                        </tr>
+                        <tr>
+                            <td>Week 6</td>
+                            <td>500</td>
+                        </tr>
+                        <tr>
+                            <td>Week 7</td>
+                            <td>500</td>
+                        </tr>
+                        <tr>
+                            <td>Week 8</td>
+                            <td>500</td>
+                        </tr>
+                        <tr>
+                            <td>Week 9</td>
+                            <td>500</td>
+                        </tr>
+                        <tr>
+                            <td>Week 10</td>
+                            <td>500</td>
+                        </tr>
+                        
+                        </tbody>
+                    </table>
+                </div>
+
             </div>
         </div>
     </div>
