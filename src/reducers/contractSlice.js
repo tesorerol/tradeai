@@ -1,9 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-  totalContracts: 0,
-  loading: false,
-  data: ""
+  platinum: "",
+  diamond: "",
+  gold: ""
 }
 
 export const contractSlice = createSlice({
@@ -11,8 +11,13 @@ export const contractSlice = createSlice({
   initialState,
   reducers: {
    addDataContracts: (state,action)=>{
-    state.data = action.payload
-    state.loading = true
+    if(action.payload.type === "platinum"){
+      state.platinum = action.payload.slots
+    } else if(action.payload.type === "diamond"){
+      state.diamond = action.payload.slots
+    } else if(action.payload.type === "gold"){
+      state.gold = action.payload.slots
+    }
    },
    
   },

@@ -28,10 +28,10 @@ const DetailsMarket = ({scid,pair,interval, max, id,maxCount,weeklyCost,leverage
     const [SlotLeft,setSlotLeft] = useState([])
     const [UserPurchase,setUserPurchase] = useState([])
 
-
     useEffect(() => {
         getSlotLefts()
         GetPucharse()
+        
         if (address) {
           Allowance(Provider, address, EarnContract, USDT).then((r) => {
             if (parseInt(ethers.utils.formatEther(r)) >= 1000000) {
@@ -43,6 +43,7 @@ const DetailsMarket = ({scid,pair,interval, max, id,maxCount,weeklyCost,leverage
         }
       }, [address, EarnContract])
 
+  
 
     const handleChange = (e) => {
         let inputValue = e.target.value;
