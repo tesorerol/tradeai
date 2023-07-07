@@ -1422,6 +1422,10 @@ a{
  
 
   @media only screen and (max-width:800px){
+    .info-middle{
+      top: 0 !important;
+      translate: -50% !important;
+    }
 
     .container-body{
       flex-direction: column !important;
@@ -2198,7 +2202,11 @@ a{
 
   @media only screen and (min-width:801px) and (max-width:1200px){
 
-    
+    .info-left{
+      padding-top: 20px !important;
+      padding-bottom: 20px !important;
+    }
+
 
     // .page-login{
     //   background-image: url(./login/bg-login.jpg) !important;
@@ -2266,7 +2274,7 @@ a{
       }
 
       .info-left{
-        padding: 0 110px 0 20px !important;
+        padding: 20px 110px 20px 20px !important;
       }
       .info-right{
         padding: 30px 15px 30px 120px !important;
@@ -2499,7 +2507,7 @@ a{
       }
 
       .info-left{
-        padding: 0 90px 0 30px !important;
+        padding: 20px 90px 20px 30px !important;
       }
       .info-right{
         padding: 30px 30px 30px 150px !important;
@@ -4492,19 +4500,21 @@ a{
   &-info{
     position: relative;
     width: 100%;
-    height: 220px;
+    min-height: 220px;
     background: linear-gradient(to left, #09151f, #0e2232,#09151f);
     border: 1px solid var(--blue-opa);
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.61);
     border-radius: 10px;
     display: flex;
+    
 
     .info-left{
       width: 50%;
-      padding: 0 80px 0 50px;
+      padding: 30px 100px 30px 50px;
       display: flex;
       color: white;
       align-items: center;
+     
       &-1{
         // border-right: 1px solid var(--blue-deg);
         width: 100%;
@@ -4545,7 +4555,8 @@ a{
       border-radius: 50%;
       // background-color: rgba(0, 0, 255, 0.801);
       left: 50%;
-      translate: -50%;
+      top: 50%;
+      translate: -50% -50%;
       z-index: 2;
 
       
@@ -4782,6 +4793,12 @@ a{
 }
 
 @media only screen and (min-width:600px) and (max-width:800px){
+  
+  .info-middle{
+    top: 0 !important;
+    translate: -50% !important;
+  }
+
   .earn-strategies-ai{
     width: 600px !important;
 
