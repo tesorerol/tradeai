@@ -80,7 +80,8 @@ document.addEventListener("keydown", function(e) {
               <div className='container-routes'>
                 <Routes>
                   <Route path="/" element={<Navigate to="/market"/>} />
-                  <Route path="/earn-strategies/:address"  element={isAllowed ? <EarnDinamic /> : <NotFound />} />
+                  <Route path="/earn-strategies/0x95E257Ba297E705B968c605BbDb5937a0CF95334"  element={isAllowed ? <EarnDinamic /> : <NotFound />} />
+                  <Route path="/earn-strategies/:address"  element={<EarnDinamic />} />
                   {/* <Route path="/earn-strategies/:address" render={() => isAllowed ? (<EarnDinamic />) : (null)} /> */}
                   <Route path="/market" element={<Market />} />
                   <Route path="/market/:id" element={<DetailsDinamic />} />
