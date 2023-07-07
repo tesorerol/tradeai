@@ -17,7 +17,7 @@ import Table from '../../Components/Table'
 const EarnTemplate = (props) => {
   const [percentage, setPercentage] = useState(null)
 
-  const { EarnContract, namePool, strategy, risk, token, type, AbiType,Abi,claim,desposit,unique } = props
+  const { EarnContract, namePool, strategy, risk, token, type, AbiType,Abi,claim,desposit,unique,infinite} = props
   const { Provider, address } = useContext(WalletContext)
   let USDT = '0x55d398326f99059fF775485246999027B3197955'
   const [Recolect, setRecolect] = useState('0')
@@ -244,7 +244,10 @@ const EarnTemplate = (props) => {
         <div className='earn-strategies-ai-tittle'>
             <p>{namePool}</p>
             <h3>
-              {type} Yield: {unique?"Surprise ": `${percentOfContract} %` }
+            {infinite 
+                ? <> {type} Yield: undetermined - SL @ 10 %</>
+                : <>{type} Yield: {unique?"Surprise ": `${percentOfContract} %` }</>
+              }
             </h3>
         </div>
         <div className='earn-strategies-ai-info'>
@@ -264,7 +267,10 @@ const EarnTemplate = (props) => {
                           <div className="question-icon">
                             <BsQuestionSquare size={'20px'} color="#245a78" />
                             <p className="info-risk">
-                            Low leverage trading (2x to 5x){' '}
+                            {infinite
+                ?"High leverage trading you can lose -10% max o win infinite"
+                :"Low leverage trading (2x to 5x)"
+                }
                             </p>
                           </div>
                         </div>
@@ -493,9 +499,9 @@ const EarnTemplate = (props) => {
         </div>
         
 
-        {/* <DailyTable />
-        <InfoPool />
-        <Table /> */}
+        {infinite && <DailyTable />}
+      {infinite&& <InfoPool />}
+      {infinite&& <Table />}
 
       </div>
       
