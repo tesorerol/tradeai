@@ -79,6 +79,7 @@ const MenuNav2 = ({removeAct, addAct, refActive}) => {
                 isAllowed && <NavLink className='button-nav' to="/earn-strategies/0x95E257Ba297E705B968c605BbDb5937a0CF95334" onClick={removeAct}> Anarkey</NavLink>
             }
             <NavLink className='button-nav' to="/market" onClick={removeAct}> Market</NavLink>
+            {/* <NavLink className='button-nav' to="/earn-strategies/" onClick={removeAct}> GM Japan</NavLink> */}
             
     </div>
   )
