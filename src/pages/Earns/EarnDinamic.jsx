@@ -37,7 +37,7 @@ const EarnDinamic = () => {
     <>
       {/* {dataContract == "" ? <Loading/> :  */}
       <>
-        {pool == "" ? <NotFound/> : <EarnTemplate Abi={pool[0].AbiType==="pass"?AbiPass:pool[0].AbiType==="public"?AbiPublic:AbiPrivate} AbiType={pool[0].AbiType} claim={pool[0].claim} desposit={pool[0].desposit} unique={pool[0].unique} type={pool[0].type} strategy={pool[0].strategy} EarnContract={pool[0].address} namePool={pool[0].namePool}  risk={pool[0].risk} token={pool[0].token}/>}
+        {pool == "" ? <NotFound/> : <EarnTemplate Abi={pool[0].AbiType==="pass"?AbiPass:pool[0].AbiType==="public"?AbiPublic:AbiPrivate} AbiType={pool[0].AbiType} claim={pool[0].claim} desposit={pool[0].desposit} unique={pool[0].unique} type={pool[0].type} strategy={pool[0].strategy} EarnContract={pool[0].address} namePool={pool[0].namePool}  risk={pool[0].risk} token={pool[0].token} infinite={pool[0].infinite}/>}
       </>
       {/* } */}
     </>
