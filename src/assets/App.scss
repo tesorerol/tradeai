@@ -4860,6 +4860,10 @@ a{
   justify-content: space-between;
   overflow: hidden;
 
+  button{
+    opacity: 0.8 !important;
+  }
+
   &-type{
     font-weight: 300;
     margin: 0;
@@ -4879,6 +4883,10 @@ a{
 
   .button2{
     width: 100%;
+  }
+
+  p{
+    margin: 0;
   }
 }
 
@@ -5158,6 +5166,17 @@ a{
 .text-platinum{
   color: #e8e8e8 !important;
 }
+.background-gold{
+  background-color: #ffc600 !important;
+}
+
+.background-diamond{
+  background-color: #b2c0ea !important;
+
+}
+.background-platinum{
+  background-color: #e8e8e8 !important;
+}
 
 .container-modal-pop-up{
   position: fixed;
@@ -5179,4 +5198,39 @@ a{
   overflow: hidden;
   border: 1px solid var(--blue-opa);
   }
+}
+
+.progress-bar-market{
+  width: 100%;
+  height: 15px;
+  background-color: var(--blue-deg);
+  border-radius: 5px;
+  overflow: hidden;
+  // border: 1px solid var(--blue-opa);
+  
+}
+.container-progress-market{
+  margin-top: 10px;
+}
+
+.bar-market{
+  background-color: var(--blue-new);
+  height: 100%;
+}
+
+.text-remaining{
+  display: flex;
+  justify-content: space-between;
+
+  p{
+    margin: 0;
+    font-size: 14px;
+  }
+  span{
+    font-size: 14px;
+  }
+}
+
+.container-progress-market{
+  margin-bottom: 5px;
 }
