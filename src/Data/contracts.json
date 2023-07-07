@@ -46,7 +46,7 @@
             "type":"Monthly",
             "visible":"true",
             "claim":true,
-            "desposit":false,
+            "desposit":true,
             "infinite":true
         }   
 ]
