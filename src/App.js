@@ -16,6 +16,7 @@ import Home from './pages/Home/Home';
 import Market from './pages/Market/Market';
 import DetailsDinamic from './pages/Market/DetailsDinamic';
 import PopUp from './Components/PopUp';
+import Anarkey from './pages/Earns/Anarkey';
 
 
 function App() {
@@ -80,7 +81,7 @@ document.addEventListener("keydown", function(e) {
               <div className='container-routes'>
                 <Routes>
                   <Route path="/" element={<Navigate to="/market"/>} />
-                  <Route path="/earn-strategies/0x95E257Ba297E705B968c605BbDb5937a0CF95334"  element={isAllowed ? <EarnDinamic /> : <NotFound />} />
+                  <Route path="/earn-strategies/0x95E257Ba297E705B968c605BbDb5937a0CF95334"  element={isAllowed ? <Anarkey /> : <NotFound />} />
                   <Route path="/earn-strategies/:address"  element={<EarnDinamic />} />
                   {/* <Route path="/earn-strategies/:address" render={() => isAllowed ? (<EarnDinamic />) : (null)} /> */}
                   <Route path="/market" element={<Market />} />
