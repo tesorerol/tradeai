@@ -35,5 +35,18 @@
             "visible":"false",
             "claim":true,
             "desposit":true
+        },
+        {
+            "address":"0x94E057dee3C7d6f98734e8b56a5a79397e9A082c",
+            "namePool": "TradeAI TAS",
+            "strategy":"- Strategy type: - High leverage trading <br/> - Funds added here will be traded <br/>- Lock is 30 days  <br/> - Joining this pool is under your consent and hence the funds are traded, the SL is -10% <br/>- Profit distribution is 70% to the user and 30% to the trading team",
+            "risk": "High",
+            "token": "USDT",
+            "parent":"weekly",
+            "type":"Monthly",
+            "visible":"true",
+            "claim":true,
+            "desposit":false,
+            "infinite":true
         }   
 ]

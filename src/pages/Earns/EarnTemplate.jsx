@@ -252,7 +252,7 @@ const EarnTemplate = (props) => {
                 <div className='info-left-1'>
                   <ul>
                     <li>
-                      <p>Strategy: <span>{strategy}</span></p>
+                      <p>Strategy: <span dangerouslySetInnerHTML={{__html:strategy}}></span></p>
                     </li>
                     <li>
                       <div className='risk-token'>
