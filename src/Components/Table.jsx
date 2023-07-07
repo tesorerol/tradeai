@@ -1,18 +1,6 @@
 const Table = () => {
     const tableData = [
-        {
-            id:1,
-            coin:"BTCUSDT",
-            date:"19/6/2023",
-            laverage:"50x - Long",
-            size: "$2,518,921.40",
-            margin: "$50,493.99",
-            roe: "22.65%",
-            risk: "38.46%",
-            entry:"$26,891.93",
-            exit:"$27,016.48",
-            pl:" $11,409.77 "
-        },
+        
         
     ]
 
