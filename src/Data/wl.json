@@ -4764,5 +4764,26 @@
     },
     {
         "wallet": "0x93516712b4116604C89a11D4E3Eff9c6A24F1ab4"
+    } ,
+    {
+        "wallet": "0x225C2f3200d2e05D98396eA34f987aAA5ebB715C"
+    },
+    {
+        "wallet": "0x200C971103c929967009C93013979a0334AaB983"
+    },
+    {
+        "wallet": "0x7A1A06c26ffbB0b969E7254752e1576ee7A2042F"
+    },
+    {
+        "wallet": "0x749d3C87B5Be922F8586C9dCd4bBDc26D30B0Af9"
+    },
+    {
+        "wallet": "0x264eb412DcdD53b2e68ac2cB4D8782fCCa5d4d0B"
+    },
+    {
+        "wallet": "0xD833cF5924F662ade460E3e9F38E624e802E2bb6"
+    },
+    {
+        "wallet": "0x4c0489abDa715cB9a879B68cB3E3Ec204e387Be1"
     }
    ]
