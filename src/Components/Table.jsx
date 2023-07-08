@@ -1,7 +1,6 @@
 const Table = () => {
     const tableData = [
-        
-        
+                
     ]
 
 
