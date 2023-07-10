@@ -48,5 +48,16 @@
             "claim":true,
             "desposit":true,
             "infinite":true
-        }   
+        },
+        {
+            "address":"0x9b9c8445365c7f9550FB00FCFF2C7aD430AF317D",
+            "namePool": "The Boomer Pool",
+            "strategy":"Trading and arbitrage",
+            "risk": "Low",
+            "token": "USDT",
+            "type":"10 Days",
+            "visible":"true",
+            "claim":true,
+            "desposit":true
+        } 
 ]

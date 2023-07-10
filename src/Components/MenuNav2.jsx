@@ -76,7 +76,11 @@ const MenuNav2 = ({removeAct, addAct, refActive}) => {
     <div className='menu-nav'>
             
             {
-                isAllowed && <NavLink className='button-nav' to="/earn-strategies/0x95E257Ba297E705B968c605BbDb5937a0CF95334" onClick={removeAct}> Anarkey</NavLink>
+                isAllowed &&
+                <> 
+                <NavLink className='button-nav' to="/earn-strategies/0x95E257Ba297E705B968c605BbDb5937a0CF95334" onClick={removeAct}> Anarkey</NavLink>
+                <NavLink className='button-nav' to="/earn-strategies/0x9b9c8445365c7f9550FB00FCFF2C7aD430AF317D" onClick={removeAct}> The Boomer Pool</NavLink>
+                </>
             }
             <NavLink className='button-nav' to="/market" onClick={removeAct}> Market</NavLink>
             <NavLink className='button-nav' to="/earn-strategies/0x94E057dee3C7d6f98734e8b56a5a79397e9A082c" onClick={removeAct}> TradeAI TAS</NavLink>
