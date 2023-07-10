@@ -10,7 +10,8 @@
             "AbiType":"pass",
             "visible":"true",
             "claim":true,
-            "desposit":true
+            "desposit":true,
+            "whitelist":true
         },
         {
             "address":"0xe10Df02431A01eE836F3B2a6D6Da9C7252681cf7",
@@ -22,7 +23,8 @@
             "AbiType":"pass",
             "visible":"false",
             "claim":true,
-            "desposit":true
+            "desposit":true,
+            "whitelist":""
         },
         {
             "address":"0x25FFC76D6ecBD341f78c479c2d8123eA1D1De446",
@@ -34,7 +36,8 @@
             "AbiType":"pass",
             "visible":"false",
             "claim":true,
-            "desposit":true
+            "desposit":true,
+            "whitelist":""
         },
         {
             "address":"0x94E057dee3C7d6f98734e8b56a5a79397e9A082c",
@@ -47,7 +50,8 @@
             "visible":"true",
             "claim":true,
             "desposit":true,
-            "infinite":true
+            "infinite":true,
+            "whitelist":false
         },
         {
             "address":"0x9b9c8445365c7f9550FB00FCFF2C7aD430AF317D",
@@ -58,6 +62,7 @@
             "type":"10 Days",
             "visible":"true",
             "claim":true,
-            "desposit":true
+            "desposit":true,
+            "whitelist":true
         } 
 ]
