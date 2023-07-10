@@ -457,10 +457,12 @@ const EarnTemplate = (props) => {
                       <h3>Pending Earn:</h3>
                     </div>
                     <p className="table-number">
-                      {unique
+                    {unique
                       ? "Surprise"
                       :formatMoney(
-                        parseFloat(UserInfo.Earn) - parseFloat(UserInfo.Amount),
+                        percentOfContract>0
+                        ?parseFloat(UserInfo.Earn) - parseFloat(UserInfo.Amount)
+                        :UserInfo.Amount,
                         'USDT',
                       )}
                     </p>
@@ -499,7 +501,7 @@ const EarnTemplate = (props) => {
         </div>
         
 
-        {infinite && <DailyTable />}
+      {infinite && <DailyTable />}
       {infinite&& <InfoPool />}
       {infinite&& <Table />}
 
