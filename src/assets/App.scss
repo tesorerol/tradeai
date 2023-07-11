@@ -1447,6 +1447,26 @@ a{
 
   @media only screen and (max-width:800px){
 
+
+
+    .strategies-details-v2{
+      max-height: 1500px !important;
+
+      
+
+      .table-row{ 
+        padding: 10px 0 !important;      
+        div,p{
+          padding-left: 5px !important;
+          font-size: 11px !important;
+        }
+        h3{
+          font-size: 12px !important;
+        }
+      }
+    }
+
+  
     .item-market{
       margin: 0 auto;
     }
@@ -1484,7 +1504,8 @@ a{
     }
 
     .btn-claim{
-      height: 4rem !important;
+      height: 35px !important;
+      margin-bottom: 2px;
     }
   
     .header{
@@ -1492,10 +1513,14 @@ a{
       position: relative !important;
     }
 
+    .button2{
+      width: 100% !important;
+    }
+
     .button2 .text-button-remaining{
-      font-size: 14px !important;
-      padding-top: 10px !important;
-      padding-bottom: 10px !important;
+      font-size: 10px !important;
+      padding-top: 0px !important;
+      padding-bottom: 0px !important;
     }
 
     .info-risk{
@@ -2233,6 +2258,17 @@ a{
 
 
   @media only screen and (min-width:801px) and (max-width:1025px){
+    .table-row h3{
+      font-size: 10px !important;
+    }
+
+    .table-number{
+      font-size: 12px !important;
+    }
+
+    .text-button-remaining{
+      font-size: 10px !important;
+    }
 
     .navbar{
       gap: 40px !important;
@@ -2756,7 +2792,7 @@ a{
 
       .table-number{
         font-weight: 400;
-        font-size: 15px;
+        font-size: 14px;
         color: rgba(255, 255, 255, 0.637);
         width: 100%;
         margin-bottom: 0;
@@ -4792,6 +4828,14 @@ a{
   }
 }
 
+@media only screen and (max-width:600px){
+
+  .details-staked-v2{
+    flex-direction: column !important;
+    padding-bottom: 10px;
+  }
+}
+
 @media only screen and (min-width:600px) and (max-width:800px){
   .earn-strategies-ai{
     width: 600px !important;
@@ -5112,4 +5156,118 @@ a{
 }
 .text-platinum{
   color: #e8e8e8 !important;
+}
+
+.table-staked-v2{
+  flex-direction: row !important;
+  
+  
+  
+  .table-row{
+    flex-direction: column;
+    height: fit-content !important;
+    padding: 4px 0;
+    align-items: flex-start;
+
+    h3{
+      padding-bottom: 5px;
+      text-align: center;
+      margin: 0 auto;
+    }
+
+    &:nth-child(1),&:nth-child(2){
+      border-right: 1px solid var(--blue-opa);
+    }
+
+    p{
+      padding: 0 !important;
+      text-align: center;
+      
+    }
+    
+
+    div{
+      width: fit-content !important;
+      border: none !important;
+      padding: 0 !important;
+      display: flex;
+      align-self: center;
+      
+    }
+  }
+}
+
+.details-staked-v2{
+  gap: 5px !important;
+  flex-direction: row;
+  align-items: flex-end;
+
+  .text-button-remaining{
+    font-size: 11px;
+    
+  }
+
+  .button2{
+    height: 30px;
+    width: 70%;
+  }
+}
+
+.ai-details-v2{
+  display: flex;
+  flex-direction: column;
+  gap: 0px !important;
+  overflow-y: scroll !important;
+  height: auto !important;
+  padding: 20px !important;
+  width: 70%;
+  
+
+  h2{
+    // margin-bottom: 0 !important;
+  }
+
+  &::-webkit-scrollbar{
+    width: 5px;
+  }
+  &::-webkit-scrollbar-track { 
+    border-radius: 30px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--blue-w);  
+    border-radius: 20px;       
+    border: 3px solid var(--blue-w);  
+  }
+  
+}
+
+.strategies-details-v2{
+  // height: 480px !important;
+  height: auto ;
+  min-height: fit-content;
+  max-height: 450px;
+  
+}
+
+.approved-v2{
+  padding: 25px 15px !important;
+}
+
+.input-deposit-v2{
+  height: 100px;
+}
+
+.details-deposit-v2{
+  height: auto !important;
+  padding: 20px !important;
+  width: 30%;
+}
+
+.span-pool-size{
+  overflow-wrap: break-word;
+}
+
+.header-tab{
+  display: flex;
+  font-size: 14px;
 }

@@ -305,7 +305,7 @@ const EarnTemplatev2 = (props) => {
                     <ul>
                       <li>
                         <p>Pool size:</p>
-                        <p><span> {formatMoney(limitAmount, 'USDT', 2, '.', ',')}</span></p>
+                        <p><span className='span-pool-size'> {formatMoney(limitAmount, 'USDT', 2, '.', ',')}</span></p>
                       </li>
                       <li>
                         <p>Current Deposit:</p>
@@ -319,13 +319,13 @@ const EarnTemplatev2 = (props) => {
                       <li>
                         <p>Min entry:</p>
                         <p>
-                          <span>{formatMoney(mintAmount, 'USDT', 2, '.', ',')}</span>
+                          <span >{formatMoney(mintAmount, 'USDT', 2, '.', ',')}</span>
                         </p>
                       </li>
                       <li>
                         <p>Max entry:</p>
                         <p>
-                          <span>
+                          <span className='span-pool-size'>
                           {' '}
                           {getMaxUser > 0
                             ? formatMoney(getMaxUser, 'USDT', 2, '.', ',')
@@ -337,14 +337,14 @@ const EarnTemplatev2 = (props) => {
                   </div>
               </div>
         </div>
-        <div className='earn-strategies-ai-details'>
-          <div className='earn-strategies-ai-details-deposit'>
+        <div className='earn-strategies-ai-details strategies-details-v2'>
+          <div className='earn-strategies-ai-details-deposit details-deposit-v2'>
             <h2>Deposit</h2>
             <div className="approve">
                 {
                   !Aprove &&
                   (
-                    <p className="amount-approved">
+                    <p className="amount-approved approved-v2">
                       Amount approved for use:{' '}
                       <span>
                         {formatMoney(AmountAprove, 'USDT', 2, '.', ',')}
@@ -359,7 +359,7 @@ const EarnTemplatev2 = (props) => {
                   <div className="input-button">
                     <div className="div-input-deposit">
                       <input
-                        className="input-deposit"
+                        className="input-deposit input-deposit-v2"
                         placeholder="0.0"
                         type="number"
                         value={Amount}
@@ -436,23 +436,26 @@ const EarnTemplatev2 = (props) => {
               </div>
             
           </div>
-          <div className='earn-strategies-ai-details-details'>
+          <div className='earn-strategies-ai-details-details ai-details-v2'>
             <h2>Your position</h2>
             {claim &&
-            UserInfo.map(r=>
-<div className="progress-section-details-staked">
-                <div className="table-staked">
-                  <div className="table-row row1">
-                    <div>
-                      <h3>Your stake:</h3>
+            UserInfo.map((r,i)=>(
+              <>
+                
+                <div className="progress-section-details-staked details-staked-v2">
+                <div className="table-staked table-staked-v2">
+                
+                  <div className="table-row ">
+                    <div >
+                      <h3 className={` ${i===0 ? "flex" : "hidden"} `}>Your stake:</h3>
                     </div>
                     <p className="table-number">
                       {formatMoney(r.Amount, 'USDT')}
                     </p>
                   </div>
-                  <div className="table-row row1">
-                    <div>
-                      <h3>Pending Earn:</h3>
+                  <div className="table-row ">
+                    <div >
+                      <h3 className={` ${i===0 ? "flex" : "hidden"} `}>Pending Earn:</h3>
                     </div>
                     <p className="table-number">
                       
@@ -462,9 +465,9 @@ const EarnTemplatev2 = (props) => {
                       )}
                     </p>
                   </div>
-                  <div className="table-row ">
-                    <div>
-                      <h3>Total payout:</h3>
+                  <div className="table-row  ">
+                    <div >
+                      <h3 className={` ${i===0 ? "flex" : "hidden"} `}>Total payout:</h3>
                     </div>
                     <p className="table-number">
                       {unique
@@ -474,7 +477,7 @@ const EarnTemplatev2 = (props) => {
                   </div>
                 </div>
                 {
-                  UserInfo.Amount > 0 && claim &&
+                  claim &&
                   <button
                     className="button2 btn-claim"
                     onClick={() => (r.Time ? console.log() : Witdraw())}
@@ -490,7 +493,7 @@ const EarnTemplatev2 = (props) => {
                   </button>
                 }
               </div>
-            )
+              </>))
             }
           </div>
 
