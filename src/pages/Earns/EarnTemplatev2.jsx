@@ -18,10 +18,7 @@ const EarnTemplatev2 = (props) => {
   const { Provider, address } = useContext(WalletContext)
   let USDT = '0x55d398326f99059fF775485246999027B3197955'
   const [Recolect, setRecolect] = useState('0')
-  const [UserInfo, setUserInfo] = useState({
-    Amount: 0,
-    Earn: 0,
-  })
+  const [UserInfo, setUserInfo] = useState([])
   const [Aprove, setAprove] = useState(true)
   const [Amount, setAmount] = useState('0')
   const [getMaxUser, setgetMaxUser] = useState('0')
@@ -107,13 +104,22 @@ const EarnTemplatev2 = (props) => {
   }
 
   function GetUserInfo() {
-    contract.balanceUser(address).then((r) => {
-      setUserInfo({
-        Amount: ethers.utils.formatEther(r.Amount),
-        Earn: ethers.utils.formatEther(r.Earn),
-      })
-      setFinishTime(MModeTimer(r.finishTime.toString()))
+    let data =[];
+    contract.depositCount(address).then(async (count) => {
+        for (let index = 0; index < count.toString(); index++) {
+            await contract.balanceUser(address,index).then((r) => {
+                data.push({
+                    Amount:ethers.utils.formatEther(r.Amount),
+                    Earn: ethers.utils.formatEther(r.Earn),
+                    Time:MModeTimer(r.finishTime.toString())
+                })
+              })
+        }
+        setUserInfo(data)
     })
+
+
+
   }
   function Intermitente() {
     intervalid = setInterval(() => {
@@ -432,15 +438,16 @@ const EarnTemplatev2 = (props) => {
           </div>
           <div className='earn-strategies-ai-details-details'>
             <h2>Your position</h2>
-            {claim &&(
-              <div className="progress-section-details-staked">
+            {claim &&
+            UserInfo.map(r=>
+<div className="progress-section-details-staked">
                 <div className="table-staked">
                   <div className="table-row row1">
                     <div>
                       <h3>Your stake:</h3>
                     </div>
                     <p className="table-number">
-                      {formatMoney(UserInfo.Amount, 'USDT')}
+                      {formatMoney(r.Amount, 'USDT')}
                     </p>
                   </div>
                   <div className="table-row row1">
@@ -448,10 +455,9 @@ const EarnTemplatev2 = (props) => {
                       <h3>Pending Earn:</h3>
                     </div>
                     <p className="table-number">
-                      {unique
-                      ? "Surprise"
-                      :formatMoney(
-                        parseFloat(UserInfo.Earn) - parseFloat(UserInfo.Amount),
+                      
+                      {formatMoney(
+                        parseFloat(r.Amount)-parseFloat(r.Earn) ,
                         'USDT',
                       )}
                     </p>
@@ -463,7 +469,7 @@ const EarnTemplatev2 = (props) => {
                     <p className="table-number">
                       {unique
                       ? "Surprise"
-                      :formatMoney(UserInfo.Earn, 'USDT')}
+                      :formatMoney(r.Earn, 'USDT')}
                     </p>
                   </div>
                 </div>
@@ -471,10 +477,10 @@ const EarnTemplatev2 = (props) => {
                   UserInfo.Amount > 0 && claim &&
                   <button
                     className="button2 btn-claim"
-                    onClick={() => (FinishTime ? console.log() : Witdraw())}
+                    onClick={() => (r.Time ? console.log() : Witdraw())}
                   >
-                    {FinishTime ? (
-                      <span className='button-content'>{FinishTime}</span>
+                    {r.Time ? (
+                      <span className='button-content'>{r.Time}</span>
                     ) : (
                       <span className='button-content'>
                         <i className="fa-solid fa-lock mr-1"></i>
@@ -484,7 +490,8 @@ const EarnTemplatev2 = (props) => {
                   </button>
                 }
               </div>
-            )}
+            )
+            }
           </div>
 
         </div>
