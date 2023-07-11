@@ -9,5 +9,17 @@
             "visible":"true",
             "claim":true,
             "desposit":true
-        }  
+        },
+        {
+            "address":"0xf220d8418a74Df6FC7a728A0eafb39EAca98ADb8",
+            "namePool": "Trimestral",
+            "strategy":"Trading and arbitrage",
+            "risk": "Low",
+            "token": "USDT",
+            "type":"Weekly",
+            "visible":"true",
+            "AbiType":"v3",
+            "claim":true,
+            "desposit":true
+        }
 ]

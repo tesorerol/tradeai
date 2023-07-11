@@ -15,6 +15,7 @@ const MenuNav2 = ({removeAct, addAct, refActive}) => {
     <div className='menu-nav'>
             
             <NavLink className='button-nav' to="/earn-strategies/0x9b8a82B85034df40EfE34c4087c36D41fc559914" onClick={removeAct}>Treehouse</NavLink>
+            <NavLink className='button-nav' to="/earn-strategies/0xf220d8418a74Df6FC7a728A0eafb39EAca98ADb8" onClick={removeAct}>Trimestral</NavLink>
             {/* <NavLink className='button-nav' to="/market" onClick={removeAct}> Market</NavLink> */}
             
     </div>
