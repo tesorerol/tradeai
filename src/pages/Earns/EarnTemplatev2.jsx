@@ -6,7 +6,7 @@ import { BsQuestionSquare } from 'react-icons/bs'
 import { ethers } from 'ethers'
 import { WalletContext } from '../../Providers/WallectConnect'
 import ERC20 from '../../artifacts/contracts/USDT.sol/TetherToken.json'
-import { Allowance, Approve, MModeTimer, formatMoney, formatMoney2 } from '../../Helpers'
+import { Allowance, Approve, MModeTimer,MModeTimer2, formatMoney, formatMoney2 } from '../../Helpers'
 import Swal from 'sweetalert2'
 import Loader from '../../Components/Loading'
 import ProgressBar from '../../Components/ProgressBar'
@@ -107,13 +107,20 @@ const EarnTemplatev2 = (props) => {
     let data =[];
     contract.depositCount(address).then(async (count) => {
         for (let index = 0; index < count.toString(); index++) {
-            await contract.balanceUser(address,index).then((r) => {
-                data.push({
-                    Amount:ethers.utils.formatEther(r.Amount),
-                    Earn: ethers.utils.formatEther(r.Earn),
-                    Time:MModeTimer(r.finishTime.toString())
-                })
+          let capital=await contract.balanceUser(address,index).then(r=>r.Amount.toString());
+          let newArray = []
+          for (let deposits = 0; deposits < 3; deposits++) {
+            await contract.depositEarnings(address,index,deposits).then((r) => {
+              newArray.push({
+                  Amount:ethers.utils.formatEther(capital),
+                  Earn: ethers.utils.formatEther(r.Earn),
+                  Time:MModeTimer2(r.finishTime.toString()),
+                  Period:r.period.toString(),
+                  finish: r.finished
               })
+            })
+          }
+        data.push(newArray);
         }
         setUserInfo(data)
     })
@@ -159,12 +166,12 @@ const EarnTemplatev2 = (props) => {
       })
   }
 
-  function Witdraw(depositID) {
+  function Witdraw(depositID,period) {
     let signer = Provider.getSigner()
     setLoading(true)
     let contract2 = new ethers.Contract(EarnContract, Abi.abi, signer)
       contract2
-        .EarnDeposit(depositID)
+        .EarnDeposit(depositID,period)
         .then((r) => {
           GetBusdBalance();
           setLoading(false)
@@ -259,7 +266,7 @@ const EarnTemplatev2 = (props) => {
                     <ul>
                       <li>
                         <p>Pool size:</p>
-                        <p><span> {formatMoney(limitAmount, 'USDT', 2, '.', ',')}</span></p>
+                        <p><span className='span-pool-size'> {formatMoney(limitAmount, 'USDT', 2, '.', ',')}</span></p>
                       </li>
                       <li>
                         <p>Current Deposit:</p>
@@ -273,13 +280,13 @@ const EarnTemplatev2 = (props) => {
                       <li>
                         <p>Min entry:</p>
                         <p>
-                          <span>{formatMoney(mintAmount, 'USDT', 2, '.', ',')}</span>
+                          <span >{formatMoney(mintAmount, 'USDT', 2, '.', ',')}</span>
                         </p>
                       </li>
                       <li>
                         <p>Max entry:</p>
                         <p>
-                          <span>
+                          <span className='span-pool-size'>
                           {' '}
                           {getMaxUser > 0
                             ? formatMoney(getMaxUser, 'USDT', 2, '.', ',')
@@ -291,14 +298,14 @@ const EarnTemplatev2 = (props) => {
                   </div>
               </div>
         </div>
-        <div className='earn-strategies-ai-details'>
-          <div className='earn-strategies-ai-details-deposit'>
+        <div className='earn-strategies-ai-details strategies-details-v2'>
+          <div className='earn-strategies-ai-details-deposit details-deposit-v2'>
             <h2>Deposit</h2>
             <div className="approve">
                 {
                   !Aprove &&
                   (
-                    <p className="amount-approved">
+                    <p className="amount-approved approved-v2">
                       Amount approved for use:{' '}
                       <span>
                         {formatMoney(AmountAprove, 'USDT', 2, '.', ',')}
@@ -313,7 +320,7 @@ const EarnTemplatev2 = (props) => {
                   <div className="input-button">
                     <div className="div-input-deposit">
                       <input
-                        className="input-deposit"
+                        className="input-deposit input-deposit-v2"
                         placeholder="0.0"
                         type="number"
                         value={Amount}
@@ -390,45 +397,85 @@ const EarnTemplatev2 = (props) => {
               </div>
             
           </div>
-          <div className='earn-strategies-ai-details-details'>
-            <h2>Your position</h2>
+          <div className='container-tables-v2'>
             {claim &&
-            UserInfo.map((r,index)=>
-<div className="progress-section-details-staked">
-                <div className="table-staked">
-                  <div className="table-row row1">
-                    <div>
-                      <h3>Your stake:</h3>
+            UserInfo.map((dp,i)=>
+            <div className='earn-strategies-ai-details-details ai-details-v2'>
+            <h2>Deposit {i+1}</h2>
+            {dp.map((r,index)=>
+              <>
+                
+           
+                <div className="progress-section-details-staked details-staked-v2">
+                <div className="table-staked table-staked-v2">
+                
+                  <div className="table-row ">
+                    <div >
+                      <h3 className={` `}>Days:</h3>
+                    </div>
+                    <p className="table-number">
+                      {r.Period} days
+                    </p>
+                  </div>
+                  
+                  <div className="table-row ">
+                    <div >
+                      <h3 className={` `}>Your stake:</h3>
                     </div>
                     <p className="table-number">
                       {formatMoney(r.Amount, 'USDT')}
                     </p>
                   </div>
-                  <div className="table-row row1">
-                    <div>
-                      <h3>Pending Earn:</h3>
+                  <div className="table-row ">
+                    <div >
+                      <h3 className={` `}>Yield:</h3>
+                    </div>
+                    <p className="table-number">
+                      {index===2?20:13}% yield
+                    </p>
+                  </div>
+                  <div className="table-row ">
+                    <div >
+                      <h3 className={` `}>Pending Earn:</h3>
                     </div>
                     <p className="table-number">
                       
                       {formatMoney(
-                        parseFloat(r.Amount)-parseFloat(r.Earn) ,
+                        parseFloat(r.Earn) ,
                         'USDT',
                       )}
                     </p>
                   </div>
-                  <div className="table-row ">
-                    <div>
-                      <h3>Total payout:</h3>
+                  <div className="table-row  ">
+                    <div >
+                      <h3 className={` `}>Total payout:</h3>
                     </div>
                     <p className="table-number">
-                      {unique
-                      ? "Surprise"
-                      :formatMoney(r.Earn, 'USDT')}
+                      {index===2
+                      ? formatMoney(parseFloat(r.Earn)+parseFloat(r.Amount), 'USDT')
+                      : formatMoney(r.Earn, 'USDT')}
+                    </p>
+                  </div>
+                  <div className="table-row  ">
+                    <div >
+                      <h3 className={` `}>Timer: </h3>
+                    </div>
+                    <p className="table-number button-claim-v2" onClick={() => (r.Time && !r.finish ? console.log() : Witdraw(i,index))}>
+                      {r.Time ? (
+                        <span className='button-content'>{r.Time}</span>
+                      ) : r.finish
+                      ? <span className='button-content'>Claimed</span>
+                      : (
+                        <span className='button-content'>
+                          <i className="fa-solid fa-lock mr-1"></i>
+                          {'Claim'}
+                        </span>
+                      )}
                     </p>
                   </div>
                 </div>
-                {
-                  r.Amount > 0 && claim &&
+                {/* {
+                  claim &&
                   <button
                     className="button2 btn-claim"
                     onClick={() => (r.Time ? console.log() : Witdraw(index))}
@@ -442,9 +489,12 @@ const EarnTemplatev2 = (props) => {
                       </span>
                     )}
                   </button>
-                }
+                } */}
               </div>
-            )
+
+              
+              </>)}
+              </div>)
             }
           </div>
 

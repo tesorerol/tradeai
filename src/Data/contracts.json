@@ -1,22 +1,11 @@
  [
         {
-            "address":"0x9b8a82B85034df40EfE34c4087c36D41fc559914",
-            "namePool": "The Treehouse",
+            "address":"0xAa252712C4B544b3e9C264cB1D49a62Cbdd36531",
+            "namePool": "Institutional",
             "strategy":"Trading and arbitrage",
             "risk": "Low",
             "token": "USDT",
-            "type":"Weekly",
-            "visible":"true",
-            "claim":true,
-            "desposit":true
-        },
-        {
-            "address":"0x33750C14fF8df87d296d9e1dc739Cfa87beE7a00",
-            "namePool": "Trimestral",
-            "strategy":"Trading and arbitrage",
-            "risk": "Low",
-            "token": "USDT",
-            "type":"Weekly",
+            "type":"",
             "visible":"true",
             "AbiType":"v3",
             "claim":true,

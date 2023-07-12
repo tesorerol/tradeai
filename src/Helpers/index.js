@@ -52,6 +52,37 @@ function MModeTimer(remainingTime) {
   }
 }
 
+function MModeTimer2(remainingTime) {
+  var currentTime = new Date().getTime() / 1000
+  var futureTime = remainingTime
+  var timeRemaining = futureTime - currentTime
+  var minute = 60
+  var hour = 60 * 60
+  var day = 60 * 60 * 24
+  var dayFloor = Math.floor(timeRemaining / day)
+  var hourFloor = Math.floor((timeRemaining - dayFloor * day) / hour)
+  var minuteFloor = Math.floor(
+    (timeRemaining - dayFloor * day - hourFloor * hour) / minute,
+  )
+  var secondFloor = Math.floor(
+    timeRemaining - dayFloor * day - hourFloor * hour - minuteFloor * minute,
+  )
+  if (dayFloor < 0 || hourFloor < 0 || secondFloor < 0 || minuteFloor < 0) {
+    return false
+  } else {
+    if (futureTime > currentTime) {
+      return (
+        <p className="text-button-remaining">
+          <span id="days">{dayFloor > 0 ? dayFloor : 0}</span>:{' '}
+          <span id="hours">{hourFloor > 0 ? hourFloor : 0}</span>:{' '}
+          <span id="minutes">{minuteFloor > 0 ? minuteFloor : 0}</span>:{' '}
+          <span id="seconds">{secondFloor > 0 ? secondFloor : 0}</span>
+        </p>
+      )
+    }
+  }
+}
+
 const formatMoney = (
   amount,
   moneda = '',
@@ -130,4 +161,4 @@ const formatMoney2 = (
   }
 }
 
-export { GetBalance, Allowance, Approve, MModeTimer, formatMoney, formatMoney2 }
+export { GetBalance, Allowance, Approve, MModeTimer,MModeTimer2, formatMoney, formatMoney2 }
