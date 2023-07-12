@@ -206,7 +206,7 @@ const EarnTemplatev2 = (props) => {
       {Loading && <Loader />}
       <div className='earn-strategies-ai'>
         <div className='earn-strategies-ai-tittle'>
-            <h2>{namePool}</h2>
+            <h3>{namePool}</h3>
         </div>
         <div className='earn-strategies-ai-info'>
               <div className='info-left'>
