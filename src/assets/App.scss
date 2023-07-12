@@ -386,6 +386,7 @@ a{
             background: linear-gradient(to right, #09151f, #0e2232);
             // backdrop-filter: blur(10px);
             border-bottom: 1px solid var(--blue-opa);
+            z-index: 99;
 
             button{
                 margin-top: 15px;
@@ -1450,7 +1451,7 @@ a{
 
 
     .strategies-details-v2{
-      max-height: 1500px !important;
+      // max-height: 1500px !important;
 
       
 
@@ -2804,6 +2805,8 @@ a{
 .text-button-remaining{
   margin-bottom: 0;
   font-size: 15px;
+  width: fit-content;
+  margin: 0 auto;
 }
 
 
@@ -4833,7 +4836,26 @@ a{
   .details-staked-v2{
     flex-direction: column !important;
     padding-bottom: 10px;
+    width: 600px;
   }
+
+  .ai-details-v2{
+    &::-webkit-scrollbar{
+      // width: 2px !important;
+      height: 4px;
+    }
+    &::-webkit-scrollbar-track { 
+      border-radius: 30px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: var(--blue-w);  
+      border-radius: 20px;       
+      border: 3px solid var(--blue-w);  
+    }
+
+  }
+
+
 }
 
 @media only screen and (min-width:600px) and (max-width:800px){
@@ -5175,7 +5197,7 @@ a{
       margin: 0 auto;
     }
 
-    &:nth-child(1),&:nth-child(2){
+    &:nth-child(1),&:nth-child(2),&:nth-child(3),&:nth-child(4),&:nth-child(5){
       border-right: 1px solid var(--blue-opa);
     }
 
@@ -5199,17 +5221,17 @@ a{
 
 .details-staked-v2{
   gap: 5px !important;
-  flex-direction: row;
+  // flex-direction: row;
   align-items: flex-end;
 
   .text-button-remaining{
-    font-size: 11px;
+    font-size: 14px;
     
   }
 
   .button2{
-    height: 30px;
-    width: 70%;
+    height: 40px;
+    width: 100%;
   }
 }
 
@@ -5220,7 +5242,7 @@ a{
   overflow-y: scroll !important;
   height: auto !important;
   padding: 20px !important;
-  width: 70%;
+  width:100%;
   
 
   h2{
@@ -5245,7 +5267,8 @@ a{
   // height: 480px !important;
   height: auto ;
   min-height: fit-content;
-  max-height: 450px;
+  // max-height: 450px;
+  flex-direction: column;
   
 }
 
@@ -5260,7 +5283,7 @@ a{
 .details-deposit-v2{
   height: auto !important;
   padding: 20px !important;
-  width: 30%;
+  width: 100%;
 }
 
 .span-pool-size{
@@ -5270,4 +5293,24 @@ a{
 .header-tab{
   display: flex;
   font-size: 14px;
+}
+
+.container-tables-v2{
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  // display: grid ;
+  // gap: 20px;
+  // grid-template-columns:repeat(auto-fit,
+  //   minmax(
+  //   250px,
+  //   1fr
+  //   )
+  //   )
+}
+
+.button-claim-v2{
+  width: fit-content !important;
+  margin: 0 auto;
+  cursor: pointer;
 }

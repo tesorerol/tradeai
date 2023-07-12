@@ -6,7 +6,7 @@ import { BsQuestionSquare } from 'react-icons/bs'
 import { ethers } from 'ethers'
 import { WalletContext } from '../../Providers/WallectConnect'
 import ERC20 from '../../artifacts/contracts/USDT.sol/TetherToken.json'
-import { Allowance, Approve, MModeTimer, formatMoney, formatMoney2 } from '../../Helpers'
+import { Allowance, Approve, MModeTimer,MModeTimer2, formatMoney, formatMoney2 } from '../../Helpers'
 import Swal from 'sweetalert2'
 import Loader from '../../Components/Loading'
 import ProgressBar from '../../Components/ProgressBar'
@@ -111,7 +111,7 @@ const EarnTemplatev2 = (props) => {
                 data.push({
                     Amount:ethers.utils.formatEther(r.Amount),
                     Earn: ethers.utils.formatEther(r.Earn),
-                    Time:MModeTimer(r.finishTime.toString())
+                    Time:MModeTimer2(r.finishTime.toString())
                 })
               })
         }
@@ -436,18 +436,28 @@ const EarnTemplatev2 = (props) => {
               </div>
             
           </div>
-          <div className='earn-strategies-ai-details-details ai-details-v2'>
-            <h2>Your position</h2>
+          <div className='container-tables-v2'>
             {claim &&
             UserInfo.map((r,i)=>(
               <>
                 
+            <div className='earn-strategies-ai-details-details ai-details-v2'>
+              <h2>Deposit {i+1}</h2>
                 <div className="progress-section-details-staked details-staked-v2">
                 <div className="table-staked table-staked-v2">
                 
                   <div className="table-row ">
                     <div >
-                      <h3 className={` ${i===0 ? "flex" : "hidden"} `}>Your stake:</h3>
+                      <h3 className={` `}>Days:</h3>
+                    </div>
+                    <p className="table-number">
+                      30 days
+                    </p>
+                  </div>
+                  
+                  <div className="table-row ">
+                    <div >
+                      <h3 className={` `}>Your stake:</h3>
                     </div>
                     <p className="table-number">
                       {formatMoney(r.Amount, 'USDT')}
@@ -455,7 +465,15 @@ const EarnTemplatev2 = (props) => {
                   </div>
                   <div className="table-row ">
                     <div >
-                      <h3 className={` ${i===0 ? "flex" : "hidden"} `}>Pending Earn:</h3>
+                      <h3 className={` `}>Yield:</h3>
+                    </div>
+                    <p className="table-number">
+                      13% yield
+                    </p>
+                  </div>
+                  <div className="table-row ">
+                    <div >
+                      <h3 className={` `}>Pending Earn:</h3>
                     </div>
                     <p className="table-number">
                       
@@ -467,7 +485,7 @@ const EarnTemplatev2 = (props) => {
                   </div>
                   <div className="table-row  ">
                     <div >
-                      <h3 className={` ${i===0 ? "flex" : "hidden"} `}>Total payout:</h3>
+                      <h3 className={` `}>Total payout:</h3>
                     </div>
                     <p className="table-number">
                       {unique
@@ -475,8 +493,23 @@ const EarnTemplatev2 = (props) => {
                       :formatMoney(r.Earn, 'USDT')}
                     </p>
                   </div>
+                  <div className="table-row  ">
+                    <div >
+                      <h3 className={` `}>Timer:</h3>
+                    </div>
+                    <p className="table-number button-claim-v2" onClick={() => (r.Time ? console.log() : Witdraw())}>
+                      {r.Time ? (
+                        <span className='button-content'>{r.Time}</span>
+                      ) : (
+                        <span className='button-content'>
+                          <i className="fa-solid fa-lock mr-1"></i>
+                          {'Claim'}
+                        </span>
+                      )}
+                    </p>
+                  </div>
                 </div>
-                {
+                {/* {
                   claim &&
                   <button
                     className="button2 btn-claim"
@@ -491,7 +524,9 @@ const EarnTemplatev2 = (props) => {
                       </span>
                     )}
                   </button>
-                }
+                } */}
+              </div>
+
               </div>
               </>))
             }
