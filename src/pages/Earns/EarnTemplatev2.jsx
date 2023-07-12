@@ -159,19 +159,14 @@ const EarnTemplatev2 = (props) => {
       })
   }
 
-  function Witdraw() {
+  function Witdraw(depositID) {
     let signer = Provider.getSigner()
     setLoading(true)
     let contract2 = new ethers.Contract(EarnContract, Abi.abi, signer)
-    if (AbiType == 'pass') {
       contract2
-        .Claim()
+        .EarnDeposit(depositID)
         .then((r) => {
           GetBusdBalance();
-          setUserInfo({
-            Amount: 0,
-            Earn: 0,
-          })
           setLoading(false)
         })
         .catch((e) => {
@@ -182,47 +177,6 @@ const EarnTemplatev2 = (props) => {
             title: errorMessage,
           })
         })
-    } else if (AbiType == 'public') {
-      contract2
-        .EarnClaim()
-        .then((r) => {
-          r.wait().then((r) => {
-            GetBusdBalance();
-            setUserInfo({
-              Amount: 0,
-              Earn: 0,
-            })
-            setLoading(false)
-          })
-        })
-        .catch((e) => {
-          setLoading(false)
-          const errorMessage = e.error.data.message
-          Swal.fire({
-            icon: 'error',
-            title: errorMessage,
-          })
-        })
-    } else {
-      contract2
-        .EarnDeposit()
-        .then((r) => {
-          GetBusdBalance();
-          setUserInfo({
-            Amount: 0,
-            Earn: 0,
-          })
-          setLoading(false)
-        })
-        .catch((e) => {
-          setLoading(false)
-          const errorMessage = e.error.data.message
-          Swal.fire({
-            icon: 'error',
-            title: errorMessage,
-          })
-        })
-    }
   }
 
   function GetBusdBalance() {
@@ -439,7 +393,7 @@ const EarnTemplatev2 = (props) => {
           <div className='earn-strategies-ai-details-details'>
             <h2>Your position</h2>
             {claim &&
-            UserInfo.map(r=>
+            UserInfo.map((r,index)=>
 <div className="progress-section-details-staked">
                 <div className="table-staked">
                   <div className="table-row row1">
@@ -474,10 +428,10 @@ const EarnTemplatev2 = (props) => {
                   </div>
                 </div>
                 {
-                  UserInfo.Amount > 0 && claim &&
+                  r.Amount > 0 && claim &&
                   <button
                     className="button2 btn-claim"
-                    onClick={() => (r.Time ? console.log() : Witdraw())}
+                    onClick={() => (r.Time ? console.log() : Witdraw(index))}
                   >
                     {r.Time ? (
                       <span className='button-content'>{r.Time}</span>
