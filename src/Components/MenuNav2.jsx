@@ -13,8 +13,13 @@ const MenuNav2 = ({removeAct, addAct, refActive}) => {
 
   return (
     <div className='menu-nav'>
-            
-            <NavLink className='button-nav' to="/earn-strategies/0x9b8a82B85034df40EfE34c4087c36D41fc559914" onClick={removeAct}>Treehouse</NavLink>
+            {
+              data.map((item,i)=>(
+                item.visible === "true" &&
+                <NavLink key={i} className='button-nav' to={`/earn-strategies/${item.address}`} onClick={removeAct}>{item.namePool}</NavLink>
+
+              ))
+            }
             {/* <NavLink className='button-nav' to="/market" onClick={removeAct}> Market</NavLink> */}
             
     </div>
