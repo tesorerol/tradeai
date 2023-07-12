@@ -206,10 +206,7 @@ const EarnTemplatev2 = (props) => {
       {Loading && <Loader />}
       <div className='earn-strategies-ai'>
         <div className='earn-strategies-ai-tittle'>
-            <p>{namePool}</p>
-            <h3>
-              {type} Yield: {unique?"Surprise ": `${percentOfContract} %` }
-            </h3>
+            <h2>{namePool}</h2>
         </div>
         <div className='earn-strategies-ai-info'>
               <div className='info-left'>
