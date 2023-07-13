@@ -1,7 +1,7 @@
  [
         {
             "address":"0xf60a872D88Eb187058155daD9659E82DAC8CA40e",
-            "namePool": "Institutional",
+            "namePool": "B2B",
             "strategy":"Trading and arbitrage",
             "risk": "Low",
             "token": "USDT",
