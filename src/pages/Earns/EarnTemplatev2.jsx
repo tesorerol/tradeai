@@ -428,7 +428,7 @@ const EarnTemplatev2 = (props) => {
                       <h3 className={` `}>Yield:</h3>
                     </div>
                     <p className="table-number">
-                      {index===2?20:13}% yield
+                      15% yield
                     </p>
                   </div>
                   <div className="table-row ">
