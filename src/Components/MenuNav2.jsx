@@ -17,7 +17,7 @@ const MenuNav2 = ({removeAct, addAct, refActive}) => {
   return (
     <div className='menu-nav'>
             
-            {
+            {/* {
                 isAllowed &&
                 <> 
                 { 
@@ -31,7 +31,8 @@ const MenuNav2 = ({removeAct, addAct, refActive}) => {
                 data.map((item,i)=>(
                     !item.whitelist && item.visible === "true" &&  <NavLink className='button-nav' to={`/earn-strategies/${item.address}`} onClick={removeAct}>{item.namePool}</NavLink>
                 ))
-            }
+            } */}
+            <NavLink className='button-nav' to="/" onClick={removeAct}> Pools</NavLink>
             <NavLink className='button-nav' to="/market" onClick={removeAct}> Market</NavLink>
             
             
