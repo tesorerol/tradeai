@@ -3,6 +3,8 @@ import logo from "../assets/logo/logo-w-b.png"
 import {AiOutlineClose} from "react-icons/ai";
 import Comunity from './Comunity';
 import MenuNav2 from './MenuNav2';
+import NewMenu from './NewMenu';
+import NewMenuMobile from './NewMenuMobile';
 
 const MenuMobile = ({closeMenu}) => {
 
@@ -21,6 +23,7 @@ const MenuMobile = ({closeMenu}) => {
             <AiOutlineClose onClick={closeMenu} color='#256fe2' size={"30px"}/>
         </div>
         <MenuNav2 removeAct={closeMenu} addAct={closeMenu} refActive={refActive}/>
+        {/* <NewMenuMobile closeMenu={closeMenu}/> */}
 
         {/* <Comunity /> */}
 
