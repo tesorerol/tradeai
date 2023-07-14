@@ -8,6 +8,6 @@
             "type":"Weekly",
             "visible":"true",
             "claim":true,
-            "desposit":true
+            "desposit":false
         }  
 ]
