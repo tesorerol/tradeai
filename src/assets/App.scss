@@ -386,6 +386,7 @@ a{
             background: linear-gradient(to right, #09151f, #0e2232);
             // backdrop-filter: blur(10px);
             border-bottom: 1px solid var(--blue-opa);
+            z-index: 10;
 
             button{
                 margin-top: 15px;
@@ -1443,7 +1444,33 @@ a{
         z-index: 9999;
   }
 
- 
+  @media only screen and (max-width:600px){
+
+    .earn-strategies-ai-details-details{
+      overflow-x: scroll;
+
+      &::-webkit-scrollbar{
+        // display: none;
+        height: 3px;
+      }
+      &::-webkit-scrollbar-track { 
+        border-radius: 30px;
+      }
+      
+      
+      &::-webkit-scrollbar-thumb {
+        background-color: var(--blue-new);  
+        border-radius: 20px;       
+        border: 3px solid var(--blue-new);  
+      }
+    }
+
+    .progress-section-details-staked{
+      width: 600px;
+    }
+  }
+
+
 
   @media only screen and (max-width:800px){
 
@@ -2723,10 +2750,10 @@ a{
   // background-color: rgba(255, 255, 255, 0.05);
   background-color: var(--dark-2);
   display: flex;
-  flex-direction: column;
+  // flex-direction: column;
   position: relative;
   border-radius: 5px;
-  margin-top: 5px;
+  // margin-top: 5px;
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.105) ,inset 0 0 5px rgba(0, 0, 0, 0.1);
 
 
@@ -2735,22 +2762,24 @@ a{
       }
 
     .table-row{
-      height: 65px;
+      // height: 65px;
       display: flex;
       align-items: center;
+      flex-direction: column;
       width: 100%;
+      padding: 10px 0;
       // backdrop-filter: blur(5px);
       div{
-        border-right: 1px solid #164671;
+        // border-right: 1px solid #164671;
         height: 100%;
         display: flex;
         align-items: center;
-        padding-left: 20px;
-        width: 200px;
+        // padding-left: 20px;
+        // width: 200px;
       }
       h3{
         font-size: 15px;
-        margin-bottom: 0;
+        margin-bottom: 10px;
         font-weight: 400;
       }
 
@@ -2760,7 +2789,10 @@ a{
         color: rgba(255, 255, 255, 0.637);
         width: 100%;
         margin-bottom: 0;
-        padding-left: 20px;
+        // padding-left: 20px;
+        text-align: center;
+        padding: 10px 0 0 0;
+        border-top: 1px solid var(--blue-opa);
       }
     }
 }
@@ -3615,7 +3647,7 @@ a{
   // padding-bottom: 40px !important;
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 10px;
 }
 
 .container-modal-transactions{
@@ -4634,15 +4666,16 @@ a{
     // height: 800px;
     display: flex;
     gap: 30px;
-    height: 380px;
+    // height: 380px;
     justify-content: space-between;
+    flex-direction: column;
     // background: linear-gradient(to left, #09151f, #0e2232,#09151f);
     // border: 1px solid var(--blue-opa);
     // box-shadow: 0 0 20px rgba(0, 0, 0, 0.61);
     // border-radius: 10px;
     
     &-deposit{
-      width: 50%;
+      width: 100%;
       height: 100%;
       background: linear-gradient(to right, #09151f, #0e2232);
       // background-color: #0e2232;
@@ -4660,7 +4693,7 @@ a{
       }
     }
     &-details{
-      width: 50%;
+      width: 100%;
       height: 100%;
       background: linear-gradient(to left, #09151f, #0e2232);
       // background-color: #0e2232;
@@ -4674,6 +4707,8 @@ a{
         border-bottom: 1px solid var(--blue-new);
         padding-bottom: 5px;
       }
+
+  
     }
   }
 }
@@ -5122,3 +5157,20 @@ a{
   color: #e8e8e8 !important;
 }
 
+.modal-popup{
+  position: fixed !important;
+}
+
+.button-claim{
+  // border: 1px solid var(--dark-3);
+  padding: 3px 20px;
+  border-radius: 20px;
+  background-color: var(--dark-3);
+  transition: all 0.4s ease-in-out;
+  color: white;
+  &:hover{
+    background-color: var(--blue-new);
+    color: white;
+    cursor: pointer;
+  }
+}

@@ -4,7 +4,7 @@ import { Link, NavLink } from 'react-router-dom'
 
 const PopUp = ({togglePopup}) => {
   return (
-    <div className='modal-header'>
+    <div className='modal-header modal-popup'>
         <div className='container-popup aparecer'>
             <h2>Migration in process, changelog:</h2>
             <p>Whitelist self service</p>

@@ -435,7 +435,7 @@ const EarnTemplate = (props) => {
             {claim &&(
               <div className="progress-section-details-staked">
                 <div className="table-staked">
-                  <div className="table-row row1">
+                  <div className="table-row ">
                     <div>
                       <h3>Your stake:</h3>
                     </div>
@@ -443,7 +443,7 @@ const EarnTemplate = (props) => {
                       {formatMoney(UserInfo.Amount, 'USDT')}
                     </p>
                   </div>
-                  <div className="table-row row1">
+                  <div className="table-row ">
                     <div>
                       <h3>Pending Earn:</h3>
                     </div>
@@ -466,23 +466,23 @@ const EarnTemplate = (props) => {
                       :formatMoney(UserInfo.Earn, 'USDT')}
                     </p>
                   </div>
-                </div>
-                {
-                  UserInfo.Amount > 0 && claim &&
-                  <button
-                    className="button2 btn-claim"
-                    onClick={() => (FinishTime ? console.log() : Witdraw())}
-                  >
+                  <div className="table-row ">
+                    <div>
+                      <h3>Timer:</h3>
+                    </div>
+                    <p className="table-number" onClick={() => (FinishTime ? console.log() : Witdraw())}>
                     {FinishTime ? (
                       <span className='button-content'>{FinishTime}</span>
                     ) : (
-                      <span className='button-content'>
+                      <span className='button-content button-claim'>
                         <i className="fa-solid fa-lock mr-1"></i>
                         {'Claim'}
                       </span>
                     )}
-                  </button>
-                }
+                    </p>
+                  </div>
+                </div>
+            
               </div>
             )}
           </div>
