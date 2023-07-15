@@ -1,13 +1,14 @@
  [
         {
-            "address":"0x9b8a82B85034df40EfE34c4087c36D41fc559914",
+            "address":"0x9715A8A317385B2c300e9C98EEE1c036f7B74deb",
             "namePool": "The Treehouse",
             "strategy":"Trading and arbitrage",
             "risk": "Low",
             "token": "USDT",
+            "AbiType":"v3",
             "type":"Weekly",
             "visible":"true",
             "claim":true,
-            "desposit":false
+            "desposit":true
         }  
 ]

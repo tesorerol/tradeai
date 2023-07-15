@@ -10,8 +10,6 @@ import Login from './pages/Login/Login';
 import RecentTransactions from './Components/RecentTransactions';
 import { WalletContext } from './Providers/WallectConnect';
 import NotFound from './Components/NotFound';
-import NewEarn from './pages/NewEarn/NewEarn';
-import Genv2 from './pages/NewEarn/gen2v2';
 import Home from './pages/Home/Home';
 import Market from './pages/Market/Market';
 import DetailsDinamic from './pages/Market/DetailsDinamic';

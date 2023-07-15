@@ -8,6 +8,7 @@ import Pools from '../../Data/contracts.json';
 import AbiPrivate from '../../artifacts/contracts/EarnPrivate.sol/EARNPRIVATE.json'
 import AbiPublic from '../../artifacts/contracts/Earn.sol/BeNFTEARN.json'
 import AbiPass from '../../artifacts/contracts/EarnPass.sol/BeNFTEARNPASS.json'
+import AbiV3 from '../../artifacts/contracts/Earnv3.sol/EARNPRIVATE.json';
 const EarnDinamic = () => {
 
     const {data} = useSelector((state)=> state.contract)
@@ -15,21 +16,18 @@ const EarnDinamic = () => {
     const dataContract = data
     const {address} = useParams()
     
-    // useEffect(()=>{
-    //   if(dataContract !== ""){
-    //     const pool =  dataContract.filter(pool=> pool.name == name)
-    //     setDataPool(pool)
-    //     return
-    //   }
-    // },[dataContract])
-
-    // useEffect(()=>{
-    //   if(dataContract !== ""){
-    //     const pool =  dataContract.filter(pool=> pool.name == name)
-    //     setDataPool(pool)
-    //     return
-    //   }
-    // },[name])
+   function setTypeAbi(abi){
+    switch (abi) {
+      case "pass":
+        return AbiPass;
+      case "public":
+        return AbiPublic;
+      case "v3":
+        return AbiV3;
+      default:
+        return AbiPrivate
+    }
+   }
 
     const pool =  Pools.filter(pool=> pool.address == address)
 
@@ -37,7 +35,9 @@ const EarnDinamic = () => {
     <>
       {/* {dataContract == "" ? <Loading/> :  */}
       <>
-        {pool == "" ? <NotFound/> : <EarnTemplate Abi={pool[0].AbiType==="pass"?AbiPass:pool[0].AbiType==="public"?AbiPublic:AbiPrivate} AbiType={pool[0].AbiType} claim={pool[0].claim} desposit={pool[0].desposit} unique={pool[0].unique} type={pool[0].type} strategy={pool[0].strategy} EarnContract={pool[0].address} namePool={pool[0].namePool}  risk={pool[0].risk} token={pool[0].token}/>}
+        {pool == "" ? <NotFound/> 
+        :<EarnTemplate Abi={setTypeAbi(pool[0].AbiType)} AbiType={pool[0].AbiType} claim={pool[0].claim} desposit={pool[0].desposit} unique={pool[0].unique} type={pool[0].type} strategy={pool[0].strategy} EarnContract={pool[0].address} namePool={pool[0].namePool}  risk={pool[0].risk} token={pool[0].token}/>
+        }
       </>
       {/* } */}
     </>
