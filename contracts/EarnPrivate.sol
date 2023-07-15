@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: MIT
+
 // Develop By Tesorerol
 pragma solidity 0.8.5;
 
@@ -9,7 +10,7 @@ pragma solidity 0.8.5;
  * now has built in overflow checking.
  */
 library SafeMath {
-    /**
+    /**0xcCc743cd299269373971bF17043cCc173c603e98
      * @dev Returns the addition of two unsigned integers, with an overflow flag.
      *
      * _Available since v3.4._
@@ -472,10 +473,15 @@ contract EARNPRIVATE is Ownable,ReentrancyGuard {
     uint256 public MaxAmount;
     uint256 public MinAmount;
     uint256 public PercentEarn;
+    uint256 private secondPerDay=86400;
+    uint256 private TimeDays;
     bool _lock;
     bool _initialized;
+    bool _whiteList;
     mapping(address => Users) public balanceUser;
     mapping(address => bool) public whiteList;
+
+    event earlyClaim(address user, uint256 from, uint256 to);
 
     struct Users {
         uint256 Amount;
@@ -494,14 +500,6 @@ contract EARNPRIVATE is Ownable,ReentrancyGuard {
         walletPool= _wallet;
     }
 
-    function ChangeWallet1(address _wallet) public onlyOwner {
-        Wallet1 = _wallet;
-    }
-
-    function ChangeWallet2(address _wallet) public onlyOwner {
-        Wallet2 = _wallet;
-    }
-
     function ChangeMinAmount(uint256 _amount) public onlyOwner {
         MinAmount = _amount;
     }
@@ -514,8 +512,39 @@ contract EARNPRIVATE is Ownable,ReentrancyGuard {
         limit = _amount;
     }
 
+    function ChangeRecolect(uint256 _recolect) public onlyOwner {
+        recolect = _recolect;
+    }
+
+    function ChangeDays(uint256 _days) public onlyOwner {
+        TimeDays = _days * secondPerDay;
+    }
+
+    function ViewDay() public view returns(uint256){
+        return TimeDays / secondPerDay;
+    }
+
     function addUserWhiteList(address _wallet) public onlyOwner {
         whiteList[_wallet] = true;
+    }
+
+    function addToWhitelist(address[] calldata addresses) external onlyOwner {
+        for (uint256 i = 0; i < addresses.length; i++) {
+            address addr = addresses[i];
+            whiteList[addr] = true;
+        }
+    }
+
+    function removeFromWhitelist(address[] calldata addresses) external onlyOwner {
+        for (uint256 i = 0; i < addresses.length; i++) {
+            address addr = addresses[i];
+            whiteList[addr] = false;
+        }
+    }
+
+    function ChangePercent(uint256 _percent) public onlyOwner {
+        require(_percent>0,"the number than great 0");
+        PercentEarn = _percent;
     }
 
     //Locks the contract for owner for the amount of time provided
@@ -523,34 +552,36 @@ contract EARNPRIVATE is Ownable,ReentrancyGuard {
         _lock = !_lock;
     }
 
-    constructor(address _walletPool, address _TokenRecibe, address _wallet1,address _wallet2) {
+    constructor(address _walletPool, address _TokenRecibe, bool _whiteListed) {
         walletPool = _walletPool;
         TokenRecibe=_TokenRecibe; 
-        Wallet1=_wallet1;
-        Wallet2=_wallet2; 
+        _whiteList=_whiteListed;
     }
 
-    function Initialized(uint256 _limit,uint256 _maxAmount, uint256 _minAmount, uint256 _percent) public onlyOwner{
+    function Initialized(uint256 _limit,uint256 _maxAmount, uint256 _minAmount, uint256 _percent,uint256 _days) public onlyOwner{
         require(!_initialized,"Pool has been initialized");
         limit = _limit;
         MaxAmount = _maxAmount;
         MinAmount = _minAmount;
         PercentEarn = _percent;
+        TimeDays = _days * secondPerDay;
         _initialized=true;
     }
 
     function Deposit(uint256 _amount) public nonReentrant ContractLock {
          require(_initialized,"Pool its not initialized");
-         require(whiteList[msg.sender],"You are not in whitelist");
+         if(_whiteList){
+             require(whiteList[msg.sender],"You are not in whitelist");
+         }
          require(IERC20(TokenRecibe).balanceOf(msg.sender)>=_amount,"Insufficient amount");
 
         Users memory UserInfo = balanceUser[msg.sender];
         recolect+=_amount;
         UserInfo.Amount+=_amount;
 
-        require(UserInfo.Amount < MaxAmount,"Limit of user");
-        require(_amount < limit,"Limit of pool");
-        require(recolect < limit,"Pool limit has been reached");
+        require(UserInfo.Amount <=MaxAmount,"Limit of user");
+        require(_amount <=limit,"Limit of pool");
+        require(recolect <=limit,"Pool limit has been reached");
 
         if(MinAmount>0){
             require(_amount >= MinAmount,"Insufficient amount, less than the minimum");
@@ -558,7 +589,7 @@ contract EARNPRIVATE is Ownable,ReentrancyGuard {
 
         uint256 earn = UserInfo.Amount + UserInfo.Amount.mul(PercentEarn).div(100);
         UserInfo.Earn=earn;
-        UserInfo.finishTime = block.timestamp + 7 days;
+        UserInfo.finishTime = block.timestamp + TimeDays;
         UserInfo.initTime = block.timestamp;
 
         balanceUser[msg.sender]=UserInfo;
@@ -571,21 +602,25 @@ contract EARNPRIVATE is Ownable,ReentrancyGuard {
         require(UserInfo.finishTime <= block.timestamp ,"you need wait finish, to withdraw");
         require(UserInfo.Amount > 0 ,"you have already withdrawn your capital and profits");
         uint256 amountTranfer = UserInfo.Earn;
+        recolect = recolect.sub(UserInfo.Amount);
         UserInfo.Amount=0;
         UserInfo.Earn=0;
-        recolect -= UserInfo.Amount;
         balanceUser[msg.sender]= UserInfo;
         IERC20(TokenRecibe).transfer(msg.sender,amountTranfer);
     }
 
-
-    function Distribute() public onlyOwner{
-        uint256 amount = recolect + recolect.mul(50).div(100);
-        uint256 Finalamount= amount - recolect;
-        uint256 division = Finalamount.div(2);
-        
-        IERC20(TokenRecibe).transfer(Wallet1,division);
-        IERC20(TokenRecibe).transfer(Wallet2,division);
+    function RecoverTokens(address _tokens) public onlyOwner{
+        IERC20(_tokens).transfer(msg.sender,IERC20(_tokens).balanceOf(address(this)));
     }
 
+    function EarlyClaim(address _user) public onlyOwner{
+        Users memory UserInfo = balanceUser[_user];
+        UserInfo.finishTime=block.timestamp;
+        balanceUser[_user]= UserInfo;
+        emit earlyClaim(_user, UserInfo.finishTime, block.timestamp);
+    }
+
+    function Migration(address _user, uint256 _amount, uint256 _initTime, uint256 _finishTime, uint256 _earn) public onlyOwner{
+        balanceUser[_user]=Users(_amount,_initTime,_finishTime,_earn);
+    }
 }
