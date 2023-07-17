@@ -10,5 +10,17 @@
             "AbiType":"v3",
             "claim":true,
             "desposit":true
+        },
+        {
+            "address":"0x26B356433Dabc81c738a0ED1e6fffA3F6160081f",
+            "namePool": "Aion Venture",
+            "strategy":"Trading and arbitrage",
+            "risk": "Low",
+            "token": "USDT",
+            "type":"",
+            "visible":"true",
+            "AbiType":"v3",
+            "claim":true,
+            "desposit":true
         }
 ]
