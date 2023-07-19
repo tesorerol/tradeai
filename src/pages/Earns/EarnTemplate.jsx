@@ -17,7 +17,7 @@ import Table from '../../Components/Table'
 const EarnTemplate = (props) => {
   const [percentage, setPercentage] = useState(null)
 
-  const { EarnContract, namePool, strategy, risk, token, type, AbiType,Abi,claim,desposit,unique,infinite,Pair} = props
+  const { EarnContract, namePool, strategy, risk, token, type, AbiType,Abi,claim,desposit,unique,infinite,Pair,table} = props
   const { Provider, address } = useContext(WalletContext)
   let USDT = '0x55d398326f99059fF775485246999027B3197955'
   const [Recolect, setRecolect] = useState('0')
@@ -509,9 +509,9 @@ const EarnTemplate = (props) => {
         </div>
         
 
-      {infinite && <DailyTable />}
-      {infinite&& <InfoPool />}
-      {infinite&& <Table />}
+      {infinite && table && <DailyTable />}
+      {infinite&& table && <InfoPool />}
+      {infinite&& table && <Table />}
 
       </div>
       
