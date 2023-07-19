@@ -32,7 +32,7 @@ const MenuNav2 = ({removeAct, addAct, refActive}) => {
                     !item.whitelist && item.visible === "true" &&  <NavLink className='button-nav' to={`/earn-strategies/${item.address}`} onClick={removeAct}>{item.namePool}</NavLink>
                 ))
             } */}
-            <NavLink className='button-nav' to="/" onClick={removeAct}> Pools</NavLink>
+            <NavLink className='button-nav' to="/earn-strategies" onClick={removeAct}> Pools</NavLink>
             <NavLink className='button-nav' to="/market" onClick={removeAct}> Market</NavLink>
             
             

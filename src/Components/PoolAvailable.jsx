@@ -234,7 +234,7 @@ const { Provider, address, isAllowed } = useContext(WalletContext)
                 {/* <p>{strategy}</p> */}
                 <h2>{name}</h2>
                 <p>Duration: <span>{duration}</span></p>
-                <p>Yield: <span>{percentOfContract}%</span></p>
+                <p>Yield: <span>{percentOfContract != 0 ? percentOfContract+"%" : "Undetermined"}</span></p>
                 <div className='container-progress-market'>
                     <div className='text-remaining'>
                         <p>PROGRESS</p>

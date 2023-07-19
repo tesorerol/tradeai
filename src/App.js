@@ -80,8 +80,8 @@ document.addEventListener("keydown", function(e) {
               <Header toggleModal={toggleModal} setLoginActive={setLoginActive}/>
               <div className='container-routes'>
                 <Routes>
-                  {/* <Route path="/" element={<Navigate to="/market"/>} /> */}
-                  <Route path="/" element={<Home />} />
+                  <Route path="/" element={<Navigate to="/earn-strategies"/>} />
+                  <Route path="/earn-strategies" element={<Home />} />
                   <Route path="/earn-strategies/wl/:address"  element={isAllowed ? <EarnDinamic /> : <NotFound />} />
                   <Route path="/earn-strategies/:address"  element={<EarnDinamic />} />
                   {/* <Route path="/earn-strategies/:address" render={() => isAllowed ? (<EarnDinamic />) : (null)} /> */}
