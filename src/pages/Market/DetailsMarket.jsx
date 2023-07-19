@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import gold from "../../assets/market/bg-gold.jpg"
 import diamond from "../../assets/market/bg-diamond.jpg"
 import platinum from "../../assets/market/bg-platinum.jpg"
+import gm from "../../assets/market/gmj.png"
 import { BsQuestionSquare } from 'react-icons/bs'
 import {Approve , Allowance} from "../../Helpers"
 import { WalletContext } from '../../Providers/WallectConnect'
@@ -128,6 +129,7 @@ const DetailsMarket = ({scid,pair,interval, max, id,maxCount,weeklyCost,leverage
                     {type === "gold" && <img src={gold} alt="titanium TradeAI" />}
                     {type === "platinum" && <img src={platinum} alt="platinium TradeAI" />} 
                     {type === "diamond" && <img src={diamond} alt="diamond TradeAI" />}
+                    {type === "gm" && <img src={gm} alt="diamond TradeAI" />}
                 </div>
                 <div className='head-info'>
                     <div className='head-info-details'>

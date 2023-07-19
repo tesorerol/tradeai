@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import cardPlatinum from "../../assets/market/card-platinum.jpg"
 import cardDiamond from "../../assets/market/card-diamond.jpg"
 import cardGold from "../../assets/market/card-gold.jpg"
+import cardGM from "../../assets/market/bg-gmjp.png"
 import { WalletContext } from '../../Providers/WallectConnect'
 import SlotAbi from "../../artifacts/slots/abi.json"
 import {ethers} from "ethers"
@@ -97,7 +98,8 @@ const Market = () => {
                     </Link> 
                     {item.type === "gold" && <img className='card-bg' src={cardGold} alt="" />} 
                     {item.type === "diamond" && <img className='card-bg' src={cardDiamond} alt="" />} 
-                    {item.type === "platinum" && <img className='card-bg' src={cardPlatinum} alt="" />} 
+                    {item.type === "platinum" && <img className='card-bg' src={cardPlatinum} alt="" />}
+                    {item.type === "gm" && <img className='card-bg' src={cardGM} alt="" />} 
                 </div>
             ))
         }
