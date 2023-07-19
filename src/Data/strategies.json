@@ -15,7 +15,9 @@
         "type":"platinum",
         "description":"2 pairs, 5 minute candle interval strategy based on market volatility and volumes.",
         "description2":"Tested - sending an average of 9 entry points daily",
-        "description3": "Correlates SL levels, TPs and leverage for max optimization while running."
+        "description3": "Correlates SL levels, TPs and leverage for max optimization while running.",
+        "period": 10,
+        "typePeriod":"Week"
     },
     {
         "id":"ANR-010",
@@ -33,7 +35,9 @@
         "type":"diamond",
         "description":"2 pairs, 15 minute candle interval strategy based on market volatility, key daily timeframes and resistance levels.",
         "description2":"Tested - sending an average of 5 entry points daily",
-        "description3": "Correlates SL levels, TPs and leverage for max optimization while running."
+        "description3": "Correlates SL levels, TPs and leverage for max optimization while running.",
+        "period": 10,
+        "typePeriod":"Week"
     },
     {
         "id":"GMJ-003",
@@ -51,7 +55,9 @@
         "type":"gold",
         "description":"1 pair, 5 minute candle interval strategy based on market volatility and volumes. ",
         "description2":"Tested - sending an average of 9 entry points daily",
-        "description3": "Correlates SL levels, TPs and leverage for max optimization while running."
+        "description3": "Correlates SL levels, TPs and leverage for max optimization while running.",
+        "period": 10,
+        "typePeriod":"Week"
     },
     {
         "id":"gmjp",
@@ -69,7 +75,9 @@
         "type":"gm",
         "description":"Copy trade the GM Japan team for 1 month ",
         "description2":"Proven profitable trades for more than 3 years",
-        "description3": "Membership starts Aug1 and runs for 30’days"
+        "description3": "Membership starts Aug1 and runs for 30’days",
+        "period": 4,
+        "typePeriod":"Monthly"
     }
 ]
 

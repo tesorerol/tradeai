@@ -23,6 +23,7 @@ const Market = () => {
     const [slotsRemainingPlatinum,setSlotsRemainingPlatinum]=useState(null)
     const [slotsRemainingDiamond,setSlotsRemainingDiamond]=useState(null)
     const [slotsRemainingGold,setSlotsRemainingGold]=useState(0)
+    const [slotsGMJP,setslotsGMJP]=useState(0)
 
     async function getSlotLefts(data) {
         for (const item of data) {
@@ -30,6 +31,7 @@ const Market = () => {
             let totalGold = 0
             let totalDiamond = 0
             let totalPlatinum = 0
+            let GMJP = 0
             
             await contractConsult.getAllDaySlots(scid).then(async (r) => {
               if (type === 'platinum') {
@@ -87,7 +89,7 @@ const Market = () => {
                     <div className='container-progress-market'>
                     <div className='text-remaining'>
                         <p>PROGRESS</p>
-                        <span>{item.type==="gold"? slotsRemainingGold : item.type === "platinum" ? slotsRemainingPlatinum : slotsRemainingDiamond}/5000</span>
+                        <span>{item.type==="gold"? slotsRemainingGold : item.type === "platinum" ?  slotsRemainingPlatinum : item.type === "diamond" ? slotsRemainingDiamond : slotsGMJP}/5000</span>
                     </div>
                     <div className='progress-bar-market'>
                         <div className={`bar-market ${item.type === "gold" ? "background-gold" : item.type === "platinum" ? "background-platinum" : item.type === "diamond" ? "background-diamond" : ""}`} style={{ width: `${item.type==="gold"? percentGold : item.type === "platinum" ? percentPlatinum : percentDiamond}%` }}></div>

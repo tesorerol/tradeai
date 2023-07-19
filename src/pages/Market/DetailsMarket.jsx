@@ -11,9 +11,18 @@ import SlotAbi from '../../artifacts/slots/abi.json'
 import Swal from 'sweetalert2'
 import { ethers } from 'ethers'
 import Loader from '../../Components/Loading'
+import TablePeriod from '../../Components/TablePeriod'
+
+const InputsToPrint=({amount})=>{
+  let array=[];
+  for (let i = 1; i <=amount; i++) {
+   array.push(<option key={i} value={i}>{i}</option>);
+  }
+  return array;
+}
 
 
-const DetailsMarket = ({scid,pair,interval, max, id,maxCount,weeklyCost,leverage,type,name,description,description2,description3}) => {
+const DetailsMarket = ({scid,pair,interval, max, id,maxCount,weeklyCost,leverage,type,name,description,description2,description3,period,typePeriod}) => {
 
     const { Provider, address } = useContext(WalletContext)
     const EarnContract = "0x836AaF1A00eaDEe459d64636222ac80Ee27c673D"
@@ -154,20 +163,9 @@ const DetailsMarket = ({scid,pair,interval, max, id,maxCount,weeklyCost,leverage
                                     className='input-number' />
                         </div>
                         <div className='container-input'>
-                            <label htmlFor="number">Weeks to Rent:</label>
+                            <label htmlFor="number">{typePeriod} to Rent:</label>
                             <select name='weekly' className='input-select' value={selectedOption} onChange={handleChangeSelect}>
-                                {/* <option value="">1-4</option> */}
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
-                                <option value="8">8</option>
-                                <option value="9">9</option>
-                                <option value="10">10</option>
-                                
+                                <InputsToPrint amount={period} />
                             </select>
                         </div>
 
@@ -263,8 +261,8 @@ const DetailsMarket = ({scid,pair,interval, max, id,maxCount,weeklyCost,leverage
                     <div className='aparecer'>
                         <p>{description}</p>
                         <p>{description2}</p>
-                        <p>{description3}</p>
-                        <p>Supported Cexs Binance, Bybit and Kucoin.</p>
+                        <p>{description3}</p> 
+                        <p>Supported Cexs: All</p>
                     </div>}
                     {
                         descriptionActive === 2 &&
@@ -275,103 +273,8 @@ const DetailsMarket = ({scid,pair,interval, max, id,maxCount,weeklyCost,leverage
                         </div>
                     }
                 </div>
-            
-                <div className='container-body-table'>
-                    <h3>Remaining Slots</h3>
-                    <table className='body-table'>
-                        <tbody>
-                        <tr>
-                            <td>Week 1</td>
-                            <td>{SlotLeft.length>0&&SlotLeft[0].toString()}</td>
-                        </tr>
-                        <tr>
-                            <td>Week 2</td>
-                            <td>{SlotLeft.length>0&&SlotLeft[1].toString()}</td>
-                        </tr>
-                        <tr>
-                            <td>Week 3</td>
-                            <td>{SlotLeft.length>0&&SlotLeft[2].toString()}</td>
-                        </tr>
-                        <tr>
-                            <td>Week 4</td>
-                            <td>{SlotLeft.length>0&&SlotLeft[3].toString()}</td>
-                        </tr>
-                        <tr>
-                            <td>Week 5</td>
-                            <td>{SlotLeft.length>0&&SlotLeft[4].toString()}</td>
-                        </tr>
-                        <tr>
-                            <td>Week 6</td>
-                            <td>{SlotLeft.length>0&&SlotLeft[5].toString()}</td>
-                        </tr>
-                        <tr>
-                            <td>Week 7</td>
-                            <td>{SlotLeft.length>0&&SlotLeft[6].toString()}</td>
-                        </tr>
-                        <tr>
-                            <td>Week 8</td>
-                            <td>{SlotLeft.length>0&&SlotLeft[7].toString()}</td>
-                        </tr>
-                        <tr>
-                            <td>Week 9</td>
-                            <td>{SlotLeft.length>0&&SlotLeft[8].toString()}</td>
-                        </tr>
-                        <tr>
-                            <td>Week 10</td>
-                            <td>{SlotLeft.length>0&&SlotLeft[9].toString()}</td>
-                        </tr>
-                        
-                        </tbody>
-                    </table>
-                </div>
-                <div className='container-body-table'>
-                    <h3>Your Slots</h3>
-                    <table className='body-table'>
-                    <tbody>
-                        <tr>
-                            <td>Week 1</td>
-                            <td>{UserPurchase.length>0&&UserPurchase[0].toString()}</td>
-                        </tr>
-                        <tr>
-                            <td>Week 2</td>
-                            <td>{UserPurchase.length>0&&UserPurchase[1].toString()}</td>
-                        </tr>
-                        <tr>
-                            <td>Week 3</td>
-                            <td>{UserPurchase.length>0&&UserPurchase[2].toString()}</td>
-                        </tr>
-                        <tr>
-                            <td>Week 4</td>
-                            <td>{UserPurchase.length>0&&UserPurchase[3].toString()}</td>
-                        </tr>
-                        <tr>
-                            <td>Week 5</td>
-                            <td>{UserPurchase.length>0&&UserPurchase[4].toString()}</td>
-                        </tr>
-                        <tr>
-                            <td>Week 6</td>
-                            <td>{UserPurchase.length>0&&UserPurchase[5].toString()}</td>
-                        </tr>
-                        <tr>
-                            <td>Week 7</td>
-                            <td>{UserPurchase.length>0&&UserPurchase[6].toString()}</td>
-                        </tr>
-                        <tr>
-                            <td>Week 8</td>
-                            <td>{UserPurchase.length>0&&UserPurchase[7].toString()}</td>
-                        </tr>
-                        <tr>
-                            <td>Week 9</td>
-                            <td>{UserPurchase.length>0&&UserPurchase[8].toString()}</td>
-                        </tr>
-                        <tr>
-                            <td>Week 10</td>
-                            <td>{UserPurchase.length>0&&UserPurchase[9].toString()}</td>
-                        </tr>
-                        
-                        </tbody>
-                    </table>
-                </div>
+                <TablePeriod tittle={"Remaining Slots"} period={period} typePeriod={typePeriod} data={SlotLeft}/>
+                <TablePeriod tittle={"Your Slots"} period={period} typePeriod={typePeriod} data={UserPurchase}/>
 
             </div>
         </div>
