@@ -58,26 +58,6 @@
         "description3": "Correlates SL levels, TPs and leverage for max optimization while running.",
         "period": 10,
         "typePeriod":"Week"
-    },
-    {
-        "id":"gmjp",
-        "scid":4,
-        "pair":"All tradable",
-        "name":"GMJ Copy trading",
-        "interval":"Copy Trading",
-        "max": "100,000",
-        "leverage":"up to 50X",
-        "strategyCap": "N/A",
-        "slots":"500",
-        "totalRev":"N/A",
-        "maxCount":"500",
-        "weeklyCost":"2,500",
-        "type":"gm",
-        "description":"Copy trade the GM Japan team for 1 month ",
-        "description2":"Proven profitable trades for more than 3 years",
-        "description3": "Membership starts Aug1 and runs for 30’days",
-        "period": 4,
-        "typePeriod":"Monthly"
     }
 ]
 
