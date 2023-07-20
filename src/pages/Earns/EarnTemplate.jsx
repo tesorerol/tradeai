@@ -394,7 +394,7 @@ const EarnTemplatev2 = (props) => {
             <h2>Your position</h2>
             {claim &&
             UserInfo.map((r,index)=>
-<div className="progress-section-details-staked">
+          <div className="progress-section-details-staked">
                 <div className="table-staked">
                   <div className="table-row row1">
                     <div>
@@ -426,8 +426,23 @@ const EarnTemplatev2 = (props) => {
                       :formatMoney(r.Earn, 'USDT')}
                     </p>
                   </div>
+                  <div className="table-row ">
+                    <div>
+                      <h3>Timer:</h3>
+                    </div>
+                    <p className="table-number table-timer" onClick={() => (r.Time ? console.log() : Witdraw(index))}>
+                      {r.Time ? (
+                        <span className='button-content'>{r.Time}</span>
+                      ) : (
+                        <span className='button-content'>
+                          <i className="fa-solid fa-lock mr-1"></i>
+                          {'Claim'}
+                        </span>
+                      )}
+                    </p>
+                  </div>
                 </div>
-                {
+                {/* {
                   r.Amount > 0 && claim &&
                   <button
                     className="button2 btn-claim"
@@ -442,7 +457,7 @@ const EarnTemplatev2 = (props) => {
                       </span>
                     )}
                   </button>
-                }
+                } */}
               </div>
             )
             }
