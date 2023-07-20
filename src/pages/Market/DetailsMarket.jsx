@@ -142,7 +142,7 @@ const DetailsMarket = ({scid,pair,interval, max, id,maxCount,weeklyCost,leverage
                 </div>
                 <div className='head-info'>
                     <div className='head-info-details'>
-                        <h2 className={`${type === "gold" ? "text-gold" : type === "platinum" ? "text-platinum" : type === "diamond" ? "text-diamond" : ""}`}>{name}</h2>
+                        <h2 className={`t-${type}`}>{name}</h2>
                         <span>{id}</span>
                         <p>Interval: {interval}</p>
                         <p>Max Margin per slot: {max}</p>

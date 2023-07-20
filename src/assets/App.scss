@@ -1486,6 +1486,7 @@ a{
           display: flex;
           flex-direction: column;
           gap:5px;
+          
         }
 
         h2{
@@ -4911,14 +4912,17 @@ a{
   &-type{
     font-weight: 300;
     margin: 0;
+    text-transform: uppercase;
     span{
       color: var(--blue-new);
       font-weight: 700;
     }
+  
   }
 
   h2{
     font-size:30px ;
+    text-transform: uppercase;
   }
 
   span{
@@ -4981,6 +4985,12 @@ a{
       width: 30%;
       flex-direction: column;
       gap: 10px;
+
+      &-details{
+        span{
+          text-transform: uppercase;
+        }
+      }
 
      
     }
@@ -5199,27 +5209,34 @@ a{
   z-index: -1;
 }
 
-.text-gold{
+.t-gold{
   color: #ffc600 !important;
 }
 
-.text-diamond{
+.t-diamond{
   color: #b2c0ea !important;
 
 }
-.text-platinum{
+.t-platinum{
   color: #e8e8e8 !important;
 }
-.background-gold{
+.b-gold{
   background-color: #ffc600 !important;
 }
 
-.background-diamond{
+.b-diamond{
   background-color: #b2c0ea !important;
 
 }
-.background-platinum{
+.b-platinum{
   background-color: #e8e8e8 !important;
+}
+.t-gm{
+  color: #bc0000 !important;
+  text-transform: uppercase;
+}
+.b-gm{
+  background-color: #bc0000 !important;
 }
 
 .container-modal-pop-up{
