@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import EarnTemplate from './EarnTemplate'
+import EarnTemplate from './EarnTemplate2.jsx'
 import NotFound from '../../Components/NotFound'
 import { useSelector } from 'react-redux'
 import Loading from '../../Components/Loading'
@@ -9,7 +9,7 @@ import AbiPrivate from '../../artifacts/contracts/EarnPrivate.sol/EARNPRIVATE.js
 import AbiPublic from '../../artifacts/contracts/Earn.sol/BeNFTEARN.json'
 import AbiPass from '../../artifacts/contracts/EarnPass.sol/BeNFTEARNPASS.json'
 import AbiV3 from '../../artifacts/contracts/Earnv3.sol/EARNPRIVATE.json';
-import EarnTemplatev2 from './EarnTemplate2'
+import EarnTemplatev2 from './EarnTemplate2.jsx'
 const EarnDinamic = () => {
 
     const {data} = useSelector((state)=> state.contract)
