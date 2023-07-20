@@ -65,7 +65,7 @@
         "pair":"All tradable",
         "name":"GMJ Copy trading",
         "interval":"Copy Trading",
-        "max": "100,000",
+        "max": "$100,000",
         "leverage":"up to 50X",
         "strategyCap": "N/A",
         "slots":"500",
