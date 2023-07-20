@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import EarnTemplate from './EarnTemplate2.jsx'
+import EarnTemplate from './EarnTemplate.jsx'
 import NotFound from '../../Components/NotFound'
 import { useSelector } from 'react-redux'
 import Loading from '../../Components/Loading'
@@ -8,7 +8,7 @@ import Pools from '../../Data/contracts.json';
 import AbiPrivate from '../../artifacts/contracts/EarnPrivate.sol/EARNPRIVATE.json'
 import AbiPublic from '../../artifacts/contracts/Earn.sol/BeNFTEARN.json'
 import AbiPass from '../../artifacts/contracts/EarnPass.sol/BeNFTEARNPASS.json'
-import AbiV3 from '../../artifacts/contracts/Earnv3.sol/EARNPRIVATE.json';
+import AbiV3 from '../../artifacts/Test.json';
 import EarnTemplatev2 from './EarnTemplate2.jsx'
 const EarnDinamic = () => {
 
