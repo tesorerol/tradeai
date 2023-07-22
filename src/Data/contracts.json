@@ -63,7 +63,7 @@
             "type":"10 Days",
             "visible":"true",
             "claim":true,
-            "desposit":true,
+            "desposit":false,
             "whitelist":true
         },
         {
@@ -77,7 +77,7 @@
             "type":"12 days",
             "visible":"true",
             "claim":true,
-            "desposit":true,
+            "desposit":false,
             "infinite":true,
             "whitelist":false
         },
@@ -92,7 +92,7 @@
             "type":"12 days",
             "visible":"true",
             "claim":true,
-            "desposit":true,
+            "desposit":false,
             "infinite":true,
             "whitelist":false
         },
@@ -107,7 +107,7 @@
             "pair":"BTC/USDT",
             "visible":"true",
             "claim":true,
-            "desposit":true,
+            "desposit":false,
             "infinite":true,
             "whitelist":false
         },
@@ -122,7 +122,7 @@
             "pair":"BTC/USDT",
             "visible":"true",
             "claim":true,
-            "desposit":true,
+            "desposit":false,
             "infinite":true,
             "whitelist":false
         },
@@ -137,7 +137,7 @@
             "pair":"ETH/USDT",
             "visible":"true",
             "claim":true,
-            "desposit":true,
+            "desposit":false,
             "infinite":true,
             "whitelist":false
         },
@@ -152,7 +152,7 @@
             "pair":"ETH/USDT",
             "visible":"true",
             "claim":true,
-            "desposit":true,
+            "desposit":false,
             "infinite":true,
             "whitelist":false
         },
@@ -167,7 +167,7 @@
             "pair":"ETH/USDT",
             "visible":"true",
             "claim":true,
-            "desposit":true,
+            "desposit":false,
             "infinite":true,
             "whitelist":false
         },
@@ -182,7 +182,7 @@
             "pair":"ETH/USDT",
             "visible":"true",
             "claim":true,
-            "desposit":true,
+            "desposit":false,
             "infinite":true,
             "whitelist":false
         },
@@ -197,7 +197,7 @@
             "pair":"BTC/USDT & ETH/USDT",
             "visible":"true",
             "claim":true,
-            "desposit":true,
+            "desposit":false,
             "infinite":true,
             "whitelist":false
         },
@@ -212,7 +212,7 @@
             "pair":"BTC/USDT & ETH/USDT",
             "visible":"true",
             "claim":true,
-            "desposit":true,
+            "desposit":false,
             "infinite":true,
             "whitelist":false
         },
@@ -227,7 +227,7 @@
             "pair":"Anarkey Ad-hoc",
             "visible":"true",
             "claim":true,
-            "desposit":true,
+            "desposit":false,
             "infinite":true,
             "whitelist":false
         }
