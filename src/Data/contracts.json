@@ -21,5 +21,16 @@
             "visible":"true",
             "claim":true,
             "desposit":true
-        }   
+        },
+        {
+            "address":"0x4794465c56BCa3A64BB339E07F7FDA249543A69C",
+            "namePool": "Monkeys on steroids",
+            "strategy":"Trading and arbitrage",
+            "risk": "Low",
+            "token": "USDT",
+            "type":"Weekly",
+            "visible":"true",
+            "claim":true,
+            "desposit":true
+        }
 ]
