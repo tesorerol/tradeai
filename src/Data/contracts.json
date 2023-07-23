@@ -28,7 +28,7 @@
             "strategy":"Trading and arbitrage",
             "risk": "Low",
             "token": "USDT",
-            "type":"Weekly",
+            "type":"2 days and 2 hours ",
             "visible":"true",
             "claim":true,
             "desposit":true
