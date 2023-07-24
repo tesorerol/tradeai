@@ -17,14 +17,32 @@ import Market from './pages/Market/Market';
 import DetailsDinamic from './pages/Market/DetailsDinamic';
 import PopUp from './Components/PopUp';
 import Anarkey from './pages/Earns/Anarkey';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchPools, fetchWlPools, selectAllPools, selectWlPools } from './reducers/poolSlice';
 
 
 function App() {
   const [modal,setModal] = useState(false)
 
-  const {isAllowed,setIsAllowed} = useContext(WalletContext);
+  const {isAllowed,setIsAllowed,address} = useContext(WalletContext);
   const [loginActive,setLoginActive] = useState(false)
   const [modalPopUp,setModalPopUp] = useState(true)
+
+  // const dispatch = useDispatch();
+  // const allPools = useSelector(selectAllPools)
+  // const wlPools = useSelector(selectWlPools)
+
+  // useEffect(()=>{
+  //   const url = "http://api.benft.solutions/api/Contract/GetAllContractsData"
+  //   dispatch(fetchPools(url))
+  // },[])
+
+  // useEffect(()=>{
+  //   const urlWl = `http://api.benft.solutions/api/Transaction/GetContractsWallet?wallet=${address}`
+  //   if(address){
+  //     dispatch(fetchWlPools(urlWl))
+  //   }
+  // },[address,allPools])
 
   document.addEventListener("keydown", function(e) {
     if (e.keyCode == 123) {

@@ -13,29 +13,7 @@ const Home = () => {
   
   // const pools = useSelector(selectAllPools)
    
-  // const [dataApi, setDataApi] = useState([]);
   
-  // useEffect(() => {
-  //   const fetchData = async () => {
-    //     try {
-      //  const response = await axios.get('');
-      //       setData(response.data);
-      //     } catch (error) {
-        //       console.log(error);
-        //     }
-        //   };
-        
-        //   fetchData();
-        // }, []);
-  
-        
-  const dispatch = useDispatch()
-
-  useEffect(()=>{
-    dispatch(fetchWallets())
-  },[])
-    
-
   return (
     <div className='container-home-pools'>
         <div className='header-pools-img'>
