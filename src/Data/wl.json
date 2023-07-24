@@ -2913,9 +2913,6 @@
      "wallet": "0x3dbD5704316C4Af64770A6008b8d2e22730d6c0C"
     },
     {
-     "wallet": "0x320e947Ec3F35F7Dc8d4bA634EaEDa00C3db8F4a"
-    },
-    {
      "wallet": "0xDfEdd65033a98d1096dF10D9b5b77CF30445cdD8"
     },
     {
@@ -4823,6 +4820,9 @@
         "wallet": "0xdbA7674F2a3C02741a4422f5CCD7A978B12eD796"
     },
     {
-        "wallet": "0x04B62b0eE0ac5668dA7D27342e1F5C6710BB338a"
+        "wallet": "0x28502C3172fF2F64A56dB665cF32f21B62170526"
+    },
+    {
+        "wallet": "0xc774FeCA444d0E5e4F9875F886616ee0BA8ebB08"
     }
    ]
