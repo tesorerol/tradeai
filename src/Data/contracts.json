@@ -31,6 +31,18 @@
             "type":"2 days and 2 hours ",
             "visible":"true",
             "claim":true,
-            "desposit":true
+            "desposit":false
+        },
+        {
+            "address":"0x6E3138381633830dB1b29e30C912a2CC62d35B04",
+            "namePool": "FOMC Degen",
+            "strategy":"Trading and arbitrage",
+            "risk": "Low",
+            "token": "USDT",
+            "type":"5 days",
+            "visible":"true",
+            "claim":true,
+            "desposit":true,
+            "AbiType":"v3"
         }
 ]

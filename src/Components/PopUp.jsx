@@ -6,11 +6,8 @@ const PopUp = ({togglePopup}) => {
   return (
     <div className='modal-header modal-popup'>
         <div className='container-popup aparecer'>
-            <h2>Migration in process, changelog:</h2>
-            <p>Whitelist self service</p>
-            <p>Multideposit same wallet UX push</p>
-            <p>Token gating</p>
-            <p>ETA 6 hrs</p>
+            <h2>New FOMC Degen Pool! Save the Whales</h2>
+            <Link to="/earn-strategies/0x6E3138381633830dB1b29e30C912a2CC62d35B04" className='btn2' onClick={togglePopup}>Go Now</Link>
             <AiOutlineClose className='close-icon' onClick={togglePopup} size={"25px"} color={"#FAFAFA"}/>
         </div>
       
