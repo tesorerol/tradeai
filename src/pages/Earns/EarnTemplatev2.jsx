@@ -124,9 +124,6 @@ const EarnTemplatev2 = (props) => {
         }
         setUserInfo(data)
     })
-
-
-
   }
   function Intermitente() {
     intervalid = setInterval(() => {
@@ -173,8 +170,15 @@ const EarnTemplatev2 = (props) => {
       contract2
         .EarnDeposit(depositID,period)
         .then((r) => {
-          GetBusdBalance();
-          setLoading(false)
+          r.wait()
+          .then((r) => {
+            TotalRecolect()
+            GetUserInfo()
+            GetBusdBalance();
+            setLoading(false)
+            GetUsdtBalanceContracts()
+          })
+
         })
         .catch((e) => {
           setLoading(false)
