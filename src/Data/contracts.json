@@ -6,7 +6,7 @@
             "risk": "Low",
             "token": "USDT",
             "type":"28 days",
-            "visible":"false",
+            "visible":"true",
             "claim":true,
             "desposit":true
         },
