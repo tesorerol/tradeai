@@ -1,18 +1,7 @@
  [
         {
-            "address":"0x9b8a82B85034df40EfE34c4087c36D41fc559914",
-            "namePool": "The Treehouse",
-            "strategy":"Trading and arbitrage",
-            "risk": "Low",
-            "token": "USDT",
-            "type":"Weekly",
-            "visible":"true",
-            "claim":true,
-            "desposit":false
-        },
-        {
-            "address":"0xfEE04a10a47A6F4Fd9c560F82a43a862db1c44CB",
-            "namePool": "New Multidepo TreeHouse",
+            "address":"0xd37894C2247F8c3992825961dE0233380Fb14D30",
+            "namePool": "The ship",
             "strategy":"Trading and arbitrage",
             "risk": "Low",
             "token": "USDT",
@@ -21,28 +10,5 @@
             "visible":"true",
             "claim":true,
             "desposit":true
-        },
-        {
-            "address":"0x4794465c56BCa3A64BB339E07F7FDA249543A69C",
-            "namePool": "Monkeys on steroids",
-            "strategy":"Trading and arbitrage",
-            "risk": "Low",
-            "token": "USDT",
-            "type":"2 days and 2 hours ",
-            "visible":"true",
-            "claim":true,
-            "desposit":false
-        },
-        {
-            "address":"0x6E3138381633830dB1b29e30C912a2CC62d35B04",
-            "namePool": "FOMC Degen",
-            "strategy":"Trading and arbitrage",
-            "risk": "Low",
-            "token": "USDT",
-            "type":"5 days",
-            "visible":"true",
-            "claim":true,
-            "desposit":true,
-            "AbiType":"v3"
         }
 ]
