@@ -11,17 +11,14 @@ import Swal from 'sweetalert2'
 import Loader from '../../Components/Loading'
 import ProgressBar from '../../Components/ProgressBar'
 
-const EarnTemplate = (props) => {
+const EarnTemplatev2 = (props) => {
   const [percentage, setPercentage] = useState(null)
 
   const { EarnContract, namePool, strategy, risk, token, type, AbiType,Abi,claim,desposit,unique } = props
   const { Provider, address } = useContext(WalletContext)
   let USDT = '0x55d398326f99059fF775485246999027B3197955'
   const [Recolect, setRecolect] = useState('0')
-  const [UserInfo, setUserInfo] = useState({
-    Amount: 0,
-    Earn: 0,
-  })
+  const [UserInfo, setUserInfo] = useState([])
   const [Aprove, setAprove] = useState(true)
   const [Amount, setAmount] = useState('0')
   const [getMaxUser, setgetMaxUser] = useState('0')
@@ -107,13 +104,22 @@ const EarnTemplate = (props) => {
   }
 
   function GetUserInfo() {
-    contract.balanceUser(address).then((r) => {
-      setUserInfo({
-        Amount: ethers.utils.formatEther(r.Amount),
-        Earn: ethers.utils.formatEther(r.Earn),
-      })
-      setFinishTime(MModeTimer(r.finishTime.toString()))
+    let data =[];
+    contract.depositCount(address).then(async (count) => {
+        for (let index = 0; index < count.toString(); index++) {
+            await contract.balanceUser(address,index).then((r) => {
+                data.push({
+                    Amount:ethers.utils.formatEther(r.Amount),
+                    Earn: ethers.utils.formatEther(r.Earn),
+                    Time:MModeTimer(r.finishTime.toString())
+                })
+              })
+        }
+        setUserInfo(data)
     })
+
+
+
   }
   function Intermitente() {
     intervalid = setInterval(() => {
@@ -153,19 +159,14 @@ const EarnTemplate = (props) => {
       })
   }
 
-  function Witdraw() {
+  function Witdraw(depositID) {
     let signer = Provider.getSigner()
     setLoading(true)
     let contract2 = new ethers.Contract(EarnContract, Abi.abi, signer)
-    if (AbiType == 'pass') {
       contract2
-        .Claim()
+        .EarnDeposit(depositID)
         .then((r) => {
           GetBusdBalance();
-          setUserInfo({
-            Amount: 0,
-            Earn: 0,
-          })
           setLoading(false)
         })
         .catch((e) => {
@@ -176,47 +177,6 @@ const EarnTemplate = (props) => {
             title: errorMessage,
           })
         })
-    } else if (AbiType == 'public') {
-      contract2
-        .EarnClaim()
-        .then((r) => {
-          r.wait().then((r) => {
-            GetBusdBalance();
-            setUserInfo({
-              Amount: 0,
-              Earn: 0,
-            })
-            setLoading(false)
-          })
-        })
-        .catch((e) => {
-          setLoading(false)
-          const errorMessage = e.error.data.message
-          Swal.fire({
-            icon: 'error',
-            title: errorMessage,
-          })
-        })
-    } else {
-      contract2
-        .EarnDeposit()
-        .then((r) => {
-          GetBusdBalance();
-          setUserInfo({
-            Amount: 0,
-            Earn: 0,
-          })
-          setLoading(false)
-        })
-        .catch((e) => {
-          setLoading(false)
-          const errorMessage = e.error.data.message
-          Swal.fire({
-            icon: 'error',
-            title: errorMessage,
-          })
-        })
-    }
   }
 
   function GetBusdBalance() {
@@ -432,15 +392,16 @@ const EarnTemplate = (props) => {
           </div>
           <div className='earn-strategies-ai-details-details'>
             <h2>Your position</h2>
-            {claim &&(
-              <div className="progress-section-details-staked">
+            {claim &&
+            UserInfo.map((r,index)=>
+          <div className="progress-section-details-staked">
                 <div className="table-staked">
                   <div className="table-row row1">
                     <div>
                       <h3>Your stake:</h3>
                     </div>
                     <p className="table-number">
-                      {formatMoney(UserInfo.Amount, 'USDT')}
+                      {formatMoney(r.Amount, 'USDT')}
                     </p>
                   </div>
                   <div className="table-row row1">
@@ -448,10 +409,9 @@ const EarnTemplate = (props) => {
                       <h3>Pending Earn:</h3>
                     </div>
                     <p className="table-number">
-                      {unique
-                      ? "Surprise"
-                      :formatMoney(
-                        parseFloat(UserInfo.Earn) - parseFloat(UserInfo.Amount),
+                      
+                      {formatMoney(
+                        parseFloat(r.Earn)-parseFloat(r.Amount),
                         'USDT',
                       )}
                     </p>
@@ -463,36 +423,38 @@ const EarnTemplate = (props) => {
                     <p className="table-number">
                       {unique
                       ? "Surprise"
-                      :formatMoney(UserInfo.Earn, 'USDT')}
+                      :formatMoney(r.Earn, 'USDT')}
+                    </p>
+                  </div>
+                  <div className="table-row ">
+                    <div>
+                      <h3>Timer:</h3>
+                    </div>
+                    <p className="table-number table-timer" onClick={() => (r.Time ? console.log() : Witdraw(index))}>
+                      {r.Time ? (
+                        <span className='button-content'>{r.Time}</span>
+                      ) : (
+                        <span className='button-content'>
+                          <i className="fa-solid fa-lock mr-1"></i>
+                          {'Claim'}
+                        </span>
+                      )}
                     </p>
                   </div>
                 </div>
-                {
-                  UserInfo.Amount > 0 && claim &&
-                  <button
-                    className="button2 btn-claim"
-                    onClick={() => (FinishTime ? console.log() : Witdraw())}
-                  >
-                    {FinishTime ? (
-                      <span className='button-content'>{FinishTime}</span>
-                    ) : (
-                      <span className='button-content'>
-                        <i className="fa-solid fa-lock mr-1"></i>
-                        {'Claim'}
-                      </span>
-                    )}
-                  </button>
-                }
+                
               </div>
-            )}
+            )
+            }
           </div>
 
         </div>
         
 
       </div>
+      
     </div>
   )
 }
 
-export default EarnTemplate
+export default EarnTemplatev2
