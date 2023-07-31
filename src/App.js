@@ -60,10 +60,8 @@ document.addEventListener("keydown", function(e) {
   return (
    
       <div className='container-all'>
-            {/*!isAllowed ? <Login isAllowed={isAllowed} setIsAllowed={setIsAllowed}/> : */}
-            
-            {/* <Menu /> */}
-            
+            {!isAllowed ? <Login isAllowed={isAllowed} setIsAllowed={setIsAllowed}/> : 
+            <>
             <div className='container-right'>
               <Header toggleModal={toggleModal} />
               <div className='container-routes'>
@@ -75,6 +73,8 @@ document.addEventListener("keydown", function(e) {
               </div>
             </div>
             {modal && <RecentTransactions toggleModal={toggleModal}/> } 
+            </>
+          }
         </div>      
   );
 }
