@@ -119,7 +119,6 @@ const EarnTemplatev2 = (props) => {
     })
 
 
-
   }
   function Intermitente() {
     intervalid = setInterval(() => {
@@ -434,7 +433,7 @@ const EarnTemplatev2 = (props) => {
                       {r.Time ? (
                         <span className='button-content'>{r.Time}</span>
                       ) : (
-                        <span className='button-content'>
+                        <span className='button-content button-claim'>
                           <i className="fa-solid fa-lock mr-1"></i>
                           {'Claim'}
                         </span>
