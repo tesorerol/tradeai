@@ -29,7 +29,7 @@
             "token": "USDT",
             "parent":"public",
             "type":"Weekly",
-            "visible":"false",
+            "visible":"true",
             "claim":true,
             "desposit":true,
             "AbiType":"v3"
