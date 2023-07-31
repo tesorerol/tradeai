@@ -22,14 +22,16 @@
             "desposit":true
         },
         {
-            "address":"0xeF71A9B8030FDD9d376458B3847dcEe877e265BE",
+            "address":"0xcD787272FA8Bc355B9fDAB2fDEc6369502100616",
             "namePool": "Private - Enhanced",
             "strategy":"Trading and arbitrage",
             "risk": "Low",
             "token": "USDT",
+            "parent":"public",
             "type":"Weekly",
             "visible":"false",
             "claim":true,
-            "desposit":true
-        }
+            "desposit":true,
+            "AbiType":"v3"
+        } 
 ]
