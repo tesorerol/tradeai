@@ -97,5 +97,25 @@
         "visible":"true",
         "claim":true,
         "desposit":false
+    }, {
+        "address":"0x9b8a82B85034df40EfE34c4087c36D41fc559914",
+        "namePool": "The Treehouse",
+        "strategy":"Trading and arbitrage",
+        "risk": "Low",
+        "token": "USDT",
+        "type":"Weekly",
+        "visible":"true",
+        "claim":true,
+        "desposit":false
+    },        {
+        "address":"0x4794465c56BCa3A64BB339E07F7FDA249543A69C",
+        "namePool": "Monkeys on steroids",
+        "strategy":"Trading and arbitrage",
+        "risk": "Low",
+        "token": "USDT",
+        "type":"2 days and 2 hours ",
+        "visible":"true",
+        "claim":true,
+        "desposit":false
     }
 ]
