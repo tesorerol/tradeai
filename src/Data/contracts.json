@@ -23,5 +23,16 @@
             "claim":true,
             "desposit":false,
             "AbiType":"v3"
+        },{
+            "address":"0x471B8B5df1F4f13c72a475Db26Df5BFBFd8A4C1A",
+            "namePool": "TreeHouse Community",
+            "strategy":"Trading and arbitrage",
+            "risk": "Low",
+            "token": "USDT",
+            "AbiType":"v3",
+            "type":"Weekly",
+            "visible":"true",
+            "claim":true,
+            "desposit":true
         }
 ]
