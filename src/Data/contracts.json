@@ -10,7 +10,7 @@
             "type":"Weekly",
             "visible":"true",
             "claim":true,
-            "desposit":true
+            "desposit":false
         },
         {
             "address":"0x6E3138381633830dB1b29e30C912a2CC62d35B04",
@@ -24,7 +24,7 @@
             "desposit":false,
             "AbiType":"v3"
         },{
-            "address":"0x471B8B5df1F4f13c72a475Db26Df5BFBFd8A4C1A",
+            "address":"0xa2646b5edD9483C5DDf107624E943F8D4A379A67",
             "namePool": "TreeHouse Community",
             "strategy":"Trading and arbitrage",
             "risk": "Low",
