@@ -1,7 +1,8 @@
  [
+       
         {
-            "address":"0xd37894C2247F8c3992825961dE0233380Fb14D30",
-            "namePool": "The ship",
+            "address":"0x1B398031598C4D2C73e8B935666689E4f059a7b6",
+            "namePool": "Elysium Fields",
             "strategy":"Trading and arbitrage",
             "risk": "Low",
             "token": "USDT",
@@ -9,6 +10,6 @@
             "type":"Weekly",
             "visible":"true",
             "claim":true,
-            "desposit":true
+            "desposit":false
         }
 ]
