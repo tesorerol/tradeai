@@ -10,5 +10,17 @@
             "visible":"true",
             "claim":true,
             "desposit":true
+        },
+        {
+            "address":"0x5f48cD16C7eD0545F771E4FaEb467Aa31681fEf2",
+            "namePool": "VIP",
+            "strategy":"Trading and arbitrage",
+            "risk": "Low",
+            "token": "USDT",
+            "AbiType":"v3",
+            "type":"Weekly",
+            "visible":"false",
+            "claim":true,
+            "desposit":true
         }
 ]
