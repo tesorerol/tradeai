@@ -64,23 +64,24 @@ document.addEventListener("keydown", function(e) {
   return (
    
       <div className='container-all'>
-            {/*!isAllowed ? <Login isAllowed={isAllowed} setIsAllowed={setIsAllowed}/> : */}
+          {!isAllowed ? <Login isAllowed={isAllowed} setIsAllowed={setIsAllowed}/> :
             
-            {/* <Menu /> */}
-            
-            <div className='container-right'>
-              <Header toggleModal={toggleModal} />
-              <div className='container-routes'>
-                <Routes>
-                  <Route path="/" element={<Navigate to="/earn-strategies/0x1242b3c2e7926750E2F3a0EB6aEBd4D865C3aCb8"/>} />
-                  <Route path="/earn-strategies/:address" element={<EarnDinamic />} />
-                  <Route path="*" element={<NotFound/>} />
-                </Routes>
+            <>
+              <div className='container-right'>
+                <Header toggleModal={toggleModal} />
+                <div className='container-routes'>
+                  <Routes>
+                    <Route path="/" element={<Navigate to="/earn-strategies/0x1242b3c2e7926750E2F3a0EB6aEBd4D865C3aCb8"/>} />
+                    <Route path="/earn-strategies/:address" element={<EarnDinamic />} />
+                    <Route path="*" element={<NotFound/>} />
+                  </Routes>
+                </div>
               </div>
-            </div>
-            {modal && <RecentTransactions toggleModal={toggleModal}/> } 
-            {/*popUp && <PopUp togglePopup={togglePopup} />*/}
-        </div>      
+              {modal && <RecentTransactions toggleModal={toggleModal}/> } 
+              {/*popUp && <PopUp togglePopup={togglePopup} />*/}
+            </>
+            }
+    </div>      
   );
 }
 
