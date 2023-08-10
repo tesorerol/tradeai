@@ -13,6 +13,7 @@ import NotFound from './Components/NotFound';
 import NewEarn from './pages/NewEarn/NewEarn';
 import Genv2 from './pages/NewEarn/gen2v2';
 import Home from './pages/Home/Home';
+import PopUp from './Components/PopUp';
 
 
 function App() {
@@ -54,11 +55,11 @@ document.addEventListener("keydown", function(e) {
     }
     }
 
-    const [popUp,setPopUp] = useState(false)
+    const [popUp,setPopUp] = useState(true)
 
     const togglePopup = ()=>{
       setPopUp(!popUp)
-    }
+    } 
 
   return (
    
@@ -79,7 +80,7 @@ document.addEventListener("keydown", function(e) {
               </div>
             </div>
             {modal && <RecentTransactions toggleModal={toggleModal}/> } 
-                      
+            {popUp && <PopUp togglePopup={togglePopup} />}
             </>
           }
         </div>      
