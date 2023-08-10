@@ -53,5 +53,17 @@
             "infinite":true,
             "whitelist":false,
             "table":true
+        },
+        {
+            "address":"0x38989C653Fa7fd650CC7d6A59D0d53ded88e7E77",
+            "namePool": "7 days of glory",
+            "strategy":"Trading and arbitrage",
+            "risk": "Low",
+            "token": "USDT",
+            "type":"Weekly",
+            "AbiType":"v3",
+            "visible":"true",
+            "claim":true,
+            "desposit":true
         }
 ]
