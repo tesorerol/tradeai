@@ -14,7 +14,7 @@ import ProgressBar from '../../Components/ProgressBar'
 const EarnTemplatev2 = (props) => {
   const [percentage, setPercentage] = useState(null)
 
-  const { EarnContract, namePool, strategy, risk, token, type, AbiType,Abi,claim,desposit,unique } = props
+  const { EarnContract, namePool, strategy, risk, token, type, AbiType,Abi,claim,desposit,unique,size } = props
   const { Provider, address } = useContext(WalletContext)
   let USDT = '0x55d398326f99059fF775485246999027B3197955'
   const [Recolect, setRecolect] = useState('0')
@@ -32,6 +32,9 @@ const EarnTemplatev2 = (props) => {
   const [limitAmount, setlimitAmount] = useState('0')
   const [percentOfContract, setpercentOfContract] = useState('0')
   const [Loading, setLoading] = useState(false)
+
+  const size7days = "5000000"
+  const current7days = "4793591.87"
   let contract = new ethers.Contract(EarnContract, Abi.abi, Provider)
   let intervalid
   const bar = useRef()
@@ -78,9 +81,16 @@ const EarnTemplatev2 = (props) => {
         //     parseFloat(ethers.utils.formatEther(limit))) *
         //   100
         // }%`
-
-        const percent = (parseFloat(Math.floor((ethers.utils.formatEther(total)) / parseFloat(ethers.utils.formatEther(limit)) * 100)))
-        setPercentage(percent)
+        {
+            if(size){
+                const percent = (parseFloat(Math.floor((current7days) / parseFloat(size7days) * 100)))
+                console.log(percent)
+                setPercentage(percent)
+            }else{
+                const percent = (parseFloat(Math.floor((ethers.utils.formatEther(total)) / parseFloat(ethers.utils.formatEther(limit)) * 100)))
+                setPercentage(percent)
+            }
+        }
         
         // bar.current.style.width = (parseFloat(ethers.utils.formatEther(total)) / parseFloat(ethers.utils.formatEther(limit))) * 100
       })
@@ -259,11 +269,20 @@ const EarnTemplatev2 = (props) => {
                     <ul>
                       <li>
                         <p>Pool size:</p>
-                        <p><span> {formatMoney(limitAmount, 'USDT', 2, '.', ',')}</span></p>
+                        <p>
+                            {
+                            size ? formatMoney(size7days, 'USDT', 2, '.', ',')
+                                : <span> {formatMoney(limitAmount, 'USDT', 2, '.', ',')}</span>
+                            }
+                        </p>
                       </li>
                       <li>
                         <p>Current Deposit:</p>
-                        <p>{formatMoney(Recolect, 'USDT', 2, '.', ',')}</p>
+                        {
+                            size ? <p>{formatMoney(current7days, 'USDT', 2, '.', ',')}</p>
+                                :<p>{formatMoney(Recolect, 'USDT', 2, '.', ',')}</p>
+                        }
+                        
                       </li>
                       
                     </ul>
@@ -281,9 +300,15 @@ const EarnTemplatev2 = (props) => {
                         <p>
                           <span>
                           {' '}
-                          {getMaxUser > 0
-                            ? formatMoney(getMaxUser, 'USDT', 2, '.', ',')
-                            : formatMoney(maxAmount, 'USDT', 2, '.', ',')}
+                            {
+                                size ? formatMoney(size7days, 'USDT', 2, '.', ',')
+                                :
+                                <>
+                                    {getMaxUser > 0
+                                    ? formatMoney(getMaxUser, 'USDT', 2, '.', ',')
+                                    : formatMoney(maxAmount, 'USDT', 2, '.', ',')}
+                                </>
+                            }
                           </span>
                         </p>
                       </li>

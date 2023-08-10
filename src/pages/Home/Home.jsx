@@ -23,7 +23,7 @@ const Home = () => {
           {
             data.map((item,i)=>(
               item.visible === "true" && 
-              <PoolAvailable strategy={item.risk} whitelist={item.whitelist} duration={item.type} name={item.namePool} EarnContract={item.address} Abi={item.AbiType==="pass"?AbiPass:item.AbiType==="public"?AbiPublic:AbiPrivate} AbiType={item.AbiType} />
+              <PoolAvailable strategy={item.risk} whitelist={item.whitelist} duration={item.type} name={item.namePool} EarnContract={item.address} Abi={item.AbiType==="pass"?AbiPass:item.AbiType==="public"?AbiPublic:AbiPrivate} AbiType={item.AbiType} size={item.size}/>
               
             ))
           }

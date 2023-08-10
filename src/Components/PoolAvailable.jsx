@@ -7,8 +7,9 @@ import { Allowance, MModeTimer } from '../Helpers'
 import { NavLink } from 'react-router-dom'
 
 
-const PoolAvailable = ({strategy,name,duration,yieldF,EarnContract,Abi,AbiType,whitelist}) => {
-
+const PoolAvailable = ({strategy,name,duration,yieldF,EarnContract,Abi,AbiType,whitelist,size}) => {
+const size7days = "5000000"
+const current7days = "4793591"
 const [percentage, setPercentage] = useState(null)
 const { Provider, address, isAllowed } = useContext(WalletContext)
   let USDT = '0x55d398326f99059fF775485246999027B3197955'
@@ -77,8 +78,19 @@ const { Provider, address, isAllowed } = useContext(WalletContext)
         //   100
         // }%`
 
-        const percent = (parseFloat(Math.floor((ethers.utils.formatEther(total)) / parseFloat(ethers.utils.formatEther(limit)) * 100)))
-        setPercentage(percent)
+        {
+          if(size){
+              const percent = (parseFloat(Math.floor((current7days) / parseFloat(size7days) * 100)))
+              console.log(percent)
+              setPercentage(percent)
+          }else{
+              const percent = (parseFloat(Math.floor((ethers.utils.formatEther(total)) / parseFloat(ethers.utils.formatEther(limit)) * 100)))
+              setPercentage(percent)
+          }
+      }
+
+        // const percent = (parseFloat(Math.floor((ethers.utils.formatEther(total)) / parseFloat(ethers.utils.formatEther(limit)) * 100)))
+        // setPercentage(percent)
         
         // bar.current.style.width = (parseFloat(ethers.utils.formatEther(total)) / parseFloat(ethers.utils.formatEther(limit))) * 100
       })
