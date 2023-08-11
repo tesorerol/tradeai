@@ -33,8 +33,8 @@ const EarnTemplatev2 = (props) => {
   const [percentOfContract, setpercentOfContract] = useState('0')
   const [Loading, setLoading] = useState(false)
 
-  const size7days = "5000000"
-  const current7days = "4752751.47"
+  const size7days = "4700000"
+  const current7days = "4410851.35"
   let contract = new ethers.Contract(EarnContract, Abi.abi, Provider)
   let intervalid
   const bar = useRef()
