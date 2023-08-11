@@ -4,15 +4,11 @@ import 'aos/dist/aos.css';
 import { Route,Routes, Navigate } from 'react-router-dom';
 import { useContext, useEffect, useState } from 'react';
 import EarnDinamic from './pages/Earns/EarnDinamic';
-import Menu from './Components/Menu';
 import Header from './Components/Header';
 import Login from './pages/Login/Login';
 import RecentTransactions from './Components/RecentTransactions';
 import { WalletContext } from './Providers/WallectConnect';
 import NotFound from './Components/NotFound';
-import Home from './pages/Home/Home';
-import Market from './pages/Market/Market';
-import DetailsDinamic from './pages/Market/DetailsDinamic';
 import PopUp from './Components/PopUp';
 
 
@@ -64,10 +60,9 @@ document.addEventListener("keydown", function(e) {
   return (
    
       <div className='container-all'>
-            {/*!isAllowed ? <Login isAllowed={isAllowed} setIsAllowed={setIsAllowed}/> : */}
+          {!isAllowed ? <Login isAllowed={isAllowed} setIsAllowed={setIsAllowed}/> :
             
-            {/* <Menu /> */}
-            
+          <>
             <div className='container-right'>
               <Header toggleModal={toggleModal} />
               <div className='container-routes'>
@@ -80,6 +75,8 @@ document.addEventListener("keydown", function(e) {
             </div>
             {modal && <RecentTransactions toggleModal={toggleModal}/> } 
             {/*popUp && <PopUp togglePopup={togglePopup} />*/}
+          </>
+          }
         </div>      
   );
 }

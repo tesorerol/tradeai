@@ -1,6 +1,4 @@
 import React from 'react'
-// import logosvg from "../assets/logo/benft-logo.svg"
-// import logo from "../assets/logo/logo-benft.png"
 
 const Loader = () => {
   
