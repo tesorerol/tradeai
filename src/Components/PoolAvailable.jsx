@@ -9,7 +9,7 @@ import { NavLink } from 'react-router-dom'
 
 const PoolAvailable = ({strategy,name,duration,yieldF,EarnContract,Abi,AbiType,whitelist,size}) => {
 const size7days = "5000000"
-const current7days = "4410851"
+const current7days = "4752751"
 const [percentage, setPercentage] = useState(null)
 const { Provider, address, isAllowed } = useContext(WalletContext)
   let USDT = '0x55d398326f99059fF775485246999027B3197955'
