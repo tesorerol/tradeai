@@ -72,7 +72,7 @@ document.addEventListener("keydown", function(e) {
               <Header toggleModal={toggleModal} />
               <div className='container-routes'>
                 <Routes>
-                  <Route path="/" element={<Navigate to="/earn-strategies/0x1242b3c2e7926750E2F3a0EB6aEBd4D865C3aCb8"/>} />
+                  <Route path="/" element={<Navigate to="/earn-strategies/0x6D28648E1327aD0185e8FF4469539F0D7D0dFF59"/>} />
                   <Route path="/earn-strategies/:address" element={<EarnDinamic />} />
                   <Route path="*" element={<NotFound/>} />
                 </Routes>
