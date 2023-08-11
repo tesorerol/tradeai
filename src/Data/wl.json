@@ -2931,5 +2931,20 @@
        },
        {
         "wallet": "0x21F1d9f8D2b5Eb8C061fb855a72c798a54A7Fd5C"
+       },
+       {
+        "wallet": "0xEA083Ea0FD5d3645dF318123aa0937970218FBa9"
+       },
+       {
+        "wallet": "0xa8cf8a51c9dc4e344939D14A274757E27f7e6A14"
+       },
+       {
+        "wallet": "0xba64d59Eafb12fd4F07E243Be538462221125037"
+       },
+       {
+        "wallet": "0x1bF8454E54805050503351CE7Fc637FF8b763fDF"
+       },
+       {
+        "wallet": "0x737116CF658508531F193fc2849e838C73549083"
        }
    ]
