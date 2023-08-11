@@ -3231,9 +3231,6 @@
      "wallet": "0xF4b18163f67206bd9f39F07889b44A2740973430"
     },
     {
-     "wallet": "0x36c6C939e067AdFDf534Ec49fAAdfeA55e30e71c"
-    },
-    {
      "wallet": "0x2c6Fc6a82F4961b579ef539e97c10c64B3065aeb"
     },
     {
@@ -5412,9 +5409,6 @@
         },
             {
                 "wallet": "0x8583f334130Da5c18979731c9E8EF52a7F333b2b"
-            },
-            {
-                "wallet": "0x36c6C939e067AdFDf534Ec49fAAdfeA55e30e71c"
             },
             {
                 "wallet": "0x2546Ea641D8bB32e1ACce0c78Ccd1a45D06E5cdc"
