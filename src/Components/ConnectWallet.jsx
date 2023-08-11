@@ -1,7 +1,4 @@
 import React, { useContext, useState } from 'react'
-import metamaskLogo from "../assets/icons/metamask.png.png"
-import walletConnect from "../assets/icons/wallet-connect.png"
-import trustWallet from "../assets/icons/trust-wallet.png"
 import {AiOutlineClose} from "react-icons/ai";
 import walletImg from "../assets/icons/wallet.png";
 import { WalletContext } from '../Providers/WallectConnect';
