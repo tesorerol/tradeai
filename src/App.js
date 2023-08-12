@@ -81,7 +81,7 @@ document.addEventListener("keydown", function(e) {
             
            
             {modal && <RecentTransactions toggleModal={toggleModal}/> } 
-            {/*popUp && <PopUp togglePopup={togglePopup} />*/}
+            {popUp && <PopUp togglePopup={togglePopup} />}
         </div>      
   );
 }
