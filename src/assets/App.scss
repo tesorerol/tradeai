@@ -1447,8 +1447,9 @@ a{
  
 
   @media only screen and (max-width:800px){
-
-
+    .container-popup{
+      width: 300px !important;
+    }
 
     .strategies-details-v2{
       // max-height: 1500px !important;
@@ -5313,4 +5314,58 @@ a{
   width: fit-content !important;
   margin: 0 auto;
   cursor: pointer;
+}
+
+.modal-popup{
+  position: fixed !important;
+}
+
+.container-popup{
+  width: 400px;
+  height: 400px;
+  background-color: var(--light-dark);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+
+  a{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  h2{
+    color: var(--blue-l);
+  }
+
+  p{
+    margin: 0;
+  }
+
+  .close-icon{
+    position: absolute;
+    top:20px;
+    right: 20px;
+    cursor: pointer;
+
+    &:hover{
+      transition: 0.2s linear;
+      fill: var(--blue-l);
+    }
+  }
+
+  h3{
+    font-size: 20px;
+    color: rgba(255, 255, 255, 0.808);
+  }
+  
+  p{
+    color: rgba(255, 255, 255, 0.708);
+  }
+
 }

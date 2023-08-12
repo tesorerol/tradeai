@@ -10,6 +10,7 @@ import Login from './pages/Login/Login';
 import RecentTransactions from './Components/RecentTransactions';
 import { WalletContext } from './Providers/WallectConnect';
 import NotFound from './Components/NotFound';
+import PopUp from './Components/PopUp';
 
 
 function App() {
@@ -51,7 +52,7 @@ document.addEventListener("keydown", function(e) {
     }
     }
 
-    const [popUp,setPopUp] = useState(false)
+    const [popUp,setPopUp] = useState(true)
 
     const togglePopup = ()=>{
       setPopUp(!popUp)
@@ -73,6 +74,7 @@ document.addEventListener("keydown", function(e) {
               </div>
             </div>
             {modal && <RecentTransactions toggleModal={toggleModal}/> } 
+            {popUp && <PopUp togglePopup={togglePopup} />}
             </>
           }
         </div>      
