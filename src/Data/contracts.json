@@ -9,6 +9,6 @@
             "visible":"true",
             "AbiType":"v3",
             "claim":true,
-            "desposit":true
+            "desposit":false
         }
 ]
