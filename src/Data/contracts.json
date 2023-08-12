@@ -10,7 +10,7 @@
             "AbiType":"pass",
             "visible":"true",
             "claim":true,
-            "desposit":true,
+            "desposit":false,
             "whitelist":true
         },
         {
@@ -23,7 +23,7 @@
             "AbiType":"pass",
             "visible":"false",
             "claim":true,
-            "desposit":true,
+            "desposit":false,
             "whitelist":""
         },
         {
@@ -36,7 +36,7 @@
             "AbiType":"pass",
             "visible":"false",
             "claim":true,
-            "desposit":true,
+            "desposit":false,
             "whitelist":""
         },
         {
@@ -49,7 +49,7 @@
             "type":"Monthly",
             "visible":"true",
             "claim":true,
-            "desposit":true,
+            "desposit":false,
             "infinite":true,
             "whitelist":false,
             "table":true
@@ -64,7 +64,7 @@
             "AbiType":"v3",
             "visible":"true",
             "claim":true,
-            "desposit":true,
+            "desposit":false,
             "size": true
         }
 ]
