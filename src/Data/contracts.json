@@ -8,7 +8,7 @@
             "type":"28 days",
             "visible":"true",
             "claim":true,
-            "desposit":true
+            "desposit":false
         },
         {
             "address":"0x25FFC76D6ecBD341f78c479c2d8123eA1D1De446",
@@ -19,7 +19,7 @@
             "type":"Weekly",
             "visible":"false",
             "claim":true,
-            "desposit":true
+            "desposit":false
         },
         {
             "address":"0xcD787272FA8Bc355B9fDAB2fDEc6369502100616",
@@ -31,7 +31,7 @@
             "type":"Weekly",
             "visible":"true",
             "claim":true,
-            "desposit":true,
+            "desposit":false,
             "AbiType":"v3"
         } 
 ]
