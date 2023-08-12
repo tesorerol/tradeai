@@ -110,7 +110,7 @@ document.addEventListener("keydown", function(e) {
               </div>
             </div>
             {modal && <RecentTransactions toggleModal={toggleModal}/> } 
-            {/* {modalPopUp && <PopUp setModalPopUp={setModalPopUp}/>}      */}
+            {modalPopUp && <PopUp setModalPopUp={setModalPopUp}/>}     
             </>
           }
         </div>      

@@ -5785,3 +5785,52 @@ a{
     cursor: pointer;
   }
 }
+
+.container-popup{
+  width: 400px;
+  height: 400px;
+  background-color: var(--blue-dark);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--blue-deg);
+
+  a{
+    display: flex;
+    align-items: center;
+  }
+
+  h2{
+    text-transform: uppercase;
+    color: var(--blue-l);
+    text-align: center;
+  }
+
+  .close-icon{
+    position: absolute;
+    top:20px;
+    right: 20px;
+    cursor: pointer;
+
+    &:hover{
+      transition: 0.2s linear;
+      fill: var(--blue-l);
+    }
+  }
+
+  h3{
+    font-size: 20px;
+    color: rgba(255, 255, 255, 0.808);
+  }
+  
+  p{
+    color: rgba(255, 255, 255, 0.708);
+  }
+
+}
