@@ -4405,6 +4405,12 @@ a{
   justify-content: center;
   position: relative;
 
+  a{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   h2{
     color: var(--blue-l);
   }
